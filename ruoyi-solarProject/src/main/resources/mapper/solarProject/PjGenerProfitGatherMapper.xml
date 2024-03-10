@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.PjGenerProfitGatherMapper">
+    
+    <resultMap type="PjGenerProfitGather" id="PjGenerProfitGatherResult">
+        <result property="pjNo"    column="pj_no"    />
+        <result property="totalGenerate"    column="total_generate"    />
+        <result property="avgGenerate"    column="avg_generate"    />
+        <result property="sumSavePrice"    column="sum_save_price"    />
+        <result property="sumSendStateIncome"    column="sum_send_state_income"    />
+        <result property="sumAnnulIncome"    column="sum_annul_income"    />
+        <result property="sumIncomeRatioAnnul"    column="sum_income_ratio_annul"    />
+        <result property="sumIncomeRatioTotal"    column="sum_income_ratio_total"    />
+        <result property="isDelete"    column="is_delete"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createId"    column="create_id"    />
+        <result property="updTime"    column="upd_time"    />
+        <result property="updId"    column="upd_id"    />
+    </resultMap>
+
+    <sql id="selectPjGenerProfitGatherVo">
+        select pj_no, total_generate, avg_generate, sum_save_price, sum_send_state_income, sum_annul_income, sum_income_ratio_annul, sum_income_ratio_total, is_delete, create_time, create_id, upd_time, upd_id from pj_gener_profit_gather
+    </sql>
+
+    <select id="selectPjGenerProfitGatherList" parameterType="PjGenerProfitGather" resultMap="PjGenerProfitGatherResult">
+        <include refid="selectPjGenerProfitGatherVo"/>
+        <where>  
+            <if test="totalGenerate != null "> and total_generate = #{totalGenerate}</if>
+            <if test="avgGenerate != null "> and avg_generate = #{avgGenerate}</if>
+            <if test="sumSavePrice != null "> and sum_save_price = #{sumSavePrice}</if>
+            <if test="sumSendStateIncome != null "> and sum_send_state_income = #{sumSendStateIncome}</if>
+            <if test="sumAnnulIncome != null "> and sum_annul_income = #{sumAnnulIncome}</if>
+            <if test="sumIncomeRatioAnnul != null "> and sum_income_ratio_annul = #{sumIncomeRatioAnnul}</if>
+            <if test="sumIncomeRatioTotal != null "> and sum_income_ratio_total = #{sumIncomeRatioTotal}</if>
+            <if test="isDelete != null  and isDelete != ''"> and is_delete = #{isDelete}</if>
+            <if test="createId != null  and createId != ''"> and create_id = #{createId}</if>
+            <if test="updTime != null "> and upd_time = #{updTime}</if>
+            <if test="updId != null  and updId != ''"> and upd_id = #{updId}</if>
+        </where>
+    </select>
+    
+    <select id="selectPjGenerProfitGatherByPjNo" parameterType="String" resultMap="PjGenerProfitGatherResult">
+        <include refid="selectPjGenerProfitGatherVo"/>
+        where pj_no = #{pjNo}
+    </select>
+        
+    <insert id="insertPjGenerProfitGather" parameterType="PjGenerProfitGather">
+        insert into pj_gener_profit_gather
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pjNo != null">pj_no,</if>
+            <if test="totalGenerate != null">total_generate,</if>
+            <if test="avgGenerate != null">avg_generate,</if>
+            <if test="sumSavePrice != null">sum_save_price,</if>
+            <if test="sumSendStateIncome != null">sum_send_state_income,</if>
+            <if test="sumAnnulIncome != null">sum_annul_income,</if>
+            <if test="sumIncomeRatioAnnul != null">sum_income_ratio_annul,</if>
+            <if test="sumIncomeRatioTotal != null">sum_income_ratio_total,</if>
+            <if test="isDelete != null">is_delete,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createId != null">create_id,</if>
+            <if test="updTime != null">upd_time,</if>
+            <if test="updId != null">upd_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pjNo != null">#{pjNo},</if>
+            <if test="totalGenerate != null">#{totalGenerate},</if>
+            <if test="avgGenerate != null">#{avgGenerate},</if>
+            <if test="sumSavePrice != null">#{sumSavePrice},</if>
+            <if test="sumSendStateIncome != null">#{sumSendStateIncome},</if>
+            <if test="sumAnnulIncome != null">#{sumAnnulIncome},</if>
+            <if test="sumIncomeRatioAnnul != null">#{sumIncomeRatioAnnul},</if>
+            <if test="sumIncomeRatioTotal != null">#{sumIncomeRatioTotal},</if>
+            <if test="isDelete != null">#{isDelete},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createId != null">#{createId},</if>
+            <if test="updTime != null">#{updTime},</if>
+            <if test="updId != null">#{updId},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePjGenerProfitGather" parameterType="PjGenerProfitGather">
+        update pj_gener_profit_gather
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="totalGenerate != null">total_generate = #{totalGenerate},</if>
+            <if test="avgGenerate != null">avg_generate = #{avgGenerate},</if>
+            <if test="sumSavePrice != null">sum_save_price = #{sumSavePrice},</if>
+            <if test="sumSendStateIncome != null">sum_send_state_income = #{sumSendStateIncome},</if>
+            <if test="sumAnnulIncome != null">sum_annul_income = #{sumAnnulIncome},</if>
+            <if test="sumIncomeRatioAnnul != null">sum_income_ratio_annul = #{sumIncomeRatioAnnul},</if>
+            <if test="sumIncomeRatioTotal != null">sum_income_ratio_total = #{sumIncomeRatioTotal},</if>
+            <if test="isDelete != null">is_delete = #{isDelete},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createId != null">create_id = #{createId},</if>
+            <if test="updTime != null">upd_time = #{updTime},</if>
+            <if test="updId != null">upd_id = #{updId},</if>
+        </trim>
+        where pj_no = #{pjNo}
+    </update>
+
+    <delete id="deletePjGenerProfitGatherByPjNo" parameterType="String">
+        delete from pj_gener_profit_gather where pj_no = #{pjNo}
+    </delete>
+
+    <delete id="deletePjGenerProfitGatherByPjNos" parameterType="String">
+        delete from pj_gener_profit_gather where pj_no in 
+        <foreach item="pjNo" collection="array" open="(" separator="," close=")">
+            #{pjNo}
+        </foreach>
+    </delete>
+</mapper>

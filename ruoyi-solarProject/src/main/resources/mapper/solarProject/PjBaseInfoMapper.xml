@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.PjBaseInfoMapper">
+    
+    <resultMap type="PjBaseInfo" id="PjBaseInfoResult">
+        <result property="pjNo"    column="pj_no"    />
+        <result property="pjName"    column="pj_name"    />
+        <result property="cusNo"    column="cus_no"    />
+        <result property="cusName"    column="cus_name"    />
+        <result property="modulesNum"    column="modules_num"    />
+        <result property="perModulesRate"    column="per_modules_rate"    />
+        <result property="totalCapacity"    column="total_capacity"    />
+        <result property="pjPerPrice"    column="pj_per_price"    />
+        <result property="pjTotalPrice"    column="pj_total_price"    />
+        <result property="perPvGenr"    column="per_pv_genr"    />
+        <result property="roofArea"    column="roof_area"    />
+        <result property="pvArea"    column="pv_area"    />
+        <result property="roofMaterials"    column="roof_materials"    />
+        <result property="installStyle"    column="install_style"    />
+        <result property="connectGridStyle"    column="connect_grid_style"    />
+        <result property="waterProofStyle"    column="water_proof_style"    />
+        <result property="funcProperty"    column="func_property"    />
+        <result property="voltgeLevel"    column="voltge_level"    />
+        <result property="trancformerCapacity"    column="trancformer_capacity"    />
+        <result property="electPrice"    column="elect_price"    />
+        <result property="sendStatePrice"    column="send_state_price"    />
+        <result property="selfUsePart"    column="self_use_part"    />
+        <result property="sendStatePart"    column="send_state_part"    />
+        <result property="selfUseAmount"    column="self_use_amount"    />
+        <result property="pjTotalBonus"    column="pj_total_bonus"    />
+        <result property="otherDesc"    column="other_desc"    />
+        <result property="isDelete"    column="is_delete"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createId"    column="create_id"    />
+        <result property="updTime"    column="upd_time"    />
+        <result property="updId"    column="upd_id"    />
+    </resultMap>
+
+    <sql id="selectPjBaseInfoVo">
+        select pj_no, pj_name, cus_no, cus_name, modules_num, per_modules_rate, total_capacity, pj_per_price, pj_total_price, per_pv_genr, roof_area, pv_area, roof_materials, install_style, connect_grid_style, water_proof_style, func_property, voltge_level, trancformer_capacity, elect_price, send_state_price, self_use_part, send_state_part, self_use_amount, pj_total_bonus, other_desc, is_delete, create_time, create_id, upd_time, upd_id from pj_base_info
+    </sql>
+
+    <select id="selectPjBaseInfoList" parameterType="PjBaseInfo" resultMap="PjBaseInfoResult">
+        <include refid="selectPjBaseInfoVo"/>
+        <where>  
+            <if test="pjName != null  and pjName != ''"> and pj_name like concat('%', #{pjName}, '%')</if>
+            <if test="cusNo != null  and cusNo != ''"> and cus_no = #{cusNo}</if>
+            <if test="cusName != null  and cusName != ''"> and cus_name like concat('%', #{cusName}, '%')</if>
+            <if test="modulesNum != null "> and modules_num = #{modulesNum}</if>
+            <if test="perModulesRate != null "> and per_modules_rate = #{perModulesRate}</if>
+            <if test="totalCapacity != null "> and total_capacity = #{totalCapacity}</if>
+            <if test="pjPerPrice != null "> and pj_per_price = #{pjPerPrice}</if>
+            <if test="pjTotalPrice != null "> and pj_total_price = #{pjTotalPrice}</if>
+            <if test="perPvGenr != null "> and per_pv_genr = #{perPvGenr}</if>
+            <if test="roofArea != null "> and roof_area = #{roofArea}</if>
+            <if test="pvArea != null "> and pv_area = #{pvArea}</if>
+            <if test="roofMaterials != null  and roofMaterials != ''"> and roof_materials = #{roofMaterials}</if>
+            <if test="installStyle != null  and installStyle != ''"> and install_style = #{installStyle}</if>
+            <if test="connectGridStyle != null  and connectGridStyle != ''"> and connect_grid_style = #{connectGridStyle}</if>
+            <if test="waterProofStyle != null  and waterProofStyle != ''"> and water_proof_style = #{waterProofStyle}</if>
+            <if test="funcProperty != null  and funcProperty != ''"> and func_property = #{funcProperty}</if>
+            <if test="voltgeLevel != null "> and voltge_level = #{voltgeLevel}</if>
+            <if test="trancformerCapacity != null "> and trancformer_capacity = #{trancformerCapacity}</if>
+            <if test="electPrice != null "> and elect_price = #{electPrice}</if>
+            <if test="sendStatePrice != null "> and send_state_price = #{sendStatePrice}</if>
+            <if test="selfUsePart != null "> and self_use_part = #{selfUsePart}</if>
+            <if test="sendStatePart != null "> and send_state_part = #{sendStatePart}</if>
+            <if test="selfUseAmount != null "> and self_use_amount = #{selfUseAmount}</if>
+            <if test="pjTotalBonus != null "> and pj_total_bonus = #{pjTotalBonus}</if>
+            <if test="otherDesc != null  and otherDesc != ''"> and other_desc = #{otherDesc}</if>
+            <if test="isDelete != null  and isDelete != ''"> and is_delete = #{isDelete}</if>
+            <if test="createId != null  and createId != ''"> and create_id = #{createId}</if>
+            <if test="updTime != null "> and upd_time = #{updTime}</if>
+            <if test="updId != null  and updId != ''"> and upd_id = #{updId}</if>
+        </where>
+    </select>
+    
+    <select id="selectPjBaseInfoByPjNo" parameterType="String" resultMap="PjBaseInfoResult">
+        <include refid="selectPjBaseInfoVo"/>
+        where pj_no = #{pjNo}
+    </select>
+        
+    <insert id="insertPjBaseInfo" parameterType="PjBaseInfo">
+        insert into pj_base_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pjNo != null">pj_no,</if>
+            <if test="pjName != null and pjName != ''">pj_name,</if>
+            <if test="cusNo != null and cusNo != ''">cus_no,</if>
+            <if test="cusName != null">cus_name,</if>
+            <if test="modulesNum != null">modules_num,</if>
+            <if test="perModulesRate != null">per_modules_rate,</if>
+            <if test="totalCapacity != null">total_capacity,</if>
+            <if test="pjPerPrice != null">pj_per_price,</if>
+            <if test="pjTotalPrice != null">pj_total_price,</if>
+            <if test="perPvGenr != null">per_pv_genr,</if>
+            <if test="roofArea != null">roof_area,</if>
+            <if test="pvArea != null">pv_area,</if>
+            <if test="roofMaterials != null">roof_materials,</if>
+            <if test="installStyle != null">install_style,</if>
+            <if test="connectGridStyle != null">connect_grid_style,</if>
+            <if test="waterProofStyle != null">water_proof_style,</if>
+            <if test="funcProperty != null">func_property,</if>
+            <if test="voltgeLevel != null">voltge_level,</if>
+            <if test="trancformerCapacity != null">trancformer_capacity,</if>
+            <if test="electPrice != null">elect_price,</if>
+            <if test="sendStatePrice != null">send_state_price,</if>
+            <if test="selfUsePart != null">self_use_part,</if>
+            <if test="sendStatePart != null">send_state_part,</if>
+            <if test="selfUseAmount != null">self_use_amount,</if>
+            <if test="pjTotalBonus != null">pj_total_bonus,</if>
+            <if test="otherDesc != null">other_desc,</if>
+            <if test="isDelete != null">is_delete,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createId != null">create_id,</if>
+            <if test="updTime != null">upd_time,</if>
+            <if test="updId != null">upd_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pjNo != null">#{pjNo},</if>
+            <if test="pjName != null and pjName != ''">#{pjName},</if>
+            <if test="cusNo != null and cusNo != ''">#{cusNo},</if>
+            <if test="cusName != null">#{cusName},</if>
+            <if test="modulesNum != null">#{modulesNum},</if>
+            <if test="perModulesRate != null">#{perModulesRate},</if>
+            <if test="totalCapacity != null">#{totalCapacity},</if>
+            <if test="pjPerPrice != null">#{pjPerPrice},</if>
+            <if test="pjTotalPrice != null">#{pjTotalPrice},</if>
+            <if test="perPvGenr != null">#{perPvGenr},</if>
+            <if test="roofArea != null">#{roofArea},</if>
+            <if test="pvArea != null">#{pvArea},</if>
+            <if test="roofMaterials != null">#{roofMaterials},</if>
+            <if test="installStyle != null">#{installStyle},</if>
+            <if test="connectGridStyle != null">#{connectGridStyle},</if>
+            <if test="waterProofStyle != null">#{waterProofStyle},</if>
+            <if test="funcProperty != null">#{funcProperty},</if>
+            <if test="voltgeLevel != null">#{voltgeLevel},</if>
+            <if test="trancformerCapacity != null">#{trancformerCapacity},</if>
+            <if test="electPrice != null">#{electPrice},</if>
+            <if test="sendStatePrice != null">#{sendStatePrice},</if>
+            <if test="selfUsePart != null">#{selfUsePart},</if>
+            <if test="sendStatePart != null">#{sendStatePart},</if>
+            <if test="selfUseAmount != null">#{selfUseAmount},</if>
+            <if test="pjTotalBonus != null">#{pjTotalBonus},</if>
+            <if test="otherDesc != null">#{otherDesc},</if>
+            <if test="isDelete != null">#{isDelete},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createId != null">#{createId},</if>
+            <if test="updTime != null">#{updTime},</if>
+            <if test="updId != null">#{updId},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePjBaseInfo" parameterType="PjBaseInfo">
+        update pj_base_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pjName != null and pjName != ''">pj_name = #{pjName},</if>
+            <if test="cusNo != null and cusNo != ''">cus_no = #{cusNo},</if>
+            <if test="cusName != null">cus_name = #{cusName},</if>
+            <if test="modulesNum != null">modules_num = #{modulesNum},</if>
+            <if test="perModulesRate != null">per_modules_rate = #{perModulesRate},</if>
+            <if test="totalCapacity != null">total_capacity = #{totalCapacity},</if>
+            <if test="pjPerPrice != null">pj_per_price = #{pjPerPrice},</if>
+            <if test="pjTotalPrice != null">pj_total_price = #{pjTotalPrice},</if>
+            <if test="perPvGenr != null">per_pv_genr = #{perPvGenr},</if>
+            <if test="roofArea != null">roof_area = #{roofArea},</if>
+            <if test="pvArea != null">pv_area = #{pvArea},</if>
+            <if test="roofMaterials != null">roof_materials = #{roofMaterials},</if>
+            <if test="installStyle != null">install_style = #{installStyle},</if>
+            <if test="connectGridStyle != null">connect_grid_style = #{connectGridStyle},</if>
+            <if test="waterProofStyle != null">water_proof_style = #{waterProofStyle},</if>
+            <if test="funcProperty != null">func_property = #{funcProperty},</if>
+            <if test="voltgeLevel != null">voltge_level = #{voltgeLevel},</if>
+            <if test="trancformerCapacity != null">trancformer_capacity = #{trancformerCapacity},</if>
+            <if test="electPrice != null">elect_price = #{electPrice},</if>
+            <if test="sendStatePrice != null">send_state_price = #{sendStatePrice},</if>
+            <if test="selfUsePart != null">self_use_part = #{selfUsePart},</if>
+            <if test="sendStatePart != null">send_state_part = #{sendStatePart},</if>
+            <if test="selfUseAmount != null">self_use_amount = #{selfUseAmount},</if>
+            <if test="pjTotalBonus != null">pj_total_bonus = #{pjTotalBonus},</if>
+            <if test="otherDesc != null">other_desc = #{otherDesc},</if>
+            <if test="isDelete != null">is_delete = #{isDelete},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createId != null">create_id = #{createId},</if>
+            <if test="updTime != null">upd_time = #{updTime},</if>
+            <if test="updId != null">upd_id = #{updId},</if>
+        </trim>
+        where pj_no = #{pjNo}
+    </update>
+
+    <delete id="deletePjBaseInfoByPjNo" parameterType="String">
+        delete from pj_base_info where pj_no = #{pjNo}
+    </delete>
+
+    <delete id="deletePjBaseInfoByPjNos" parameterType="String">
+        delete from pj_base_info where pj_no in 
+        <foreach item="pjNo" collection="array" open="(" separator="," close=")">
+            #{pjNo}
+        </foreach>
+    </delete>
+</mapper>

@@ -698,3 +698,121 @@ create table gen_table_column (
   update_time       datetime                                   comment '更新时间',
   primary key (column_id)
 ) engine=innodb auto_increment=1 comment = '代码生成业务表字段';
+
+
+DROP TABLE IF EXISTS cus_base_info;
+CREATE TABLE cus_base_info (
+        cus_no        varchar(30)     NOT NULL            COMMENT '客户编号',
+        cus_name      varchar(50)     NOT NULL            COMMENT '客户名称',
+        other_desc     varchar(300)                       COMMENT '备注信息',
+        is_delete     char(1)                             COMMENT '是否删除',
+        create_time   datetime                            COMMENT '插入时间',
+        create_id     varchar(20)                         COMMENT '插入用户',
+        upd_time      datetime                            COMMENT '更新时间',
+        upd_id        varchar(20)                         COMMENT '更新用户',
+        PRIMARY KEY (cus_no)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+------------------------------------------------------------------------------------------------------------------------------
+
+
+DROP TABLE IF EXISTS pj_base_info;
+CREATE TABLE pj_base_info (
+          pj_no                     varchar(30)       not null         COMMENT '项目编号',
+          pj_name	                varchar(200)      not null         COMMENT '项目名称',
+          cus_no                    varchar(30)                     COMMENT '客户编号',
+          cus_name                  varchar(50)                        COMMENT '客户名称',
+          modules_num               int                                COMMENT '组件数量',
+          per_modules_rate          int                                COMMENT '单块组件功率',
+          total_capacity            decimal(10,2)                      COMMENT '总装机量',
+          pj_per_price              decimal(10,2)                      COMMENT '系统单价',
+          pj_total_price            decimal(10,4)                      COMMENT '系统总价',
+          per_pv_genr               int                                COMMENT '单位发电量',
+          roof_area                 decimal(10,4)                      COMMENT '屋顶面积',
+          pv_area                   decimal(10,4)                      COMMENT '光伏面积',
+          roof_materials            char(2)                            COMMENT '屋顶结构材料',
+          install_style             char(2)                            COMMENT '安装方式',
+          connect_grid_style        char(2)                            COMMENT '并网方式',
+          water_proof_style         char(2)                            COMMENT '防水方式',
+          func_property             char(2)                            COMMENT '功能属性',
+          voltge_level              decimal(10,4)                      COMMENT '电压等级',
+          trancformer_capacity      decimal(10,4)                      COMMENT '变压器容量',
+          elect_price               decimal(10,4)                      COMMENT '客户国网电价',
+          send_state_price          decimal(10,4)                      COMMENT '余电上网电价',
+          self_use_part             decimal(3,2)                       COMMENT '自发自用占比',
+          send_state_part           decimal(3,2)                       COMMENT '余电上网占比',
+          self_use_amount           decimal(10,4)                      COMMENT '客户年用电量',
+          pj_total_bonus            decimal(10,4)                      COMMENT '补贴总金额',
+          other_desc                varchar(500)                       COMMENT '项目备注',
+          is_delete                 char(1)                            COMMENT '是否删除',
+          create_time               datetime                           COMMENT '插入时间',
+          create_id                 varchar(20)                        COMMENT '插入用户',
+          upd_time                  datetime                           COMMENT '更新时间',
+          upd_id                    varchar(20)                        COMMENT '更新用户',
+          PRIMARY KEY (pj_no)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+---- 增加索引
+ALTER  TABLE  'PJ_BASE_INFO'  ADD  UNIQUE ('pj_no');
+------------------------------------------------------------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS pj_gener_profit_test;
+CREATE TABLE pj_gener_profit_test (
+           pj_no                      varchar(30)  not null           comment '项目编号',
+           test_type                  char(1)                 comment '测算类型',
+           first_decrease_value       decimal(5,4)            comment '首年衰减值',
+           other_decrease_value       decimal(5,4)            comment '非首年衰减值',
+           pr_value                   decimal(5,4)            comment 'PR值',
+           year                       varchar(3)              comment '年份',
+           annul_generate             decimal(20,4)           comment '年度发电量',
+           save_elec_price            decimal(20,2)           comment '节省电费',
+           send_state_income          decimal(20,4)           comment '余电上网收益',
+           annul_income               decimal(20,4)           comment '年净收益',
+           income_ratio_annul         decimal(10,4)           comment '年投资回报率',
+           income_ratio_total         decimal(10,4)           comment '总投资回报率',
+           is_delete                  char(1)                 comment '是否删除',
+           create_time                datetime                comment '插入时间',
+           create_id                  varchar(20)             comment '插入用户',
+           upd_time                   datetime                comment '更新时间',
+           upd_id                     varchar(20)             comment '更新用户',
+           PRIMARY KEY (pj_no)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+------------------------------------------------------------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS pj_gener_profit_gather;
+CREATE TABLE pj_gener_profit_gather (
+            pj_no                     varchar(30)    not null     comment '项目编号',
+            total_generate            decimal(20,4)               comment '总发电量',
+            avg_generate              decimal(20,4)               comment '年均发电量',
+            sum_save_price            decimal(20,4)               comment '节省电费汇总',
+            sum_send_state_income     decimal(20,4)               comment '余电上网收益汇总',
+            sum_annul_income          decimal(20,4)               comment '年净收益汇总',
+            sum_income_ratio_annul    decimal(10,4)               comment '年投资回报率汇总',
+            sum_income_ratio_total    decimal(10,4)               comment '总投资回报率汇总',
+            is_delete                 char(1)                     comment '是否删除',
+            create_time               datetime                    comment '插入时间',
+            create_id                 varchar(20)                 comment '插入用户',
+            upd_time                  datetime                    comment '更新时间',
+            upd_id                    varchar(20)                 comment '更新用户',
+            PRIMARY KEY (pj_no)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+------------------------------------------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS pj_energy_saving;
+CREATE TABLE pj_energy_saving (
+             pj_no                     varchar(30)      not null    comment '项目编号',
+             coal_saving_average       int                          comment '节省标煤',
+             carbon_saving_average     int                          comment '减排二氧化碳',
+             sulfur_saving_average     int                          comment '减排二氧化硫',
+             nitric_saving_average     int                          comment '减排氮氧化物',
+             smoke_saving_average      int                          comment '减排烟尘',
+             is_delete                 char(1)                      comment '是否删除',
+             create_time               datetime                     comment '插入时间',
+             create_id                 varchar(20)                  comment '插入用户',
+             upd_time                  datetime                     comment '更新时间',
+             upd_id                    varchar(20)                  comment '更新用户',
+             PRIMARY KEY (pj_no)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+------------------------------------------------------------------------------------------------------------------------------

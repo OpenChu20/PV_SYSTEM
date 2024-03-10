@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.CusBaseInfoMapper">
+    
+    <resultMap type="CusBaseInfo" id="CusBaseInfoResult">
+        <result property="cusNo"    column="cus_no"    />
+        <result property="cusName"    column="cus_name"    />
+        <result property="otherDesc"    column="other_desc"    />
+        <result property="isDelete"    column="is_delete"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createId"    column="create_id"    />
+        <result property="updTime"    column="upd_time"    />
+        <result property="updId"    column="upd_id"    />
+    </resultMap>
+
+    <sql id="selectCusBaseInfoVo">
+        select cus_no, cus_name, other_desc, is_delete, create_time, create_id, upd_time, upd_id from cus_base_info
+    </sql>
+
+    <select id="selectCusBaseInfoList" parameterType="CusBaseInfo" resultMap="CusBaseInfoResult">
+        <include refid="selectCusBaseInfoVo"/>
+        <where>  
+            <if test="cusName != null  and cusName != ''"> and cus_name like concat('%', #{cusName}, '%')</if>
+            <if test="otherDesc != null  and otherDesc != ''"> and other_desc = #{otherDesc}</if>
+            <if test="isDelete != null  and isDelete != ''"> and is_delete = #{isDelete}</if>
+            <if test="createId != null  and createId != ''"> and create_id = #{createId}</if>
+            <if test="updTime != null "> and upd_time = #{updTime}</if>
+            <if test="updId != null  and updId != ''"> and upd_id = #{updId}</if>
+        </where>
+    </select>
+    
+    <select id="selectCusBaseInfoByCusNo" parameterType="String" resultMap="CusBaseInfoResult">
+        <include refid="selectCusBaseInfoVo"/>
+        where cus_no = #{cusNo}
+    </select>
+        
+    <insert id="insertCusBaseInfo" parameterType="CusBaseInfo">
+        insert into cus_base_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cusNo != null">cus_no,</if>
+            <if test="cusName != null and cusName != ''">cus_name,</if>
+            <if test="otherDesc != null">other_desc,</if>
+            <if test="isDelete != null">is_delete,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createId != null">create_id,</if>
+            <if test="updTime != null">upd_time,</if>
+            <if test="updId != null">upd_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cusNo != null">#{cusNo},</if>
+            <if test="cusName != null and cusName != ''">#{cusName},</if>
+            <if test="otherDesc != null">#{otherDesc},</if>
+            <if test="isDelete != null">#{isDelete},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createId != null">#{createId},</if>
+            <if test="updTime != null">#{updTime},</if>
+            <if test="updId != null">#{updId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCusBaseInfo" parameterType="CusBaseInfo">
+        update cus_base_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="cusName != null and cusName != ''">cus_name = #{cusName},</if>
+            <if test="otherDesc != null">other_desc = #{otherDesc},</if>
+            <if test="isDelete != null">is_delete = #{isDelete},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createId != null">create_id = #{createId},</if>
+            <if test="updTime != null">upd_time = #{updTime},</if>
+            <if test="updId != null">upd_id = #{updId},</if>
+        </trim>
+        where cus_no = #{cusNo}
+    </update>
+
+    <delete id="deleteCusBaseInfoByCusNo" parameterType="String">
+        delete from cus_base_info where cus_no = #{cusNo}
+    </delete>
+
+    <delete id="deleteCusBaseInfoByCusNos" parameterType="String">
+        delete from cus_base_info where cus_no in 
+        <foreach item="cusNo" collection="array" open="(" separator="," close=")">
+            #{cusNo}
+        </foreach>
+    </delete>
+</mapper>
