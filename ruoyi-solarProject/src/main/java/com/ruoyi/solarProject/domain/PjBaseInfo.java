@@ -10,7 +10,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 【请填写功能名称】对象 pj_base_info
- * 
+ *
  * @author ruoyi
  * @date 2024-03-10
  */
@@ -138,273 +138,273 @@ public class PjBaseInfo extends BaseEntity
     @Excel(name = "更新用户")
     private String updId;
 
-    public void setPjNo(String pjNo) 
+    public void setPjNo(String pjNo)
     {
         this.pjNo = pjNo;
     }
 
-    public String getPjNo() 
+    public String getPjNo()
     {
         return pjNo;
     }
-    public void setPjName(String pjName) 
+    public void setPjName(String pjName)
     {
         this.pjName = pjName;
     }
 
-    public String getPjName() 
+    public String getPjName()
     {
         return pjName;
     }
-    public void setCusNo(String cusNo) 
+    public void setCusNo(String cusNo)
     {
         this.cusNo = cusNo;
     }
 
-    public String getCusNo() 
+    public String getCusNo()
     {
         return cusNo;
     }
-    public void setCusName(String cusName) 
+    public void setCusName(String cusName)
     {
         this.cusName = cusName;
     }
 
-    public String getCusName() 
+    public String getCusName()
     {
         return cusName;
     }
-    public void setModulesNum(Long modulesNum) 
+    public void setModulesNum(Long modulesNum)
     {
         this.modulesNum = modulesNum;
     }
 
-    public Long getModulesNum() 
+    public Long getModulesNum()
     {
         return modulesNum;
     }
-    public void setPerModulesRate(Long perModulesRate) 
+    public void setPerModulesRate(Long perModulesRate)
     {
         this.perModulesRate = perModulesRate;
     }
 
-    public Long getPerModulesRate() 
+    public Long getPerModulesRate()
     {
         return perModulesRate;
     }
-    public void setTotalCapacity(BigDecimal totalCapacity) 
+    public void setTotalCapacity(BigDecimal totalCapacity)
     {
         this.totalCapacity = totalCapacity;
     }
 
-    public BigDecimal getTotalCapacity() 
+    public BigDecimal getTotalCapacity()
     {
         return totalCapacity;
     }
-    public void setPjPerPrice(BigDecimal pjPerPrice) 
+    public void setPjPerPrice(BigDecimal pjPerPrice)
     {
         this.pjPerPrice = pjPerPrice;
     }
 
-    public BigDecimal getPjPerPrice() 
+    public BigDecimal getPjPerPrice()
     {
         return pjPerPrice;
     }
-    public void setPjTotalPrice(BigDecimal pjTotalPrice) 
+    public void setPjTotalPrice(BigDecimal pjTotalPrice)
     {
         this.pjTotalPrice = pjTotalPrice;
     }
 
-    public BigDecimal getPjTotalPrice() 
+    public BigDecimal getPjTotalPrice()
     {
         return pjTotalPrice;
     }
-    public void setPerPvGenr(Long perPvGenr) 
+    public void setPerPvGenr(Long perPvGenr)
     {
         this.perPvGenr = perPvGenr;
     }
 
-    public Long getPerPvGenr() 
+    public Long getPerPvGenr()
     {
         return perPvGenr;
     }
-    public void setRoofArea(BigDecimal roofArea) 
+    public void setRoofArea(BigDecimal roofArea)
     {
         this.roofArea = roofArea;
     }
 
-    public BigDecimal getRoofArea() 
+    public BigDecimal getRoofArea()
     {
         return roofArea;
     }
-    public void setPvArea(BigDecimal pvArea) 
+    public void setPvArea(BigDecimal pvArea)
     {
         this.pvArea = pvArea;
     }
 
-    public BigDecimal getPvArea() 
+    public BigDecimal getPvArea()
     {
         return pvArea;
     }
-    public void setRoofMaterials(String roofMaterials) 
+    public void setRoofMaterials(String roofMaterials)
     {
         this.roofMaterials = roofMaterials;
     }
 
-    public String getRoofMaterials() 
+    public String getRoofMaterials()
     {
         return roofMaterials;
     }
-    public void setInstallStyle(String installStyle) 
+    public void setInstallStyle(String installStyle)
     {
         this.installStyle = installStyle;
     }
 
-    public String getInstallStyle() 
+    public String getInstallStyle()
     {
         return installStyle;
     }
-    public void setConnectGridStyle(String connectGridStyle) 
+    public void setConnectGridStyle(String connectGridStyle)
     {
         this.connectGridStyle = connectGridStyle;
     }
 
-    public String getConnectGridStyle() 
+    public String getConnectGridStyle()
     {
         return connectGridStyle;
     }
-    public void setWaterProofStyle(String waterProofStyle) 
+    public void setWaterProofStyle(String waterProofStyle)
     {
         this.waterProofStyle = waterProofStyle;
     }
 
-    public String getWaterProofStyle() 
+    public String getWaterProofStyle()
     {
         return waterProofStyle;
     }
-    public void setFuncProperty(String funcProperty) 
+    public void setFuncProperty(String funcProperty)
     {
         this.funcProperty = funcProperty;
     }
 
-    public String getFuncProperty() 
+    public String getFuncProperty()
     {
         return funcProperty;
     }
-    public void setVoltgeLevel(BigDecimal voltgeLevel) 
+    public void setVoltgeLevel(BigDecimal voltgeLevel)
     {
         this.voltgeLevel = voltgeLevel;
     }
 
-    public BigDecimal getVoltgeLevel() 
+    public BigDecimal getVoltgeLevel()
     {
         return voltgeLevel;
     }
-    public void setTrancformerCapacity(BigDecimal trancformerCapacity) 
+    public void settransformerCapacity(BigDecimal transformerCapacity)
     {
-        this.trancformerCapacity = trancformerCapacity;
+        this.trancformerCapacity = transformerCapacity;
     }
 
-    public BigDecimal getTrancformerCapacity() 
+    public BigDecimal gettransformerCapacity()
     {
         return trancformerCapacity;
     }
-    public void setElectPrice(BigDecimal electPrice) 
+    public void setElectPrice(BigDecimal electPrice)
     {
         this.electPrice = electPrice;
     }
 
-    public BigDecimal getElectPrice() 
+    public BigDecimal getElectPrice()
     {
         return electPrice;
     }
-    public void setSendStatePrice(BigDecimal sendStatePrice) 
+    public void setSendStatePrice(BigDecimal sendStatePrice)
     {
         this.sendStatePrice = sendStatePrice;
     }
 
-    public BigDecimal getSendStatePrice() 
+    public BigDecimal getSendStatePrice()
     {
         return sendStatePrice;
     }
-    public void setSelfUsePart(BigDecimal selfUsePart) 
+    public void setSelfUsePart(BigDecimal selfUsePart)
     {
         this.selfUsePart = selfUsePart;
     }
 
-    public BigDecimal getSelfUsePart() 
+    public BigDecimal getSelfUsePart()
     {
         return selfUsePart;
     }
-    public void setSendStatePart(BigDecimal sendStatePart) 
+    public void setSendStatePart(BigDecimal sendStatePart)
     {
         this.sendStatePart = sendStatePart;
     }
 
-    public BigDecimal getSendStatePart() 
+    public BigDecimal getSendStatePart()
     {
         return sendStatePart;
     }
-    public void setSelfUseAmount(BigDecimal selfUseAmount) 
+    public void setSelfUseAmount(BigDecimal selfUseAmount)
     {
         this.selfUseAmount = selfUseAmount;
     }
 
-    public BigDecimal getSelfUseAmount() 
+    public BigDecimal getSelfUseAmount()
     {
         return selfUseAmount;
     }
-    public void setPjTotalBonus(BigDecimal pjTotalBonus) 
+    public void setPjTotalBonus(BigDecimal pjTotalBonus)
     {
         this.pjTotalBonus = pjTotalBonus;
     }
 
-    public BigDecimal getPjTotalBonus() 
+    public BigDecimal getPjTotalBonus()
     {
         return pjTotalBonus;
     }
-    public void setOtherDesc(String otherDesc) 
+    public void setOtherDesc(String otherDesc)
     {
         this.otherDesc = otherDesc;
     }
 
-    public String getOtherDesc() 
+    public String getOtherDesc()
     {
         return otherDesc;
     }
-    public void setIsDelete(String isDelete) 
+    public void setIsDelete(String isDelete)
     {
         this.isDelete = isDelete;
     }
 
-    public String getIsDelete() 
+    public String getIsDelete()
     {
         return isDelete;
     }
-    public void setCreateId(String createId) 
+    public void setCreateId(String createId)
     {
         this.createId = createId;
     }
 
-    public String getCreateId() 
+    public String getCreateId()
     {
         return createId;
     }
-    public void setUpdTime(Date updTime) 
+    public void setUpdTime(Date updTime)
     {
         this.updTime = updTime;
     }
 
-    public Date getUpdTime() 
+    public Date getUpdTime()
     {
         return updTime;
     }
-    public void setUpdId(String updId) 
+    public void setUpdId(String updId)
     {
         this.updId = updId;
     }
 
-    public String getUpdId() 
+    public String getUpdId()
     {
         return updId;
     }
@@ -430,7 +430,7 @@ public class PjBaseInfo extends BaseEntity
             .append("waterProofStyle", getWaterProofStyle())
             .append("funcProperty", getFuncProperty())
             .append("voltgeLevel", getVoltgeLevel())
-            .append("trancformerCapacity", getTrancformerCapacity())
+            .append("transformerCapacity", gettransformerCapacity())
             .append("electPrice", getElectPrice())
             .append("sendStatePrice", getSendStatePrice())
             .append("selfUsePart", getSelfUsePart())

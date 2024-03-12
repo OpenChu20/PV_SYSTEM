@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.PjBaseInfoMapper">
-    
+
     <resultMap type="PjBaseInfo" id="PjBaseInfoResult">
         <result property="pjNo"    column="pj_no"    />
         <result property="pjName"    column="pj_name"    />
@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="waterProofStyle"    column="water_proof_style"    />
         <result property="funcProperty"    column="func_property"    />
         <result property="voltgeLevel"    column="voltge_level"    />
-        <result property="trancformerCapacity"    column="trancformer_capacity"    />
+        <result property="transformerCapacity"    column="transformer_capacity"    />
         <result property="electPrice"    column="elect_price"    />
         <result property="sendStatePrice"    column="send_state_price"    />
         <result property="selfUsePart"    column="self_use_part"    />
@@ -39,12 +39,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectPjBaseInfoVo">
-        select pj_no, pj_name, cus_no, cus_name, modules_num, per_modules_rate, total_capacity, pj_per_price, pj_total_price, per_pv_genr, roof_area, pv_area, roof_materials, install_style, connect_grid_style, water_proof_style, func_property, voltge_level, trancformer_capacity, elect_price, send_state_price, self_use_part, send_state_part, self_use_amount, pj_total_bonus, other_desc, is_delete, create_time, create_id, upd_time, upd_id from pj_base_info
+        select pj_no, pj_name, cus_no, cus_name, modules_num, per_modules_rate, total_capacity, pj_per_price, pj_total_price, per_pv_genr, roof_area, pv_area, roof_materials, install_style, connect_grid_style, water_proof_style, func_property, voltge_level, transformer_capacity, elect_price, send_state_price, self_use_part, send_state_part, self_use_amount, pj_total_bonus, other_desc, is_delete, create_time, create_id, upd_time, upd_id from pj_base_info
     </sql>
 
     <select id="selectPjBaseInfoList" parameterType="PjBaseInfo" resultMap="PjBaseInfoResult">
         <include refid="selectPjBaseInfoVo"/>
-        <where>  
+        <where>
             <if test="pjName != null  and pjName != ''"> and pj_name like concat('%', #{pjName}, '%')</if>
             <if test="cusNo != null  and cusNo != ''"> and cus_no = #{cusNo}</if>
             <if test="cusName != null  and cusName != ''"> and cus_name like concat('%', #{cusName}, '%')</if>
@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="waterProofStyle != null  and waterProofStyle != ''"> and water_proof_style = #{waterProofStyle}</if>
             <if test="funcProperty != null  and funcProperty != ''"> and func_property = #{funcProperty}</if>
             <if test="voltgeLevel != null "> and voltge_level = #{voltgeLevel}</if>
-            <if test="trancformerCapacity != null "> and trancformer_capacity = #{trancformerCapacity}</if>
+            <if test="transformerCapacity != null "> and transformer_capacity = #{transformerCapacity}</if>
             <if test="electPrice != null "> and elect_price = #{electPrice}</if>
             <if test="sendStatePrice != null "> and send_state_price = #{sendStatePrice}</if>
             <if test="selfUsePart != null "> and self_use_part = #{selfUsePart}</if>
@@ -76,12 +76,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updId != null  and updId != ''"> and upd_id = #{updId}</if>
         </where>
     </select>
-    
+
     <select id="selectPjBaseInfoByPjNo" parameterType="String" resultMap="PjBaseInfoResult">
         <include refid="selectPjBaseInfoVo"/>
-        where pj_no = #{pjNo}
+        where pj_no = #{pjNo} and is_delete='0'
     </select>
-        
+
     <insert id="insertPjBaseInfo" parameterType="PjBaseInfo">
         insert into pj_base_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -103,7 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="waterProofStyle != null">water_proof_style,</if>
             <if test="funcProperty != null">func_property,</if>
             <if test="voltgeLevel != null">voltge_level,</if>
-            <if test="trancformerCapacity != null">trancformer_capacity,</if>
+            <if test="transformerCapacity != null">transformer_capacity,</if>
             <if test="electPrice != null">elect_price,</if>
             <if test="sendStatePrice != null">send_state_price,</if>
             <if test="selfUsePart != null">self_use_part,</if>
@@ -136,7 +136,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="waterProofStyle != null">#{waterProofStyle},</if>
             <if test="funcProperty != null">#{funcProperty},</if>
             <if test="voltgeLevel != null">#{voltgeLevel},</if>
-            <if test="trancformerCapacity != null">#{trancformerCapacity},</if>
+            <if test="transformerCapacity != null">#{transformerCapacity},</if>
             <if test="electPrice != null">#{electPrice},</if>
             <if test="sendStatePrice != null">#{sendStatePrice},</if>
             <if test="selfUsePart != null">#{selfUsePart},</if>
@@ -172,7 +172,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="waterProofStyle != null">water_proof_style = #{waterProofStyle},</if>
             <if test="funcProperty != null">func_property = #{funcProperty},</if>
             <if test="voltgeLevel != null">voltge_level = #{voltgeLevel},</if>
-            <if test="trancformerCapacity != null">trancformer_capacity = #{trancformerCapacity},</if>
+            <if test="transformerCapacity != null">transformer_capacity = #{transformerCapacity},</if>
             <if test="electPrice != null">elect_price = #{electPrice},</if>
             <if test="sendStatePrice != null">send_state_price = #{sendStatePrice},</if>
             <if test="selfUsePart != null">self_use_part = #{selfUsePart},</if>
@@ -194,7 +194,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deletePjBaseInfoByPjNos" parameterType="String">
-        delete from pj_base_info where pj_no in 
+        delete from pj_base_info where pj_no in
         <foreach item="pjNo" collection="array" open="(" separator="," close=")">
             #{pjNo}
         </foreach>

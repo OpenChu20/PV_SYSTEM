@@ -85,9 +85,10 @@ public class PjBaseInfoController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:info:edit')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
-    @PutMapping
+    @PostMapping(value = "/update")
     public AjaxResult edit(@RequestBody PjBaseInfo pjBaseInfo)
     {
+        System.out.println(pjBaseInfo);
         return toAjax(pjBaseInfoService.updatePjBaseInfo(pjBaseInfo));
     }
 
@@ -96,7 +97,7 @@ public class PjBaseInfoController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:info:remove')")
     @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{pjNos}")
+    @DeleteMapping("/{pjNos}")
     public AjaxResult remove(@PathVariable String[] pjNos)
     {
         return toAjax(pjBaseInfoService.deletePjBaseInfoByPjNos(pjNos));

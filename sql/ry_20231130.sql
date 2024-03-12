@@ -720,7 +720,7 @@ DROP TABLE IF EXISTS pj_base_info;
 CREATE TABLE pj_base_info (
           pj_no                     varchar(30)       not null         COMMENT '项目编号',
           pj_name	                varchar(200)      not null         COMMENT '项目名称',
-          cus_no                    varchar(30)                     COMMENT '客户编号',
+          cus_no                    varchar(30)                        COMMENT '客户编号',
           cus_name                  varchar(50)                        COMMENT '客户名称',
           modules_num               int                                COMMENT '组件数量',
           per_modules_rate          int                                COMMENT '单块组件功率',
@@ -736,7 +736,7 @@ CREATE TABLE pj_base_info (
           water_proof_style         char(2)                            COMMENT '防水方式',
           func_property             char(2)                            COMMENT '功能属性',
           voltge_level              decimal(10,4)                      COMMENT '电压等级',
-          trancformer_capacity      decimal(10,4)                      COMMENT '变压器容量',
+          transformer_capacity      decimal(10,4)                      COMMENT '变压器容量',
           elect_price               decimal(10,4)                      COMMENT '客户国网电价',
           send_state_price          decimal(10,4)                      COMMENT '余电上网电价',
           self_use_part             decimal(3,2)                       COMMENT '自发自用占比',
