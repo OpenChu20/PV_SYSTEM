@@ -735,7 +735,7 @@ CREATE TABLE pj_base_info (
           connect_grid_style        char(2)                            COMMENT '并网方式',
           water_proof_style         char(2)                            COMMENT '防水方式',
           func_property             char(2)                            COMMENT '功能属性',
-          voltge_level              decimal(10,4)                      COMMENT '电压等级',
+          voltge_level              char(1)                            COMMENT '电压等级',
           transformer_capacity      decimal(10,4)                      COMMENT '变压器容量',
           elect_price               decimal(10,4)                      COMMENT '客户国网电价',
           send_state_price          decimal(10,4)                      COMMENT '余电上网电价',
