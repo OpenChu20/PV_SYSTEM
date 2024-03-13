@@ -1,4 +1,4 @@
-package com.ruoyi.system.controller;
+package com.ruoyi.web.controller.solarProject.baseProject;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +21,8 @@ import com.ruoyi.system.service.IPjBaseInfoService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
+import static com.ruoyi.common.constant.SolarProjectConstants.IS_NO;
+
 /**
  * 【请填写功能名称】Controller
  *
@@ -28,7 +30,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2024-03-10
  */
 @RestController
-@RequestMapping("/solarProject/info")
+@RequestMapping("/solarProject/baseInfo")
 public class PjBaseInfoController extends BaseController
 {
     @Autowired
@@ -77,6 +79,7 @@ public class PjBaseInfoController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody PjBaseInfo pjBaseInfo)
     {
+        pjBaseInfo.setIsDelete(IS_NO);
         return toAjax(pjBaseInfoService.insertPjBaseInfo(pjBaseInfo));
     }
 
