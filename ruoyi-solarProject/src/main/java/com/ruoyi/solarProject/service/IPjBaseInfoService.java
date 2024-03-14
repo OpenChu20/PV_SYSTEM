@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.system.domain.PjBaseInfo;
+import com.ruoyi.system.domain.PjGenerProfitTest;
 
 /**
  * 【请填写功能名称】Service接口
@@ -58,4 +59,6 @@ public interface IPjBaseInfoService
      * @return 结果
      */
     public int deletePjBaseInfoByPjNo(String pjNo);
+
+    public List<PjGenerProfitTest> getGenerProfits(String pjNo);
 }

@@ -2,6 +2,8 @@ package com.ruoyi.web.controller.solarProject.baseProject;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.system.domain.PjGenerProfitTest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -105,4 +107,17 @@ public class PjBaseInfoController extends BaseController
     {
         return toAjax(pjBaseInfoService.deletePjBaseInfoByPjNos(pjNos));
     }
+
+    /**
+     * 查询【请填写功能名称】列表
+     */
+    @PreAuthorize("@ss.hasPermi('system:info:getGenerProfits')")
+    @GetMapping("/getGenerProfits")
+    public TableDataInfo getGenerProfits(PjBaseInfo pjBaseInfo)
+    {
+        String pjNo = pjBaseInfo.getPjNo();
+        List<PjGenerProfitTest> list = pjBaseInfoService.getGenerProfits(pjNo);
+        return getDataTable(list);
+    }
+
 }

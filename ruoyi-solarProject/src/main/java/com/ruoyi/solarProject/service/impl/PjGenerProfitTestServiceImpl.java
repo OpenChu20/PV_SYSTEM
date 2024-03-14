@@ -29,7 +29,8 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService
     @Override
     public PjGenerProfitTest selectPjGenerProfitTestByPjNo(String pjNo)
     {
-        return pjGenerProfitTestMapper.selectPjGenerProfitTestByPjNo(pjNo);
+        //return pjGenerProfitTestMapper.selectPjGenerProfitTestByPjNo(pjNo);
+        return null;
     }
 
     /**
@@ -78,7 +79,7 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService
     @Override
     public int deletePjGenerProfitTestByPjNos(String[] pjNos)
     {
-        return pjGenerProfitTestMapper.deletePjGenerProfitTestByPjNos(pjNos);
+        return 0;
     }
 
     /**
@@ -90,6 +91,6 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService
     @Override
     public int deletePjGenerProfitTestByPjNo(String pjNo)
     {
-        return pjGenerProfitTestMapper.deletePjGenerProfitTestByPjNo(pjNo);
+        return 0;
     }
 }

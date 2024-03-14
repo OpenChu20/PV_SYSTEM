@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.PjGenerProfitTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.PjBaseInfoMapper;
@@ -95,5 +96,10 @@ public class PjBaseInfoServiceImpl implements IPjBaseInfoService
     public int deletePjBaseInfoByPjNo(String pjNo)
     {
         return pjBaseInfoMapper.deletePjBaseInfoByPjNo(pjNo);
+    }
+
+    @Override
+    public List<PjGenerProfitTest> getGenerProfits(String pjNo) {
+        return pjBaseInfoMapper.getGenerProfits(pjNo);
     }
 }

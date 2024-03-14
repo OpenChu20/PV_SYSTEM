@@ -125,6 +125,11 @@ public class PjBaseInfo extends BaseEntity
     @Excel(name = "是否删除")
     private String isDelete;
 
+
+    /** 插入用户 */
+    @Excel(name = "插入用户")
+    private String transformerCapacity;
+
     /** 插入用户 */
     @Excel(name = "插入用户")
     private String createId;
@@ -137,6 +142,14 @@ public class PjBaseInfo extends BaseEntity
     /** 更新用户 */
     @Excel(name = "更新用户")
     private String updId;
+
+    public String getTransformerCapacity() {
+        return transformerCapacity;
+    }
+
+    public void setTransformerCapacity(String transformerCapacity) {
+        this.transformerCapacity = transformerCapacity;
+    }
 
     public void setPjNo(String pjNo)
     {

@@ -2,6 +2,7 @@ package com.ruoyi.system.mapper;
 
 import java.util.List;
 import com.ruoyi.system.domain.PjBaseInfo;
+import com.ruoyi.system.domain.PjGenerProfitTest;
 
 /**
  * 【请填写功能名称】Mapper接口
@@ -58,4 +59,7 @@ public interface PjBaseInfoMapper
      * @return 结果
      */
     public int deletePjBaseInfoByPjNos(String[] pjNos);
+
+
+    public List<PjGenerProfitTest> getGenerProfits(String pjNo);
 }

@@ -1,4 +1,4 @@
-package com.ruoyi.solarProject.domain;
+package com.ruoyi.system.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
