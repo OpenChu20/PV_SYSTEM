@@ -739,8 +739,8 @@ CREATE TABLE pj_base_info (
           transformer_capacity      decimal(10,4)                      COMMENT '变压器容量',
           elect_price               decimal(10,4)                      COMMENT '客户国网电价',
           send_state_price          decimal(10,4)                      COMMENT '余电上网电价',
-          self_use_part             decimal(3,2)                       COMMENT '自发自用占比',
-          send_state_part           decimal(3,2)                       COMMENT '余电上网占比',
+          self_use_part             decimal(5,2)                       COMMENT '自发自用占比',
+          send_state_part           decimal(5,2)                       COMMENT '余电上网占比',
           self_use_amount           decimal(10,4)                      COMMENT '客户年用电量',
           pj_total_bonus            decimal(10,4)                      COMMENT '补贴总金额',
           other_desc                varchar(500)                       COMMENT '项目备注',
@@ -758,25 +758,32 @@ ALTER  TABLE  'PJ_BASE_INFO'  ADD  UNIQUE ('pj_no');
 
 DROP TABLE IF EXISTS pj_gener_profit_test;
 CREATE TABLE pj_gener_profit_test (
-           pj_no                      varchar(30)  not null           comment '项目编号',
-           test_type                  char(1)                 comment '测算类型',
-           first_decrease_value       decimal(5,4)            comment '首年衰减值',
-           other_decrease_value       decimal(5,4)            comment '非首年衰减值',
-           pr_value                   decimal(5,4)            comment 'PR值',
-           year                       varchar(3)              comment '年份',
-           annul_generate             decimal(20,4)           comment '年度发电量',
-           save_elec_price            decimal(20,2)           comment '节省电费',
-           send_state_income          decimal(20,4)           comment '余电上网收益',
-           annul_income               decimal(20,4)           comment '年净收益',
-           income_ratio_annul         decimal(10,4)           comment '年投资回报率',
-           income_ratio_total         decimal(10,4)           comment '总投资回报率',
-           is_delete                  char(1)                 comment '是否删除',
-           create_time                datetime                comment '插入时间',
-           create_id                  varchar(20)             comment '插入用户',
-           upd_time                   datetime                comment '更新时间',
-           upd_id                     varchar(20)             comment '更新用户',
-           PRIMARY KEY (pj_no)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+                                    id                         bigint     not null  comment '主键',
+                                    pj_no                      varchar(30)            comment '项目编号',
+                                    test_type                  char(1)             comment '测算类型',
+                                    first_decrease_value       decimal(7,4)            comment '首年衰减值',
+                                    other_decrease_value       decimal(7,4)            comment '非首年衰减值',
+                                    pr_value                   decimal(7,4)            comment 'PR值',
+                                    year                       varchar(2)              comment '年份',
+                                    annul_generate             decimal(20,4)           comment '年度发电量',
+                                    save_elec_price            decimal(20,4)           comment '节省电费',
+                                    send_state_income          decimal(20,4)           comment '余电上网收益',
+                                    annul_income               decimal(20,4)           comment '年净收益',
+                                    income_ratio_annul         decimal(10,4)           comment '年投资回报率',
+                                    income_ratio_total         decimal(10,4)           comment '总投资回报率',
+                                    annul_generate_c             decimal(20,4)           comment '年度发电量（修正）',
+                                    save_elec_price_c            decimal(20,4)           comment '节省电费（修正）',
+                                    send_state_income_c          decimal(20,4)           comment '余电上网收益（修正）',
+                                    annul_income_c               decimal(20,4)           comment '年净收益（修正）',
+                                    income_ratio_annul_c         decimal(10,4)           comment '年投资回报率（修正）',
+                                    income_ratio_total_c         decimal(10,4)           comment '总投资回报率（修正）',
+                                    is_delete                  char(1)                 comment '是否删除',
+                                    create_time                datetime                comment '插入时间',
+                                    create_id                  varchar(20)             comment '插入用户',
+                                    upd_time                   datetime                comment '更新时间',
+                                    upd_id                     varchar(20)             comment '更新用户',
+                                    PRIMARY KEY (id)
+) ENGINE=InnoDB auto_increment=100 DEFAULT CHARSET=utf8;
 ------------------------------------------------------------------------------------------------------------------------------
 
 DROP TABLE IF EXISTS pj_gener_profit_gather;
@@ -852,3 +859,10 @@ INSERT INTO `ry-vue`.sys_dict_type (dict_id, dict_name, dict_type, status, creat
 INSERT INTO `ry-vue`.sys_dict_type (dict_id, dict_name, dict_type, status, create_by, create_time, update_by, update_time, remark) VALUES (103, '防水方式', 'water_proof_style', '0', 'admin', '2024-03-12 12:11:35', '', null, null);
 INSERT INTO `ry-vue`.sys_dict_type (dict_id, dict_name, dict_type, status, create_by, create_time, update_by, update_time, remark) VALUES (104, '功能属性', 'func_property', '0', 'admin', '2024-03-12 12:13:13', '', null, null);
 INSERT INTO `ry-vue`.sys_dict_type (dict_id, dict_name, dict_type, status, create_by, create_time, update_by, update_time, remark) VALUES (105, '电压等级', 'voltge_level', '0', 'admin', '2024-03-12 12:14:42', '', null, null);
+
+
+----20240314
+alter table pj_base_info modify column send_state_part decimal(5,2)
+alter table pj_base_info modify column self_use_part decimal(5,2)
+
+
