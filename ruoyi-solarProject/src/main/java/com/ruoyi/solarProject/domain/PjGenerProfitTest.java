@@ -75,6 +75,12 @@ public class PjGenerProfitTest extends BaseEntity
 
     /** 更新时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date createTime;
+
+
+    /** 更新时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date updTime;
 
@@ -82,7 +88,75 @@ public class PjGenerProfitTest extends BaseEntity
     @Excel(name = "更新用户")
     private String updId;
 
-    public void setPjNo(String pjNo) 
+
+    /** 插入用户 */
+    @Excel(name = "插入用户")
+    private String annul_generate_c;
+    /** 插入用户 */
+    @Excel(name = "插入用户")
+    private String save_elec_price_c;
+    /** 插入用户 */
+    @Excel(name = "插入用户")
+    private String send_state_income_c;
+    /** 插入用户 */
+    @Excel(name = "插入用户")
+    private String annul_income_c;
+    /** 插入用户 */
+    @Excel(name = "插入用户")
+    private String income_ratio_annul_c;
+    /** 插入用户 */
+    @Excel(name = "插入用户")
+    private String income_ratio_total_c;
+
+    public String getAnnul_generate_c() {
+        return annul_generate_c;
+    }
+
+    public void setAnnul_generate_c(String annul_generate_c) {
+        this.annul_generate_c = annul_generate_c;
+    }
+
+    public String getSave_elec_price_c() {
+        return save_elec_price_c;
+    }
+
+    public void setSave_elec_price_c(String save_elec_price_c) {
+        this.save_elec_price_c = save_elec_price_c;
+    }
+
+    public String getSend_state_income_c() {
+        return send_state_income_c;
+    }
+
+    public void setSend_state_income_c(String send_state_income_c) {
+        this.send_state_income_c = send_state_income_c;
+    }
+
+    public String getAnnul_income_c() {
+        return annul_income_c;
+    }
+
+    public void setAnnul_income_c(String annul_income_c) {
+        this.annul_income_c = annul_income_c;
+    }
+
+    public String getIncome_ratio_annul_c() {
+        return income_ratio_annul_c;
+    }
+
+    public void setIncome_ratio_annul_c(String income_ratio_annul_c) {
+        this.income_ratio_annul_c = income_ratio_annul_c;
+    }
+
+    public String getIncome_ratio_total_c() {
+        return income_ratio_total_c;
+    }
+
+    public void setIncome_ratio_total_c(String income_ratio_total_c) {
+        this.income_ratio_total_c = income_ratio_total_c;
+    }
+
+    public void setPjNo(String pjNo)
     {
         this.pjNo = pjNo;
     }
@@ -225,6 +299,16 @@ public class PjGenerProfitTest extends BaseEntity
     public String getUpdId() 
     {
         return updId;
+    }
+
+    @Override
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    @Override
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     @Override
