@@ -1,4 +1,4 @@
-package com.ruoyi.system.domain;
+package com.ruoyi.solarProject.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -9,16 +9,20 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 【请填写功能名称】对象 pj_gener_profit_test
- * 
+ * 年对象 pj_gener_profit_test
+ *
  * @author ruoyi
- * @date 2024-03-10
+ * @date 2024-03-14
  */
 public class PjGenerProfitTest extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
+    /** 主键 */
+    private Long id;
+
     /** 项目编号 */
+    @Excel(name = "项目编号")
     private String pjNo;
 
     /** 测算类型 */
@@ -65,6 +69,30 @@ public class PjGenerProfitTest extends BaseEntity
     @Excel(name = "总投资回报率")
     private BigDecimal incomeRatioTotal;
 
+    /** 年度发电量（修正） */
+    @Excel(name = "年度发电量", readConverterExp = "修=正")
+    private BigDecimal annulGenerateC;
+
+    /** 节省电费（修正） */
+    @Excel(name = "节省电费", readConverterExp = "修=正")
+    private BigDecimal saveElecPriceC;
+
+    /** 余电上网收益（修正） */
+    @Excel(name = "余电上网收益", readConverterExp = "修=正")
+    private BigDecimal sendStateIncomeC;
+
+    /** 年净收益（修正） */
+    @Excel(name = "年净收益", readConverterExp = "修=正")
+    private BigDecimal annulIncomeC;
+
+    /** 年投资回报率（修正） */
+    @Excel(name = "年投资回报率", readConverterExp = "修=正")
+    private BigDecimal incomeRatioAnnulC;
+
+    /** 总投资回报率（修正） */
+    @Excel(name = "总投资回报率", readConverterExp = "修=正")
+    private BigDecimal incomeRatioTotalC;
+
     /** 是否删除 */
     @Excel(name = "是否删除")
     private String isDelete;
@@ -82,156 +110,218 @@ public class PjGenerProfitTest extends BaseEntity
     @Excel(name = "更新用户")
     private String updId;
 
-    public void setPjNo(String pjNo) 
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
+
+    public Long getId()
+    {
+        return id;
+    }
+    public void setPjNo(String pjNo)
     {
         this.pjNo = pjNo;
     }
 
-    public String getPjNo() 
+    public String getPjNo()
     {
         return pjNo;
     }
-    public void setTestType(String testType) 
-    {
-        this.testType = testType;
-    }
-
-    public String getTestType() 
-    {
-        return testType;
-    }
-    public void setFirstDecreaseValue(BigDecimal firstDecreaseValue) 
+    public void setFirstDecreaseValue(BigDecimal firstDecreaseValue)
     {
         this.firstDecreaseValue = firstDecreaseValue;
     }
 
-    public BigDecimal getFirstDecreaseValue() 
+    public BigDecimal getFirstDecreaseValue()
     {
         return firstDecreaseValue;
     }
-    public void setOtherDecreaseValue(BigDecimal otherDecreaseValue) 
+    public void setOtherDecreaseValue(BigDecimal otherDecreaseValue)
     {
         this.otherDecreaseValue = otherDecreaseValue;
     }
 
-    public BigDecimal getOtherDecreaseValue() 
+    public BigDecimal getOtherDecreaseValue()
     {
         return otherDecreaseValue;
     }
-    public void setPrValue(BigDecimal prValue) 
+    public void setPrValue(BigDecimal prValue)
     {
         this.prValue = prValue;
     }
 
-    public BigDecimal getPrValue() 
+    public BigDecimal getPrValue()
     {
         return prValue;
     }
-    public void setYear(String year) 
+    public void setYear(String year)
     {
         this.year = year;
     }
 
-    public String getYear() 
+    public String getYear()
     {
         return year;
     }
-    public void setAnnulGenerate(BigDecimal annulGenerate) 
+    public void setAnnulGenerate(BigDecimal annulGenerate)
     {
         this.annulGenerate = annulGenerate;
     }
 
-    public BigDecimal getAnnulGenerate() 
+    public BigDecimal getAnnulGenerate()
     {
         return annulGenerate;
     }
-    public void setSaveElecPrice(BigDecimal saveElecPrice) 
+    public void setSaveElecPrice(BigDecimal saveElecPrice)
     {
         this.saveElecPrice = saveElecPrice;
     }
 
-    public BigDecimal getSaveElecPrice() 
+    public BigDecimal getSaveElecPrice()
     {
         return saveElecPrice;
     }
-    public void setSendStateIncome(BigDecimal sendStateIncome) 
+    public void setSendStateIncome(BigDecimal sendStateIncome)
     {
         this.sendStateIncome = sendStateIncome;
     }
 
-    public BigDecimal getSendStateIncome() 
+    public BigDecimal getSendStateIncome()
     {
         return sendStateIncome;
     }
-    public void setAnnulIncome(BigDecimal annulIncome) 
+    public void setAnnulIncome(BigDecimal annulIncome)
     {
         this.annulIncome = annulIncome;
     }
 
-    public BigDecimal getAnnulIncome() 
+    public BigDecimal getAnnulIncome()
     {
         return annulIncome;
     }
-    public void setIncomeRatioAnnul(BigDecimal incomeRatioAnnul) 
+    public void setIncomeRatioAnnul(BigDecimal incomeRatioAnnul)
     {
         this.incomeRatioAnnul = incomeRatioAnnul;
     }
 
-    public BigDecimal getIncomeRatioAnnul() 
+    public BigDecimal getIncomeRatioAnnul()
     {
         return incomeRatioAnnul;
     }
-    public void setIncomeRatioTotal(BigDecimal incomeRatioTotal) 
+    public void setIncomeRatioTotal(BigDecimal incomeRatioTotal)
     {
         this.incomeRatioTotal = incomeRatioTotal;
     }
 
-    public BigDecimal getIncomeRatioTotal() 
+    public BigDecimal getIncomeRatioTotal()
     {
         return incomeRatioTotal;
     }
-    public void setIsDelete(String isDelete) 
+    public void setAnnulGenerateC(BigDecimal annulGenerateC)
+    {
+        this.annulGenerateC = annulGenerateC;
+    }
+
+    public BigDecimal getAnnulGenerateC()
+    {
+        return annulGenerateC;
+    }
+    public void setSaveElecPriceC(BigDecimal saveElecPriceC)
+    {
+        this.saveElecPriceC = saveElecPriceC;
+    }
+
+    public BigDecimal getSaveElecPriceC()
+    {
+        return saveElecPriceC;
+    }
+    public void setSendStateIncomeC(BigDecimal sendStateIncomeC)
+    {
+        this.sendStateIncomeC = sendStateIncomeC;
+    }
+
+    public BigDecimal getSendStateIncomeC()
+    {
+        return sendStateIncomeC;
+    }
+    public void setAnnulIncomeC(BigDecimal annulIncomeC)
+    {
+        this.annulIncomeC = annulIncomeC;
+    }
+
+    public BigDecimal getAnnulIncomeC()
+    {
+        return annulIncomeC;
+    }
+    public void setIncomeRatioAnnulC(BigDecimal incomeRatioAnnulC)
+    {
+        this.incomeRatioAnnulC = incomeRatioAnnulC;
+    }
+
+    public BigDecimal getIncomeRatioAnnulC()
+    {
+        return incomeRatioAnnulC;
+    }
+    public void setIncomeRatioTotalC(BigDecimal incomeRatioTotalC)
+    {
+        this.incomeRatioTotalC = incomeRatioTotalC;
+    }
+
+    public BigDecimal getIncomeRatioTotalC()
+    {
+        return incomeRatioTotalC;
+    }
+    public void setIsDelete(String isDelete)
     {
         this.isDelete = isDelete;
     }
 
-    public String getIsDelete() 
+    public String getIsDelete()
     {
         return isDelete;
     }
-    public void setCreateId(String createId) 
+    public void setCreateId(String createId)
     {
         this.createId = createId;
     }
 
-    public String getCreateId() 
+    public String getCreateId()
     {
         return createId;
     }
-    public void setUpdTime(Date updTime) 
+    public void setUpdTime(Date updTime)
     {
         this.updTime = updTime;
     }
 
-    public Date getUpdTime() 
+    public Date getUpdTime()
     {
         return updTime;
     }
-    public void setUpdId(String updId) 
+    public void setUpdId(String updId)
     {
         this.updId = updId;
     }
 
-    public String getUpdId() 
+    public String getUpdId()
     {
         return updId;
+    }
+
+    public String getTestType() {
+        return testType;
+    }
+
+    public void setTestType(String testType) {
+        this.testType = testType;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("id", getId())
             .append("pjNo", getPjNo())
-            .append("testType", getTestType())
             .append("firstDecreaseValue", getFirstDecreaseValue())
             .append("otherDecreaseValue", getOtherDecreaseValue())
             .append("prValue", getPrValue())
@@ -242,6 +332,12 @@ public class PjGenerProfitTest extends BaseEntity
             .append("annulIncome", getAnnulIncome())
             .append("incomeRatioAnnul", getIncomeRatioAnnul())
             .append("incomeRatioTotal", getIncomeRatioTotal())
+            .append("annulGenerateC", getAnnulGenerateC())
+            .append("saveElecPriceC", getSaveElecPriceC())
+            .append("sendStateIncomeC", getSendStateIncomeC())
+            .append("annulIncomeC", getAnnulIncomeC())
+            .append("incomeRatioAnnulC", getIncomeRatioAnnulC())
+            .append("incomeRatioTotalC", getIncomeRatioTotalC())
             .append("isDelete", getIsDelete())
             .append("createTime", getCreateTime())
             .append("createId", getCreateId())

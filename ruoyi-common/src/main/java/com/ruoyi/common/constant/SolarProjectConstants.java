@@ -14,6 +14,16 @@ public class SolarProjectConstants
     public static final String IS_YES = "1";
     public static final String IS_NO = "0";
 
+    // 标准测算    修正测算
+    public static final String STANDARD_TEST = "0";
+    public static final String FIX_TEST = "1";
+
+
+    // 标准测算    修正测算
+    public static final String FIRST_YEAR = "1";
+    public static final String SECOND_YEAR = "2";
+
+
     /**
      * UTF-8 字符集
      */
