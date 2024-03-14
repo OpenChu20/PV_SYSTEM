@@ -35,11 +35,11 @@ public class PjBaseInfo extends BaseEntity
 
     /** 组件数量 */
     @Excel(name = "组件数量")
-    private Long modulesNum;
+    private int modulesNum;
 
     /** 单块组件功率 */
     @Excel(name = "单块组件功率")
-    private Long perModulesRate;
+    private int perModulesRate;
 
     /** 总装机量 */
     @Excel(name = "总装机量")
@@ -55,7 +55,7 @@ public class PjBaseInfo extends BaseEntity
 
     /** 单位发电量 */
     @Excel(name = "单位发电量")
-    private Long perPvGenr;
+    private int perPvGenr;
 
     /** 屋顶面积 */
     @Excel(name = "屋顶面积")
@@ -87,7 +87,7 @@ public class PjBaseInfo extends BaseEntity
 
     /** 电压等级 */
     @Excel(name = "电压等级")
-    private BigDecimal voltgeLevel;
+    private String voltgeLevel;
 
     /** 变压器容量 */
     @Excel(name = "变压器容量")
@@ -161,288 +161,223 @@ public class PjBaseInfo extends BaseEntity
         this.cusNo = cusNo;
     }
 
-    public String getCusNo()
-    {
-        return cusNo;
+    public String getCusName() {
+        return cusName;
     }
-    public void setCusName(String cusName)
-    {
+
+    public void setCusName(String cusName) {
         this.cusName = cusName;
     }
 
-    public String getCusName()
-    {
-        return cusName;
+    public int getModulesNum() {
+        return modulesNum;
     }
-    public void setModulesNum(Long modulesNum)
-    {
+
+    public void setModulesNum(int modulesNum) {
         this.modulesNum = modulesNum;
     }
 
-    public Long getModulesNum()
-    {
-        return modulesNum;
+    public int getPerModulesRate() {
+        return perModulesRate;
     }
-    public void setPerModulesRate(Long perModulesRate)
-    {
+
+    public void setPerModulesRate(int perModulesRate) {
         this.perModulesRate = perModulesRate;
     }
 
-    public Long getPerModulesRate()
-    {
-        return perModulesRate;
+    public BigDecimal getTotalCapacity() {
+        return totalCapacity;
     }
-    public void setTotalCapacity(BigDecimal totalCapacity)
-    {
+
+    public void setTotalCapacity(BigDecimal totalCapacity) {
         this.totalCapacity = totalCapacity;
     }
 
-    public BigDecimal getTotalCapacity()
-    {
-        return totalCapacity;
+    public BigDecimal getPjPerPrice() {
+        return pjPerPrice;
     }
-    public void setPjPerPrice(BigDecimal pjPerPrice)
-    {
+
+    public void setPjPerPrice(BigDecimal pjPerPrice) {
         this.pjPerPrice = pjPerPrice;
     }
 
-    public BigDecimal getPjPerPrice()
-    {
-        return pjPerPrice;
+    public BigDecimal getPjTotalPrice() {
+        return pjTotalPrice;
     }
-    public void setPjTotalPrice(BigDecimal pjTotalPrice)
-    {
+
+    public void setPjTotalPrice(BigDecimal pjTotalPrice) {
         this.pjTotalPrice = pjTotalPrice;
     }
 
-    public BigDecimal getPjTotalPrice()
-    {
-        return pjTotalPrice;
+    public int getPerPvGenr() {
+        return perPvGenr;
     }
-    public void setPerPvGenr(Long perPvGenr)
-    {
+
+    public void setPerPvGenr(int perPvGenr) {
         this.perPvGenr = perPvGenr;
     }
 
-    public Long getPerPvGenr()
-    {
-        return perPvGenr;
+    public BigDecimal getRoofArea() {
+        return roofArea;
     }
-    public void setRoofArea(BigDecimal roofArea)
-    {
+
+    public void setRoofArea(BigDecimal roofArea) {
         this.roofArea = roofArea;
     }
 
-    public BigDecimal getRoofArea()
-    {
-        return roofArea;
+    public BigDecimal getPvArea() {
+        return pvArea;
     }
-    public void setPvArea(BigDecimal pvArea)
-    {
+
+    public void setPvArea(BigDecimal pvArea) {
         this.pvArea = pvArea;
     }
 
-    public BigDecimal getPvArea()
-    {
-        return pvArea;
+    public String getRoofMaterials() {
+        return roofMaterials;
     }
-    public void setRoofMaterials(String roofMaterials)
-    {
+
+    public void setRoofMaterials(String roofMaterials) {
         this.roofMaterials = roofMaterials;
     }
 
-    public String getRoofMaterials()
-    {
-        return roofMaterials;
+    public String getInstallStyle() {
+        return installStyle;
     }
-    public void setInstallStyle(String installStyle)
-    {
+
+    public void setInstallStyle(String installStyle) {
         this.installStyle = installStyle;
     }
 
-    public String getInstallStyle()
-    {
-        return installStyle;
+    public String getConnectGridStyle() {
+        return connectGridStyle;
     }
-    public void setConnectGridStyle(String connectGridStyle)
-    {
+
+    public void setConnectGridStyle(String connectGridStyle) {
         this.connectGridStyle = connectGridStyle;
     }
 
-    public String getConnectGridStyle()
-    {
-        return connectGridStyle;
+    public String getWaterProofStyle() {
+        return waterProofStyle;
     }
-    public void setWaterProofStyle(String waterProofStyle)
-    {
+
+    public void setWaterProofStyle(String waterProofStyle) {
         this.waterProofStyle = waterProofStyle;
     }
 
-    public String getWaterProofStyle()
-    {
-        return waterProofStyle;
+    public String getFuncProperty() {
+        return funcProperty;
     }
-    public void setFuncProperty(String funcProperty)
-    {
+
+    public void setFuncProperty(String funcProperty) {
         this.funcProperty = funcProperty;
     }
 
-    public String getFuncProperty()
-    {
-        return funcProperty;
+    public String getCusNo() {
+        return cusNo;
     }
-    public void setVoltgeLevel(BigDecimal voltgeLevel)
-    {
+
+    public String getVoltgeLevel() {
+        return voltgeLevel;
+    }
+
+    public void setVoltgeLevel(String voltgeLevel) {
         this.voltgeLevel = voltgeLevel;
     }
 
-    public BigDecimal getVoltgeLevel()
-    {
-        return voltgeLevel;
-    }
-    public void settransformerCapacity(BigDecimal transformerCapacity)
-    {
-        this.trancformerCapacity = transformerCapacity;
-    }
-
-    public BigDecimal gettransformerCapacity()
-    {
+    public BigDecimal getTrancformerCapacity() {
         return trancformerCapacity;
     }
-    public void setElectPrice(BigDecimal electPrice)
-    {
+
+    public void setTrancformerCapacity(BigDecimal trancformerCapacity) {
+        this.trancformerCapacity = trancformerCapacity;
+    }
+
+    public BigDecimal getElectPrice() {
+        return electPrice;
+    }
+
+    public void setElectPrice(BigDecimal electPrice) {
         this.electPrice = electPrice;
     }
 
-    public BigDecimal getElectPrice()
-    {
-        return electPrice;
+    public BigDecimal getSendStatePrice() {
+        return sendStatePrice;
     }
-    public void setSendStatePrice(BigDecimal sendStatePrice)
-    {
+
+    public void setSendStatePrice(BigDecimal sendStatePrice) {
         this.sendStatePrice = sendStatePrice;
     }
 
-    public BigDecimal getSendStatePrice()
-    {
-        return sendStatePrice;
+    public BigDecimal getSelfUsePart() {
+        return selfUsePart;
     }
-    public void setSelfUsePart(BigDecimal selfUsePart)
-    {
+
+    public void setSelfUsePart(BigDecimal selfUsePart) {
         this.selfUsePart = selfUsePart;
     }
 
-    public BigDecimal getSelfUsePart()
-    {
-        return selfUsePart;
+    public BigDecimal getSendStatePart() {
+        return sendStatePart;
     }
-    public void setSendStatePart(BigDecimal sendStatePart)
-    {
+
+    public void setSendStatePart(BigDecimal sendStatePart) {
         this.sendStatePart = sendStatePart;
     }
 
-    public BigDecimal getSendStatePart()
-    {
-        return sendStatePart;
+    public BigDecimal getSelfUseAmount() {
+        return selfUseAmount;
     }
-    public void setSelfUseAmount(BigDecimal selfUseAmount)
-    {
+
+    public void setSelfUseAmount(BigDecimal selfUseAmount) {
         this.selfUseAmount = selfUseAmount;
     }
 
-    public BigDecimal getSelfUseAmount()
-    {
-        return selfUseAmount;
+    public BigDecimal getPjTotalBonus() {
+        return pjTotalBonus;
     }
-    public void setPjTotalBonus(BigDecimal pjTotalBonus)
-    {
+
+    public void setPjTotalBonus(BigDecimal pjTotalBonus) {
         this.pjTotalBonus = pjTotalBonus;
     }
 
-    public BigDecimal getPjTotalBonus()
-    {
-        return pjTotalBonus;
+    public String getOtherDesc() {
+        return otherDesc;
     }
-    public void setOtherDesc(String otherDesc)
-    {
+
+    public void setOtherDesc(String otherDesc) {
         this.otherDesc = otherDesc;
     }
 
-    public String getOtherDesc()
-    {
-        return otherDesc;
+    public String getIsDelete() {
+        return isDelete;
     }
-    public void setIsDelete(String isDelete)
-    {
+
+    public void setIsDelete(String isDelete) {
         this.isDelete = isDelete;
     }
 
-    public String getIsDelete()
-    {
-        return isDelete;
+    public String getCreateId() {
+        return createId;
     }
-    public void setCreateId(String createId)
-    {
+
+    public void setCreateId(String createId) {
         this.createId = createId;
     }
 
-    public String getCreateId()
-    {
-        return createId;
+    public Date getUpdTime() {
+        return updTime;
     }
-    public void setUpdTime(Date updTime)
-    {
+
+    public void setUpdTime(Date updTime) {
         this.updTime = updTime;
     }
 
-    public Date getUpdTime()
-    {
-        return updTime;
-    }
-    public void setUpdId(String updId)
-    {
-        this.updId = updId;
-    }
-
-    public String getUpdId()
-    {
+    public String getUpdId() {
         return updId;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("pjNo", getPjNo())
-            .append("pjName", getPjName())
-            .append("cusNo", getCusNo())
-            .append("cusName", getCusName())
-            .append("modulesNum", getModulesNum())
-            .append("perModulesRate", getPerModulesRate())
-            .append("totalCapacity", getTotalCapacity())
-            .append("pjPerPrice", getPjPerPrice())
-            .append("pjTotalPrice", getPjTotalPrice())
-            .append("perPvGenr", getPerPvGenr())
-            .append("roofArea", getRoofArea())
-            .append("pvArea", getPvArea())
-            .append("roofMaterials", getRoofMaterials())
-            .append("installStyle", getInstallStyle())
-            .append("connectGridStyle", getConnectGridStyle())
-            .append("waterProofStyle", getWaterProofStyle())
-            .append("funcProperty", getFuncProperty())
-            .append("voltgeLevel", getVoltgeLevel())
-            .append("transformerCapacity", gettransformerCapacity())
-            .append("electPrice", getElectPrice())
-            .append("sendStatePrice", getSendStatePrice())
-            .append("selfUsePart", getSelfUsePart())
-            .append("sendStatePart", getSendStatePart())
-            .append("selfUseAmount", getSelfUseAmount())
-            .append("pjTotalBonus", getPjTotalBonus())
-            .append("otherDesc", getOtherDesc())
-            .append("isDelete", getIsDelete())
-            .append("createTime", getCreateTime())
-            .append("createId", getCreateId())
-            .append("updTime", getUpdTime())
-            .append("updId", getUpdId())
-            .toString();
+    public void setUpdId(String updId) {
+        this.updId = updId;
     }
 }

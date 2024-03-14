@@ -2,9 +2,10 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.system.mapper.PjGenerProfitTestMapper">
-    
+<mapper namespace="com.ruoyi.solarProject.mapper.PjGenerProfitTestMapper">
+
     <resultMap type="PjGenerProfitTest" id="PjGenerProfitTestResult">
+        <result property="id"    column="id"    />
         <result property="pjNo"    column="pj_no"    />
         <result property="testType"    column="test_type"    />
         <result property="firstDecreaseValue"    column="first_decrease_value"    />
@@ -17,6 +18,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="annulIncome"    column="annul_income"    />
         <result property="incomeRatioAnnul"    column="income_ratio_annul"    />
         <result property="incomeRatioTotal"    column="income_ratio_total"    />
+        <result property="annulGenerateC"    column="annul_generate_c"    />
+        <result property="saveElecPriceC"    column="save_elec_price_c"    />
+        <result property="sendStateIncomeC"    column="send_state_income_c"    />
+        <result property="annulIncomeC"    column="annul_income_c"    />
+        <result property="incomeRatioAnnulC"    column="income_ratio_annul_c"    />
+        <result property="incomeRatioTotalC"    column="income_ratio_total_c"    />
         <result property="isDelete"    column="is_delete"    />
         <result property="createTime"    column="create_time"    />
         <result property="createId"    column="create_id"    />
@@ -25,12 +32,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectPjGenerProfitTestVo">
-        select pj_no, test_type, first_decrease_value, other_decrease_value, pr_value, year, annul_generate, save_elec_price, send_state_income, annul_income, income_ratio_annul, income_ratio_total, is_delete, create_time, create_id, upd_time, upd_id from pj_gener_profit_test
+        select id, pj_no, test_type, first_decrease_value, other_decrease_value, pr_value, year, annul_generate, save_elec_price, send_state_income, annul_income, income_ratio_annul, income_ratio_total, annul_generate_c, save_elec_price_c, send_state_income_c, annul_income_c, income_ratio_annul_c, income_ratio_total_c, is_delete, create_time, create_id, upd_time, upd_id from pj_gener_profit_test
     </sql>
 
     <select id="selectPjGenerProfitTestList" parameterType="PjGenerProfitTest" resultMap="PjGenerProfitTestResult">
         <include refid="selectPjGenerProfitTestVo"/>
-        <where>  
+        <where>
+            <if test="pjNo != null  and pjNo != ''"> and pj_no = #{pjNo}</if>
             <if test="testType != null  and testType != ''"> and test_type = #{testType}</if>
             <if test="firstDecreaseValue != null "> and first_decrease_value = #{firstDecreaseValue}</if>
             <if test="otherDecreaseValue != null "> and other_decrease_value = #{otherDecreaseValue}</if>
@@ -42,21 +50,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="annulIncome != null "> and annul_income = #{annulIncome}</if>
             <if test="incomeRatioAnnul != null "> and income_ratio_annul = #{incomeRatioAnnul}</if>
             <if test="incomeRatioTotal != null "> and income_ratio_total = #{incomeRatioTotal}</if>
+            <if test="annulGenerateC != null "> and annul_generate_c = #{annulGenerateC}</if>
+            <if test="saveElecPriceC != null "> and save_elec_price_c = #{saveElecPriceC}</if>
+            <if test="sendStateIncomeC != null "> and send_state_income_c = #{sendStateIncomeC}</if>
+            <if test="annulIncomeC != null "> and annul_income_c = #{annulIncomeC}</if>
+            <if test="incomeRatioAnnulC != null "> and income_ratio_annul_c = #{incomeRatioAnnulC}</if>
+            <if test="incomeRatioTotalC != null "> and income_ratio_total_c = #{incomeRatioTotalC}</if>
             <if test="isDelete != null  and isDelete != ''"> and is_delete = #{isDelete}</if>
             <if test="createId != null  and createId != ''"> and create_id = #{createId}</if>
             <if test="updTime != null "> and upd_time = #{updTime}</if>
             <if test="updId != null  and updId != ''"> and upd_id = #{updId}</if>
         </where>
     </select>
-    
-    <select id="selectPjGenerProfitTestByPjNo" parameterType="String" resultMap="PjGenerProfitTestResult">
+
+    <select id="selectPjGenerProfitTestById" parameterType="Long" resultMap="PjGenerProfitTestResult">
         <include refid="selectPjGenerProfitTestVo"/>
-        where pj_no = #{pjNo}
+        where id = #{id}
     </select>
-        
+
     <insert id="insertPjGenerProfitTest" parameterType="PjGenerProfitTest">
         insert into pj_gener_profit_test
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
             <if test="pjNo != null">pj_no,</if>
             <if test="testType != null">test_type,</if>
             <if test="firstDecreaseValue != null">first_decrease_value,</if>
@@ -69,6 +84,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="annulIncome != null">annul_income,</if>
             <if test="incomeRatioAnnul != null">income_ratio_annul,</if>
             <if test="incomeRatioTotal != null">income_ratio_total,</if>
+            <if test="annulGenerateC != null">annul_generate_c,</if>
+            <if test="saveElecPriceC != null">save_elec_price_c,</if>
+            <if test="sendStateIncomeC != null">send_state_income_c,</if>
+            <if test="annulIncomeC != null">annul_income_c,</if>
+            <if test="incomeRatioAnnulC != null">income_ratio_annul_c,</if>
+            <if test="incomeRatioTotalC != null">income_ratio_total_c,</if>
             <if test="isDelete != null">is_delete,</if>
             <if test="createTime != null">create_time,</if>
             <if test="createId != null">create_id,</if>
@@ -76,6 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updId != null">upd_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
             <if test="pjNo != null">#{pjNo},</if>
             <if test="testType != null">#{testType},</if>
             <if test="firstDecreaseValue != null">#{firstDecreaseValue},</if>
@@ -88,6 +110,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="annulIncome != null">#{annulIncome},</if>
             <if test="incomeRatioAnnul != null">#{incomeRatioAnnul},</if>
             <if test="incomeRatioTotal != null">#{incomeRatioTotal},</if>
+            <if test="annulGenerateC != null">#{annulGenerateC},</if>
+            <if test="saveElecPriceC != null">#{saveElecPriceC},</if>
+            <if test="sendStateIncomeC != null">#{sendStateIncomeC},</if>
+            <if test="annulIncomeC != null">#{annulIncomeC},</if>
+            <if test="incomeRatioAnnulC != null">#{incomeRatioAnnulC},</if>
+            <if test="incomeRatioTotalC != null">#{incomeRatioTotalC},</if>
             <if test="isDelete != null">#{isDelete},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="createId != null">#{createId},</if>
@@ -99,6 +127,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updatePjGenerProfitTest" parameterType="PjGenerProfitTest">
         update pj_gener_profit_test
         <trim prefix="SET" suffixOverrides=",">
+            <if test="pjNo != null">pj_no = #{pjNo},</if>
             <if test="testType != null">test_type = #{testType},</if>
             <if test="firstDecreaseValue != null">first_decrease_value = #{firstDecreaseValue},</if>
             <if test="otherDecreaseValue != null">other_decrease_value = #{otherDecreaseValue},</if>
@@ -110,23 +139,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="annulIncome != null">annul_income = #{annulIncome},</if>
             <if test="incomeRatioAnnul != null">income_ratio_annul = #{incomeRatioAnnul},</if>
             <if test="incomeRatioTotal != null">income_ratio_total = #{incomeRatioTotal},</if>
+            <if test="annulGenerateC != null">annul_generate_c = #{annulGenerateC},</if>
+            <if test="saveElecPriceC != null">save_elec_price_c = #{saveElecPriceC},</if>
+            <if test="sendStateIncomeC != null">send_state_income_c = #{sendStateIncomeC},</if>
+            <if test="annulIncomeC != null">annul_income_c = #{annulIncomeC},</if>
+            <if test="incomeRatioAnnulC != null">income_ratio_annul_c = #{incomeRatioAnnulC},</if>
+            <if test="incomeRatioTotalC != null">income_ratio_total_c = #{incomeRatioTotalC},</if>
             <if test="isDelete != null">is_delete = #{isDelete},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="createId != null">create_id = #{createId},</if>
             <if test="updTime != null">upd_time = #{updTime},</if>
             <if test="updId != null">upd_id = #{updId},</if>
         </trim>
-        where pj_no = #{pjNo}
+        where id = #{id}
     </update>
 
-    <delete id="deletePjGenerProfitTestByPjNo" parameterType="String">
-        delete from pj_gener_profit_test where pj_no = #{pjNo}
+    <delete id="deletePjGenerProfitTestById" parameterType="Long">
+        delete from pj_gener_profit_test where id = #{id}
     </delete>
 
-    <delete id="deletePjGenerProfitTestByPjNos" parameterType="String">
-        delete from pj_gener_profit_test where pj_no in 
-        <foreach item="pjNo" collection="array" open="(" separator="," close=")">
-            #{pjNo}
+    <delete id="deletePjGenerProfitTestByIds" parameterType="String">
+        delete from pj_gener_profit_test where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
         </foreach>
     </delete>
 </mapper>

@@ -1,61 +1,62 @@
-package com.ruoyi.system.mapper;
+package com.ruoyi.solarProject.mapper;
+
+import com.ruoyi.solarProject.domain.PjGenerProfitTest;
 
 import java.util.List;
-import com.ruoyi.system.domain.PjGenerProfitTest;
 
 /**
- * 【请填写功能名称】Mapper接口
- * 
+ * 年Mapper接口
+ *
  * @author ruoyi
- * @date 2024-03-10
+ * @date 2024-03-14
  */
-public interface PjGenerProfitTestMapper 
+public interface PjGenerProfitTestMapper
 {
     /**
-     * 查询【请填写功能名称】
-     * 
-     * @param pjNo 【请填写功能名称】主键
-     * @return 【请填写功能名称】
+     * 查询年
+     *
+     * @param id 年主键
+     * @return 年
      */
-    public PjGenerProfitTest selectPjGenerProfitTestByPjNo(String pjNo);
+    public PjGenerProfitTest selectPjGenerProfitTestById(Long id);
 
     /**
-     * 查询【请填写功能名称】列表
-     * 
-     * @param pjGenerProfitTest 【请填写功能名称】
-     * @return 【请填写功能名称】集合
+     * 查询年列表
+     *
+     * @param pjGenerProfitTest 年
+     * @return 年集合
      */
     public List<PjGenerProfitTest> selectPjGenerProfitTestList(PjGenerProfitTest pjGenerProfitTest);
 
     /**
-     * 新增【请填写功能名称】
-     * 
-     * @param pjGenerProfitTest 【请填写功能名称】
+     * 新增年
+     *
+     * @param pjGenerProfitTest 年
      * @return 结果
      */
     public int insertPjGenerProfitTest(PjGenerProfitTest pjGenerProfitTest);
 
     /**
-     * 修改【请填写功能名称】
-     * 
-     * @param pjGenerProfitTest 【请填写功能名称】
+     * 修改年
+     *
+     * @param pjGenerProfitTest 年
      * @return 结果
      */
     public int updatePjGenerProfitTest(PjGenerProfitTest pjGenerProfitTest);
 
     /**
-     * 删除【请填写功能名称】
-     * 
-     * @param pjNo 【请填写功能名称】主键
+     * 删除年
+     *
+     * @param id 年主键
      * @return 结果
      */
-    public int deletePjGenerProfitTestByPjNo(String pjNo);
+    public int deletePjGenerProfitTestById(Long id);
 
     /**
-     * 批量删除【请填写功能名称】
-     * 
-     * @param pjNos 需要删除的数据主键集合
+     * 批量删除年
+     *
+     * @param ids 需要删除的数据主键集合
      * @return 结果
      */
-    public int deletePjGenerProfitTestByPjNos(String[] pjNos);
+    public int deletePjGenerProfitTestByIds(Long[] ids);
 }
