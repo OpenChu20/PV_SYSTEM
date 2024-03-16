@@ -1,20 +1,21 @@
-package com.ruoyi.system.mapper;
+package com.ruoyi.solarProject.mapper;
+
+import com.ruoyi.solarProject.domain.PjBaseInfo;
+import com.ruoyi.solarProject.domain.PjGenerProfitTest;
 
 import java.util.List;
-import com.ruoyi.system.domain.PjBaseInfo;
-import com.ruoyi.system.domain.PjGenerProfitTest;
 
 /**
  * 【请填写功能名称】Mapper接口
- * 
+ *
  * @author ruoyi
  * @date 2024-03-10
  */
-public interface PjBaseInfoMapper 
+public interface PjBaseInfoMapper
 {
     /**
      * 查询【请填写功能名称】
-     * 
+     *
      * @param pjNo 【请填写功能名称】主键
      * @return 【请填写功能名称】
      */
@@ -22,7 +23,7 @@ public interface PjBaseInfoMapper
 
     /**
      * 查询【请填写功能名称】列表
-     * 
+     *
      * @param pjBaseInfo 【请填写功能名称】
      * @return 【请填写功能名称】集合
      */
@@ -30,7 +31,7 @@ public interface PjBaseInfoMapper
 
     /**
      * 新增【请填写功能名称】
-     * 
+     *
      * @param pjBaseInfo 【请填写功能名称】
      * @return 结果
      */
@@ -38,7 +39,7 @@ public interface PjBaseInfoMapper
 
     /**
      * 修改【请填写功能名称】
-     * 
+     *
      * @param pjBaseInfo 【请填写功能名称】
      * @return 结果
      */
@@ -46,7 +47,7 @@ public interface PjBaseInfoMapper
 
     /**
      * 删除【请填写功能名称】
-     * 
+     *
      * @param pjNo 【请填写功能名称】主键
      * @return 结果
      */
@@ -54,7 +55,7 @@ public interface PjBaseInfoMapper
 
     /**
      * 批量删除【请填写功能名称】
-     * 
+     *
      * @param pjNos 需要删除的数据主键集合
      * @return 结果
      */

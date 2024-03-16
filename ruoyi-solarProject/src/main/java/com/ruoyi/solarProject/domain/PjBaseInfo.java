@@ -1,4 +1,4 @@
-package com.ruoyi.system.domain;
+package com.ruoyi.solarProject.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -35,11 +35,11 @@ public class PjBaseInfo extends BaseEntity
 
     /** 组件数量 */
     @Excel(name = "组件数量")
-    private int modulesNum;
+    private Integer modulesNum;
 
     /** 单块组件功率 */
     @Excel(name = "单块组件功率")
-    private int perModulesRate;
+    private Integer perModulesRate;
 
     /** 总装机量 */
     @Excel(name = "总装机量")
@@ -55,7 +55,7 @@ public class PjBaseInfo extends BaseEntity
 
     /** 单位发电量 */
     @Excel(name = "单位发电量")
-    private int perPvGenr;
+    private Integer perPvGenr;
 
     /** 屋顶面积 */
     @Excel(name = "屋顶面积")
@@ -182,19 +182,19 @@ public class PjBaseInfo extends BaseEntity
         this.cusName = cusName;
     }
 
-    public int getModulesNum() {
+    public Integer getModulesNum() {
         return modulesNum;
     }
 
-    public void setModulesNum(int modulesNum) {
+    public void setModulesNum(Integer modulesNum) {
         this.modulesNum = modulesNum;
     }
 
-    public int getPerModulesRate() {
+    public Integer getPerModulesRate() {
         return perModulesRate;
     }
 
-    public void setPerModulesRate(int perModulesRate) {
+    public void setPerModulesRate(Integer perModulesRate) {
         this.perModulesRate = perModulesRate;
     }
 
@@ -222,11 +222,11 @@ public class PjBaseInfo extends BaseEntity
         this.pjTotalPrice = pjTotalPrice;
     }
 
-    public int getPerPvGenr() {
+    public Integer getPerPvGenr() {
         return perPvGenr;
     }
 
-    public void setPerPvGenr(int perPvGenr) {
+    public void setPerPvGenr(Integer perPvGenr) {
         this.perPvGenr = perPvGenr;
     }
 

@@ -1,28 +1,28 @@
-package com.ruoyi.system.service.impl;
+package com.ruoyi.solarProject.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.solarProject.domain.PjEnergySaving;
+import com.ruoyi.solarProject.mapper.PjEnergySavingMapper;
+import com.ruoyi.solarProject.service.IPjEnergySavingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.system.mapper.PjEnergySavingMapper;
-import com.ruoyi.system.domain.PjEnergySaving;
-import com.ruoyi.system.service.IPjEnergySavingService;
 
 /**
  * 【请填写功能名称】Service业务层处理
- * 
+ *
  * @author ruoyi
  * @date 2024-03-10
  */
 @Service
-public class PjEnergySavingServiceImpl implements IPjEnergySavingService 
+public class PjEnergySavingServiceImpl implements IPjEnergySavingService
 {
     @Autowired
     private PjEnergySavingMapper pjEnergySavingMapper;
 
     /**
      * 查询【请填写功能名称】
-     * 
+     *
      * @param pjNo 【请填写功能名称】主键
      * @return 【请填写功能名称】
      */
@@ -34,7 +34,7 @@ public class PjEnergySavingServiceImpl implements IPjEnergySavingService
 
     /**
      * 查询【请填写功能名称】列表
-     * 
+     *
      * @param pjEnergySaving 【请填写功能名称】
      * @return 【请填写功能名称】
      */
@@ -46,7 +46,7 @@ public class PjEnergySavingServiceImpl implements IPjEnergySavingService
 
     /**
      * 新增【请填写功能名称】
-     * 
+     *
      * @param pjEnergySaving 【请填写功能名称】
      * @return 结果
      */
@@ -59,7 +59,7 @@ public class PjEnergySavingServiceImpl implements IPjEnergySavingService
 
     /**
      * 修改【请填写功能名称】
-     * 
+     *
      * @param pjEnergySaving 【请填写功能名称】
      * @return 结果
      */
@@ -71,7 +71,7 @@ public class PjEnergySavingServiceImpl implements IPjEnergySavingService
 
     /**
      * 批量删除【请填写功能名称】
-     * 
+     *
      * @param pjNos 需要删除的【请填写功能名称】主键
      * @return 结果
      */
@@ -83,7 +83,7 @@ public class PjEnergySavingServiceImpl implements IPjEnergySavingService
 
     /**
      * 删除【请填写功能名称】信息
-     * 
+     *
      * @param pjNo 【请填写功能名称】主键
      * @return 结果
      */

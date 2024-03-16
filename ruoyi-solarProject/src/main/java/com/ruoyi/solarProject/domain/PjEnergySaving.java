@@ -1,4 +1,4 @@
-package com.ruoyi.system.domain;
+package com.ruoyi.solarProject.domain;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -9,7 +9,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 【请填写功能名称】对象 pj_energy_saving
- * 
+ *
  * @author ruoyi
  * @date 2024-03-10
  */
@@ -57,93 +57,93 @@ public class PjEnergySaving extends BaseEntity
     @Excel(name = "更新用户")
     private String updId;
 
-    public void setPjNo(String pjNo) 
+    public void setPjNo(String pjNo)
     {
         this.pjNo = pjNo;
     }
 
-    public String getPjNo() 
+    public String getPjNo()
     {
         return pjNo;
     }
-    public void setCoalSavingAverage(Long coalSavingAverage) 
+    public void setCoalSavingAverage(Long coalSavingAverage)
     {
         this.coalSavingAverage = coalSavingAverage;
     }
 
-    public Long getCoalSavingAverage() 
+    public Long getCoalSavingAverage()
     {
         return coalSavingAverage;
     }
-    public void setCarbonSavingAverage(Long carbonSavingAverage) 
+    public void setCarbonSavingAverage(Long carbonSavingAverage)
     {
         this.carbonSavingAverage = carbonSavingAverage;
     }
 
-    public Long getCarbonSavingAverage() 
+    public Long getCarbonSavingAverage()
     {
         return carbonSavingAverage;
     }
-    public void setSulfurSavingAverage(Long sulfurSavingAverage) 
+    public void setSulfurSavingAverage(Long sulfurSavingAverage)
     {
         this.sulfurSavingAverage = sulfurSavingAverage;
     }
 
-    public Long getSulfurSavingAverage() 
+    public Long getSulfurSavingAverage()
     {
         return sulfurSavingAverage;
     }
-    public void setNitricSavingAverage(Long nitricSavingAverage) 
+    public void setNitricSavingAverage(Long nitricSavingAverage)
     {
         this.nitricSavingAverage = nitricSavingAverage;
     }
 
-    public Long getNitricSavingAverage() 
+    public Long getNitricSavingAverage()
     {
         return nitricSavingAverage;
     }
-    public void setSmokeSavingAverage(Long smokeSavingAverage) 
+    public void setSmokeSavingAverage(Long smokeSavingAverage)
     {
         this.smokeSavingAverage = smokeSavingAverage;
     }
 
-    public Long getSmokeSavingAverage() 
+    public Long getSmokeSavingAverage()
     {
         return smokeSavingAverage;
     }
-    public void setIsDelete(String isDelete) 
+    public void setIsDelete(String isDelete)
     {
         this.isDelete = isDelete;
     }
 
-    public String getIsDelete() 
+    public String getIsDelete()
     {
         return isDelete;
     }
-    public void setCreateId(String createId) 
+    public void setCreateId(String createId)
     {
         this.createId = createId;
     }
 
-    public String getCreateId() 
+    public String getCreateId()
     {
         return createId;
     }
-    public void setUpdTime(Date updTime) 
+    public void setUpdTime(Date updTime)
     {
         this.updTime = updTime;
     }
 
-    public Date getUpdTime() 
+    public Date getUpdTime()
     {
         return updTime;
     }
-    public void setUpdId(String updId) 
+    public void setUpdId(String updId)
     {
         this.updId = updId;
     }
 
-    public String getUpdId() 
+    public String getUpdId()
     {
         return updId;
     }

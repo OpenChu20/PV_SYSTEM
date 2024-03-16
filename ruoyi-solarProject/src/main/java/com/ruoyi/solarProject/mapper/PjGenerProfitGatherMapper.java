@@ -1,19 +1,20 @@
-package com.ruoyi.system.mapper;
+package com.ruoyi.solarProject.mapper;
+
+import com.ruoyi.solarProject.domain.PjGenerProfitGather;
 
 import java.util.List;
-import com.ruoyi.system.domain.PjGenerProfitGather;
 
 /**
  * 【请填写功能名称】Mapper接口
- * 
+ *
  * @author ruoyi
  * @date 2024-03-10
  */
-public interface PjGenerProfitGatherMapper 
+public interface PjGenerProfitGatherMapper
 {
     /**
      * 查询【请填写功能名称】
-     * 
+     *
      * @param pjNo 【请填写功能名称】主键
      * @return 【请填写功能名称】
      */
@@ -21,7 +22,7 @@ public interface PjGenerProfitGatherMapper
 
     /**
      * 查询【请填写功能名称】列表
-     * 
+     *
      * @param pjGenerProfitGather 【请填写功能名称】
      * @return 【请填写功能名称】集合
      */
@@ -29,7 +30,7 @@ public interface PjGenerProfitGatherMapper
 
     /**
      * 新增【请填写功能名称】
-     * 
+     *
      * @param pjGenerProfitGather 【请填写功能名称】
      * @return 结果
      */
@@ -37,7 +38,7 @@ public interface PjGenerProfitGatherMapper
 
     /**
      * 修改【请填写功能名称】
-     * 
+     *
      * @param pjGenerProfitGather 【请填写功能名称】
      * @return 结果
      */
@@ -45,7 +46,7 @@ public interface PjGenerProfitGatherMapper
 
     /**
      * 删除【请填写功能名称】
-     * 
+     *
      * @param pjNo 【请填写功能名称】主键
      * @return 结果
      */
@@ -53,7 +54,7 @@ public interface PjGenerProfitGatherMapper
 
     /**
      * 批量删除【请填写功能名称】
-     * 
+     *
      * @param pjNos 需要删除的数据主键集合
      * @return 结果
      */

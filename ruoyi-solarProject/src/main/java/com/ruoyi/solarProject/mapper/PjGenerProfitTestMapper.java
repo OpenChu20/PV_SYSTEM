@@ -1,6 +1,7 @@
-package com.ruoyi.system.mapper;
+package com.ruoyi.solarProject.mapper;
 
-import com.ruoyi.system.domain.PjGenerProfitTest;
+
+import com.ruoyi.solarProject.domain.PjGenerProfitTest;
 
 import java.util.List;
 

@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.system.mapper.PjEnergySavingMapper">
-    
+<mapper namespace="com.ruoyi.solarProject.mapper.PjEnergySavingMapper">
+
     <resultMap type="PjEnergySaving" id="PjEnergySavingResult">
         <result property="pjNo"    column="pj_no"    />
         <result property="coalSavingAverage"    column="coal_saving_average"    />
@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectPjEnergySavingList" parameterType="PjEnergySaving" resultMap="PjEnergySavingResult">
         <include refid="selectPjEnergySavingVo"/>
-        <where>  
+        <where>
             <if test="coalSavingAverage != null "> and coal_saving_average = #{coalSavingAverage}</if>
             <if test="carbonSavingAverage != null "> and carbon_saving_average = #{carbonSavingAverage}</if>
             <if test="sulfurSavingAverage != null "> and sulfur_saving_average = #{sulfurSavingAverage}</if>
@@ -36,12 +36,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updId != null  and updId != ''"> and upd_id = #{updId}</if>
         </where>
     </select>
-    
+
     <select id="selectPjEnergySavingByPjNo" parameterType="String" resultMap="PjEnergySavingResult">
         <include refid="selectPjEnergySavingVo"/>
         where pj_no = #{pjNo}
     </select>
-        
+
     <insert id="insertPjEnergySaving" parameterType="PjEnergySaving">
         insert into pj_energy_saving
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -94,7 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deletePjEnergySavingByPjNos" parameterType="String">
-        delete from pj_energy_saving where pj_no in 
+        delete from pj_energy_saving where pj_no in
         <foreach item="pjNo" collection="array" open="(" separator="," close=")">
             #{pjNo}
         </foreach>

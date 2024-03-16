@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.system.mapper.CusBaseInfoMapper">
-    
+<mapper namespace="com.ruoyi.solarProject.mapper.CusBaseInfoMapper">
+
     <resultMap type="CusBaseInfo" id="CusBaseInfoResult">
         <result property="cusNo"    column="cus_no"    />
         <result property="cusName"    column="cus_name"    />
@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectCusBaseInfoList" parameterType="CusBaseInfo" resultMap="CusBaseInfoResult">
         <include refid="selectCusBaseInfoVo"/>
-        <where>  
+        <where>
             <if test="cusName != null  and cusName != ''"> and cus_name like concat('%', #{cusName}, '%')</if>
             <if test="otherDesc != null  and otherDesc != ''"> and other_desc = #{otherDesc}</if>
             <if test="isDelete != null  and isDelete != ''"> and is_delete = #{isDelete}</if>
@@ -30,12 +30,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updId != null  and updId != ''"> and upd_id = #{updId}</if>
         </where>
     </select>
-    
+
     <select id="selectCusBaseInfoByCusNo" parameterType="String" resultMap="CusBaseInfoResult">
         <include refid="selectCusBaseInfoVo"/>
         where cus_no = #{cusNo}
     </select>
-        
+
     <insert id="insertCusBaseInfo" parameterType="CusBaseInfo">
         insert into cus_base_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -79,7 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteCusBaseInfoByCusNos" parameterType="String">
-        delete from cus_base_info where cus_no in 
+        delete from cus_base_info where cus_no in
         <foreach item="cusNo" collection="array" open="(" separator="," close=")">
             #{cusNo}
         </foreach>

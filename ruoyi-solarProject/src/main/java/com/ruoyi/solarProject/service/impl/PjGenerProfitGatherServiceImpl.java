@@ -1,28 +1,28 @@
-package com.ruoyi.system.service.impl;
+package com.ruoyi.solarProject.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.solarProject.domain.PjGenerProfitGather;
+import com.ruoyi.solarProject.mapper.PjGenerProfitGatherMapper;
+import com.ruoyi.solarProject.service.IPjGenerProfitGatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.system.mapper.PjGenerProfitGatherMapper;
-import com.ruoyi.system.domain.PjGenerProfitGather;
-import com.ruoyi.system.service.IPjGenerProfitGatherService;
 
 /**
  * 【请填写功能名称】Service业务层处理
- * 
+ *
  * @author ruoyi
  * @date 2024-03-10
  */
 @Service
-public class PjGenerProfitGatherServiceImpl implements IPjGenerProfitGatherService 
+public class PjGenerProfitGatherServiceImpl implements IPjGenerProfitGatherService
 {
     @Autowired
     private PjGenerProfitGatherMapper pjGenerProfitGatherMapper;
 
     /**
      * 查询【请填写功能名称】
-     * 
+     *
      * @param pjNo 【请填写功能名称】主键
      * @return 【请填写功能名称】
      */
@@ -34,7 +34,7 @@ public class PjGenerProfitGatherServiceImpl implements IPjGenerProfitGatherServi
 
     /**
      * 查询【请填写功能名称】列表
-     * 
+     *
      * @param pjGenerProfitGather 【请填写功能名称】
      * @return 【请填写功能名称】
      */
@@ -46,7 +46,7 @@ public class PjGenerProfitGatherServiceImpl implements IPjGenerProfitGatherServi
 
     /**
      * 新增【请填写功能名称】
-     * 
+     *
      * @param pjGenerProfitGather 【请填写功能名称】
      * @return 结果
      */
@@ -59,7 +59,7 @@ public class PjGenerProfitGatherServiceImpl implements IPjGenerProfitGatherServi
 
     /**
      * 修改【请填写功能名称】
-     * 
+     *
      * @param pjGenerProfitGather 【请填写功能名称】
      * @return 结果
      */
@@ -71,7 +71,7 @@ public class PjGenerProfitGatherServiceImpl implements IPjGenerProfitGatherServi
 
     /**
      * 批量删除【请填写功能名称】
-     * 
+     *
      * @param pjNos 需要删除的【请填写功能名称】主键
      * @return 结果
      */
@@ -83,7 +83,7 @@ public class PjGenerProfitGatherServiceImpl implements IPjGenerProfitGatherServi
 
     /**
      * 删除【请填写功能名称】信息
-     * 
+     *
      * @param pjNo 【请填写功能名称】主键
      * @return 结果
      */

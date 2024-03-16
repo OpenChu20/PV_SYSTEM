@@ -1,4 +1,4 @@
-package com.ruoyi.system.domain;
+package com.ruoyi.solarProject.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -10,7 +10,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 【请填写功能名称】对象 pj_gener_profit_gather
- * 
+ *
  * @author ruoyi
  * @date 2024-03-10
  */
@@ -66,111 +66,111 @@ public class PjGenerProfitGather extends BaseEntity
     @Excel(name = "更新用户")
     private String updId;
 
-    public void setPjNo(String pjNo) 
+    public void setPjNo(String pjNo)
     {
         this.pjNo = pjNo;
     }
 
-    public String getPjNo() 
+    public String getPjNo()
     {
         return pjNo;
     }
-    public void setTotalGenerate(BigDecimal totalGenerate) 
+    public void setTotalGenerate(BigDecimal totalGenerate)
     {
         this.totalGenerate = totalGenerate;
     }
 
-    public BigDecimal getTotalGenerate() 
+    public BigDecimal getTotalGenerate()
     {
         return totalGenerate;
     }
-    public void setAvgGenerate(BigDecimal avgGenerate) 
+    public void setAvgGenerate(BigDecimal avgGenerate)
     {
         this.avgGenerate = avgGenerate;
     }
 
-    public BigDecimal getAvgGenerate() 
+    public BigDecimal getAvgGenerate()
     {
         return avgGenerate;
     }
-    public void setSumSavePrice(BigDecimal sumSavePrice) 
+    public void setSumSavePrice(BigDecimal sumSavePrice)
     {
         this.sumSavePrice = sumSavePrice;
     }
 
-    public BigDecimal getSumSavePrice() 
+    public BigDecimal getSumSavePrice()
     {
         return sumSavePrice;
     }
-    public void setSumSendStateIncome(BigDecimal sumSendStateIncome) 
+    public void setSumSendStateIncome(BigDecimal sumSendStateIncome)
     {
         this.sumSendStateIncome = sumSendStateIncome;
     }
 
-    public BigDecimal getSumSendStateIncome() 
+    public BigDecimal getSumSendStateIncome()
     {
         return sumSendStateIncome;
     }
-    public void setSumAnnulIncome(BigDecimal sumAnnulIncome) 
+    public void setSumAnnulIncome(BigDecimal sumAnnulIncome)
     {
         this.sumAnnulIncome = sumAnnulIncome;
     }
 
-    public BigDecimal getSumAnnulIncome() 
+    public BigDecimal getSumAnnulIncome()
     {
         return sumAnnulIncome;
     }
-    public void setSumIncomeRatioAnnul(BigDecimal sumIncomeRatioAnnul) 
+    public void setSumIncomeRatioAnnul(BigDecimal sumIncomeRatioAnnul)
     {
         this.sumIncomeRatioAnnul = sumIncomeRatioAnnul;
     }
 
-    public BigDecimal getSumIncomeRatioAnnul() 
+    public BigDecimal getSumIncomeRatioAnnul()
     {
         return sumIncomeRatioAnnul;
     }
-    public void setSumIncomeRatioTotal(BigDecimal sumIncomeRatioTotal) 
+    public void setSumIncomeRatioTotal(BigDecimal sumIncomeRatioTotal)
     {
         this.sumIncomeRatioTotal = sumIncomeRatioTotal;
     }
 
-    public BigDecimal getSumIncomeRatioTotal() 
+    public BigDecimal getSumIncomeRatioTotal()
     {
         return sumIncomeRatioTotal;
     }
-    public void setIsDelete(String isDelete) 
+    public void setIsDelete(String isDelete)
     {
         this.isDelete = isDelete;
     }
 
-    public String getIsDelete() 
+    public String getIsDelete()
     {
         return isDelete;
     }
-    public void setCreateId(String createId) 
+    public void setCreateId(String createId)
     {
         this.createId = createId;
     }
 
-    public String getCreateId() 
+    public String getCreateId()
     {
         return createId;
     }
-    public void setUpdTime(Date updTime) 
+    public void setUpdTime(Date updTime)
     {
         this.updTime = updTime;
     }
 
-    public Date getUpdTime() 
+    public Date getUpdTime()
     {
         return updTime;
     }
-    public void setUpdId(String updId) 
+    public void setUpdId(String updId)
     {
         this.updId = updId;
     }
 
-    public String getUpdId() 
+    public String getUpdId()
     {
         return updId;
     }

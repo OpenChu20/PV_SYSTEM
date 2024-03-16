@@ -1,15 +1,15 @@
-package com.ruoyi.system.service.impl;
+package com.ruoyi.solarProject.service.impl;
 
 import java.util.List;
 import java.util.Random;
 
 import com.ruoyi.common.utils.DateUtils;
-import com.ruoyi.system.domain.PjGenerProfitTest;
+import com.ruoyi.solarProject.domain.PjBaseInfo;
+import com.ruoyi.solarProject.domain.PjGenerProfitTest;
+import com.ruoyi.solarProject.mapper.PjBaseInfoMapper;
+import com.ruoyi.solarProject.service.IPjBaseInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.system.mapper.PjBaseInfoMapper;
-import com.ruoyi.system.domain.PjBaseInfo;
-import com.ruoyi.system.service.IPjBaseInfoService;
 
 /**
  * 【请填写功能名称】Service业务层处理
@@ -71,6 +71,8 @@ public class PjBaseInfoServiceImpl implements IPjBaseInfoService
     @Override
     public int updatePjBaseInfo(PjBaseInfo pjBaseInfo)
     {
+        pjBaseInfoMapper.updatePjBaseInfo(pjBaseInfo);
+
         return pjBaseInfoMapper.updatePjBaseInfo(pjBaseInfo);
     }
 

@@ -3,7 +3,11 @@ package com.ruoyi.web.controller.solarProject.baseProject;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ruoyi.system.domain.PjGenerProfitTest;
+import com.ruoyi.solarProject.domain.PjBaseInfo;
+import com.ruoyi.solarProject.domain.PjGenerProfitTest;
+import com.ruoyi.solarProject.service.IPjBaseInfoService;
+
+import com.ruoyi.solarProject.service.IPjGenerProfitTestService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +22,6 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.system.domain.PjBaseInfo;
-import com.ruoyi.system.service.IPjBaseInfoService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
@@ -37,6 +39,8 @@ public class PjBaseInfoController extends BaseController
 {
     @Autowired
     private IPjBaseInfoService pjBaseInfoService;
+    @Autowired
+    private IPjGenerProfitTestService pjGenerProfitTestService;
 
     /**
      * 查询【请填写功能名称】列表
@@ -94,6 +98,7 @@ public class PjBaseInfoController extends BaseController
     public AjaxResult edit(@RequestBody PjBaseInfo pjBaseInfo)
     {
         System.out.println(pjBaseInfo);
+        pjGenerProfitTestService.pjGenerProfitTest(pjBaseInfo);
         return toAjax(pjBaseInfoService.updatePjBaseInfo(pjBaseInfo));
     }
 
