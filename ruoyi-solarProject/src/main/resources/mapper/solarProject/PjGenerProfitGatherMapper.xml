@@ -11,7 +11,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="sumSavePrice"    column="sum_save_price"    />
         <result property="sumSendStateIncome"    column="sum_send_state_income"    />
         <result property="sumAnnulIncome"    column="sum_annul_income"    />
+        <result property="avgIncomeRatioAnnul"    column="avg_income_ratio_annul"    />
         <result property="sumIncomeRatioAnnul"    column="sum_income_ratio_annul"    />
+        <result property="avgIncomeRatioTotal"    column="avg_income_ratio_total"    />
         <result property="sumIncomeRatioTotal"    column="sum_income_ratio_total"    />
         <result property="isDelete"    column="is_delete"    />
         <result property="createTime"    column="create_time"    />
@@ -21,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectPjGenerProfitGatherVo">
-        select pj_no, total_generate, avg_generate, sum_save_price, sum_send_state_income, sum_annul_income, sum_income_ratio_annul, sum_income_ratio_total, is_delete, create_time, create_id, upd_time, upd_id from pj_gener_profit_gather
+        select pj_no, total_generate, avg_generate, sum_save_price, sum_send_state_income, sum_annul_income, avg_income_ratio_annul, sum_income_ratio_annul, avg_income_ratio_total, sum_income_ratio_total, is_delete, create_time, create_id, upd_time, upd_id from pj_gener_profit_gather
     </sql>
 
     <select id="selectPjGenerProfitGatherList" parameterType="PjGenerProfitGather" resultMap="PjGenerProfitGatherResult">
@@ -32,7 +34,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sumSavePrice != null "> and sum_save_price = #{sumSavePrice}</if>
             <if test="sumSendStateIncome != null "> and sum_send_state_income = #{sumSendStateIncome}</if>
             <if test="sumAnnulIncome != null "> and sum_annul_income = #{sumAnnulIncome}</if>
+            <if test="avgIncomeRatioAnnul != null "> and avg_income_ratio_annul = #{avgIncomeRatioAnnul}</if>
             <if test="sumIncomeRatioAnnul != null "> and sum_income_ratio_annul = #{sumIncomeRatioAnnul}</if>
+            <if test="avgIncomeRatioTotal != null "> and avg_income_ratio_total = #{avgIncomeRatioTotal}</if>
             <if test="sumIncomeRatioTotal != null "> and sum_income_ratio_total = #{sumIncomeRatioTotal}</if>
             <if test="isDelete != null  and isDelete != ''"> and is_delete = #{isDelete}</if>
             <if test="createId != null  and createId != ''"> and create_id = #{createId}</if>
@@ -55,7 +59,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sumSavePrice != null">sum_save_price,</if>
             <if test="sumSendStateIncome != null">sum_send_state_income,</if>
             <if test="sumAnnulIncome != null">sum_annul_income,</if>
+            <if test="avgIncomeRatioAnnul != null">avg_income_ratio_annul,</if>
             <if test="sumIncomeRatioAnnul != null">sum_income_ratio_annul,</if>
+            <if test="avgIncomeRatioTotal != null">avg_income_ratio_total,</if>
             <if test="sumIncomeRatioTotal != null">sum_income_ratio_total,</if>
             <if test="isDelete != null">is_delete,</if>
             <if test="createTime != null">create_time,</if>
@@ -70,7 +76,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sumSavePrice != null">#{sumSavePrice},</if>
             <if test="sumSendStateIncome != null">#{sumSendStateIncome},</if>
             <if test="sumAnnulIncome != null">#{sumAnnulIncome},</if>
+            <if test="avgIncomeRatioAnnul != null">#{avgIncomeRatioAnnul},</if>
             <if test="sumIncomeRatioAnnul != null">#{sumIncomeRatioAnnul},</if>
+            <if test="avgIncomeRatioTotal != null">#{avgIncomeRatioTotal},</if>
             <if test="sumIncomeRatioTotal != null">#{sumIncomeRatioTotal},</if>
             <if test="isDelete != null">#{isDelete},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -88,7 +96,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sumSavePrice != null">sum_save_price = #{sumSavePrice},</if>
             <if test="sumSendStateIncome != null">sum_send_state_income = #{sumSendStateIncome},</if>
             <if test="sumAnnulIncome != null">sum_annul_income = #{sumAnnulIncome},</if>
+            <if test="avgIncomeRatioAnnul != null">avg_income_ratio_annul = #{avgIncomeRatioAnnul},</if>
             <if test="sumIncomeRatioAnnul != null">sum_income_ratio_annul = #{sumIncomeRatioAnnul},</if>
+            <if test="avgIncomeRatioTotal != null">avg_income_ratio_total = #{avgIncomeRatioTotal},</if>
             <if test="sumIncomeRatioTotal != null">sum_income_ratio_total = #{sumIncomeRatioTotal},</if>
             <if test="isDelete != null">is_delete = #{isDelete},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
@@ -109,4 +119,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{pjNo}
         </foreach>
     </delete>
+
+    <insert id="caculateProfitGather">
+        insert into pj_gener_profit_gather
+        (  pj_no, total_generate, avg_generate, sum_save_price, sum_send_state_income, sum_annul_income,
+           sum_income_ratio_annul, sum_income_ratio_total, is_delete, create_time, create_id, upd_time,
+           upd_id,avg_income_ratio_annul)
+        values
+            (#{pjNo},#{totalGenerate},#{avgGenerate},#{sumSavePrice},#{sumSendStateIncome},#{sumAnnulIncome},
+             #{sumIncomeRatioAnnul},#{sumIncomeRatioTotal},#{isDelete},#{createTime},#{createId},#{updTime},
+             #{updId},#{avgIncomeRatioAnnul})
+            ON DUPLICATE KEY UPDATE
+                                 pj_no = VALUES(pj_no)
+    </insert>
 </mapper>

@@ -12,7 +12,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 【请填写功能名称】对象 pj_gener_profit_gather
  *
  * @author ruoyi
- * @date 2024-03-10
+ * @date 2024-03-17
  */
 public class PjGenerProfitGather extends BaseEntity
 {
@@ -37,13 +37,21 @@ public class PjGenerProfitGather extends BaseEntity
     @Excel(name = "余电上网收益汇总")
     private BigDecimal sumSendStateIncome;
 
-    /** 年净收益汇总 */
-    @Excel(name = "年净收益汇总")
+    /** 总发电收益 */
+    @Excel(name = "总发电收益")
     private BigDecimal sumAnnulIncome;
+
+    /** 年均收益率 */
+    @Excel(name = "年均收益率")
+    private BigDecimal avgIncomeRatioAnnul;
 
     /** 年投资回报率汇总 */
     @Excel(name = "年投资回报率汇总")
     private BigDecimal sumIncomeRatioAnnul;
+
+    /** 年均总回报率 */
+    @Excel(name = "年均总回报率")
+    private BigDecimal avgIncomeRatioTotal;
 
     /** 总投资回报率汇总 */
     @Excel(name = "总投资回报率汇总")
@@ -120,6 +128,15 @@ public class PjGenerProfitGather extends BaseEntity
     {
         return sumAnnulIncome;
     }
+    public void setAvgIncomeRatioAnnul(BigDecimal avgIncomeRatioAnnul)
+    {
+        this.avgIncomeRatioAnnul = avgIncomeRatioAnnul;
+    }
+
+    public BigDecimal getAvgIncomeRatioAnnul()
+    {
+        return avgIncomeRatioAnnul;
+    }
     public void setSumIncomeRatioAnnul(BigDecimal sumIncomeRatioAnnul)
     {
         this.sumIncomeRatioAnnul = sumIncomeRatioAnnul;
@@ -128,6 +145,15 @@ public class PjGenerProfitGather extends BaseEntity
     public BigDecimal getSumIncomeRatioAnnul()
     {
         return sumIncomeRatioAnnul;
+    }
+    public void setAvgIncomeRatioTotal(BigDecimal avgIncomeRatioTotal)
+    {
+        this.avgIncomeRatioTotal = avgIncomeRatioTotal;
+    }
+
+    public BigDecimal getAvgIncomeRatioTotal()
+    {
+        return avgIncomeRatioTotal;
     }
     public void setSumIncomeRatioTotal(BigDecimal sumIncomeRatioTotal)
     {
@@ -184,7 +210,9 @@ public class PjGenerProfitGather extends BaseEntity
             .append("sumSavePrice", getSumSavePrice())
             .append("sumSendStateIncome", getSumSendStateIncome())
             .append("sumAnnulIncome", getSumAnnulIncome())
+            .append("avgIncomeRatioAnnul", getAvgIncomeRatioAnnul())
             .append("sumIncomeRatioAnnul", getSumIncomeRatioAnnul())
+            .append("avgIncomeRatioTotal", getAvgIncomeRatioTotal())
             .append("sumIncomeRatioTotal", getSumIncomeRatioTotal())
             .append("isDelete", getIsDelete())
             .append("createTime", getCreateTime())
