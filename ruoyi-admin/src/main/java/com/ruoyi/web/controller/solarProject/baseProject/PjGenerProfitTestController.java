@@ -3,17 +3,12 @@ package com.ruoyi.web.controller.solarProject.baseProject;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.solarProject.domain.PjBaseInfo;
+import com.ruoyi.solarProject.domain.PjGenerProfitTest;
 import com.ruoyi.solarProject.service.IPjGenerProfitTestService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -28,7 +23,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2024-03-10
  */
 @RestController
-@RequestMapping("/system/test")
+@RequestMapping("/solarProject/test")
 public class PjGenerProfitTestController extends BaseController
 {
     @Autowired
@@ -101,4 +96,26 @@ public class PjGenerProfitTestController extends BaseController
 //    {
 //        return toAjax(pjGenerProfitTestService.deletePjGenerProfitTestByPjNos(pjNos));
 //    }
+
+    @PostMapping
+    public TableDataInfo list(@RequestBody PjGenerProfitTest pjGenerProfitTest)
+    {
+        startPage();
+
+        return getDataTable(pjGenerProfitTestService.pjGenerProfitTest(pjGenerProfitTest));
+    }
+
+    /**
+     * 查询【请填写功能名称】列表
+     */
+    @PreAuthorize("@ss.hasPermi('system:info:getGenerProfits')")
+    @GetMapping("/getGenerProfits/{pjNo}")
+    public TableDataInfo getGenerProfits(@PathVariable(value = "pjNo") String pjNo)
+    {
+//        String pjNo = pjBaseInfo.getPjNo();
+        System.out.println(pjNo);
+        String ccc = "";
+        List<PjGenerProfitTest> list = pjGenerProfitTestService.getGenerProfits(pjNo);
+        return getDataTable(list);
+    }
 }

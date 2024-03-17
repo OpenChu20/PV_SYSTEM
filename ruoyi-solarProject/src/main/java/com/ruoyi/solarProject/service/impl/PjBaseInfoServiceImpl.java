@@ -100,8 +100,5 @@ public class PjBaseInfoServiceImpl implements IPjBaseInfoService
         return pjBaseInfoMapper.deletePjBaseInfoByPjNo(pjNo);
     }
 
-    @Override
-    public List<PjGenerProfitTest> getGenerProfits(String pjNo) {
-        return pjBaseInfoMapper.getGenerProfits(pjNo);
-    }
+
 }

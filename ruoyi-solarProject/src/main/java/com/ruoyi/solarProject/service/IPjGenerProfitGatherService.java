@@ -1,6 +1,8 @@
 package com.ruoyi.solarProject.service;
 
 import com.ruoyi.solarProject.domain.PjGenerProfitGather;
+import com.ruoyi.solarProject.domain.PjGenerProfitTest;
+import com.ruoyi.solarProject.domain.vo.ProfitGatherVo;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ public interface IPjGenerProfitGatherService
      * @param pjNo 【请填写功能名称】主键
      * @return 【请填写功能名称】
      */
-    public PjGenerProfitGather selectPjGenerProfitGatherByPjNo(String pjNo);
+    public ProfitGatherVo selectPjGenerProfitGatherByPjNo(String pjNo);
 
     /**
      * 查询【请填写功能名称】列表
@@ -59,4 +61,6 @@ public interface IPjGenerProfitGatherService
      * @return 结果
      */
     public int deletePjGenerProfitGatherByPjNo(String pjNo);
+
+    public void caculateProfitAmount(List<PjGenerProfitTest> pjGenerProfitTestList);
 }

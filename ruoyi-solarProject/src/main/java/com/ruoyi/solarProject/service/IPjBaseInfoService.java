@@ -62,5 +62,4 @@ public interface IPjBaseInfoService
      */
     public int deletePjBaseInfoByPjNo(String pjNo);
 
-    public List<PjGenerProfitTest> getGenerProfits(String pjNo);
 }

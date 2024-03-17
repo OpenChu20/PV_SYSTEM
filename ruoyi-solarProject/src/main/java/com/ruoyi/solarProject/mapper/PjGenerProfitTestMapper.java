@@ -60,4 +60,9 @@ public interface PjGenerProfitTestMapper
      * @return 结果
      */
     public int deletePjGenerProfitTestByIds(Long[] ids);
+
+    public List<PjGenerProfitTest> getGenerProfits(String pjNo);
+
+
+
 }

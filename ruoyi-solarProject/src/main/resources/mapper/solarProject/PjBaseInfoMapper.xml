@@ -201,12 +201,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
 
-    <select id="getGenerProfits" parameterType="String" resultMap="PjGenerProfitTestResult">
-        <include refid="selectPjGenerProfitTest"/>
-        where pj_no = #{pjNo} and is_delete='0'
-    </select>
-
-
 
 
     <sql id="selectPjGenerProfitTest">

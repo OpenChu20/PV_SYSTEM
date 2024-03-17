@@ -29,7 +29,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2024-03-10
  */
 @RestController
-@RequestMapping("/system/gather")
+@RequestMapping("/solarProject/gather")
 public class PjGenerProfitGatherController extends BaseController
 {
     @Autowired

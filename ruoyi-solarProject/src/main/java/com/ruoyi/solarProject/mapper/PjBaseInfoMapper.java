@@ -62,5 +62,4 @@ public interface PjBaseInfoMapper
     public int deletePjBaseInfoByPjNos(String[] pjNos);
 
 
-    public List<PjGenerProfitTest> getGenerProfits(String pjNo);
 }

@@ -98,7 +98,6 @@ public class PjBaseInfoController extends BaseController
     public AjaxResult edit(@RequestBody PjBaseInfo pjBaseInfo)
     {
         System.out.println(pjBaseInfo);
-        pjGenerProfitTestService.pjGenerProfitTest(pjBaseInfo);
         return toAjax(pjBaseInfoService.updatePjBaseInfo(pjBaseInfo));
     }
 
@@ -113,16 +112,6 @@ public class PjBaseInfoController extends BaseController
         return toAjax(pjBaseInfoService.deletePjBaseInfoByPjNos(pjNos));
     }
 
-    /**
-     * 查询【请填写功能名称】列表
-     */
-    @PreAuthorize("@ss.hasPermi('system:info:getGenerProfits')")
-    @GetMapping("/getGenerProfits")
-    public TableDataInfo getGenerProfits(PjBaseInfo pjBaseInfo)
-    {
-        String pjNo = pjBaseInfo.getPjNo();
-        List<PjGenerProfitTest> list = pjBaseInfoService.getGenerProfits(pjNo);
-        return getDataTable(list);
-    }
+
 
 }

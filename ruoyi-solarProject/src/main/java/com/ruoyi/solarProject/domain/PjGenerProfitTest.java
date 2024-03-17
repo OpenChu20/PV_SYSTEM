@@ -47,26 +47,32 @@ public class PjGenerProfitTest extends BaseEntity
 
     /** 年度发电量 */
     @Excel(name = "年度发电量")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal annulGenerate;
 
     /** 节省电费 */
     @Excel(name = "节省电费")
+    @JsonFormat(pattern = "#.##%", shape = JsonFormat.Shape.STRING)
     private BigDecimal saveElecPrice;
 
     /** 余电上网收益 */
     @Excel(name = "余电上网收益")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal sendStateIncome;
 
     /** 年净收益 */
     @Excel(name = "年净收益")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal annulIncome;
 
     /** 年投资回报率 */
     @Excel(name = "年投资回报率")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal incomeRatioAnnul;
 
     /** 总投资回报率 */
     @Excel(name = "总投资回报率")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal incomeRatioTotal;
 
     /** 年度发电量（修正） */

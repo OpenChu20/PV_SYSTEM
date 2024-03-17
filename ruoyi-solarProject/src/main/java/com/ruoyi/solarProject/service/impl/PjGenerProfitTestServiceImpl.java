@@ -1,9 +1,12 @@
 package com.ruoyi.solarProject.service.impl;
 
 
+import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.solarProject.domain.PjBaseInfo;
 import com.ruoyi.solarProject.domain.PjGenerProfitTest;
+import com.ruoyi.solarProject.mapper.PjBaseInfoMapper;
 import com.ruoyi.solarProject.mapper.PjGenerProfitTestMapper;
+import com.ruoyi.solarProject.service.IPjGenerProfitGatherService;
 import com.ruoyi.solarProject.service.IPjGenerProfitTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,10 @@ import static java.math.BigDecimal.ROUND_HALF_UP;
 public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService {
     @Autowired
     private PjGenerProfitTestMapper pjGenerProfitTestMapper;
+    @Autowired
+    private PjBaseInfoMapper pjBaseInfoMapper;
+    @Autowired
+    private IPjGenerProfitGatherService pjGenerProfitGatherService;
 
 //    /**
 //     * 查询【请填写功能名称】
@@ -112,8 +119,12 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService {
     }*/
 
     @Override
-    public void pjGenerProfitTest(PjBaseInfo pjBaseInfo) {
+    public List<PjGenerProfitTest> pjGenerProfitTest(PjGenerProfitTest pjGenerProfitTest) {
         int i;
+        BigDecimal firstDecreasePoint = pjGenerProfitTest.getFirstDecreaseValue().divide(new BigDecimal(100));
+        BigDecimal otherDecreasePoint = pjGenerProfitTest.getOtherDecreaseValue().divide(new BigDecimal(100));
+        String pjNo = pjGenerProfitTest.getPjNo();
+        PjBaseInfo pjBaseInfo = pjBaseInfoMapper.selectPjBaseInfoByPjNo(pjGenerProfitTest.getPjNo());
         PjGenerProfitTest pjGenerProfit = new PjGenerProfitTest();
         List<PjGenerProfitTest> pjGenerProfitList = new ArrayList<>();
         //        首年发电
@@ -124,64 +135,122 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService {
                 .multiply(new BigDecimal(pjBaseInfo.getPerModulesRate()))
                 .divide(new BigDecimal(1000))
                 .divide(new BigDecimal(10000)).setScale(4, ROUND_HALF_UP);
-        BigDecimal firstGenerC = firstGener.multiply(new BigDecimal(0.8)).setScale(4, ROUND_HALF_UP);
+        BigDecimal firstGenerC = firstGener.multiply(new BigDecimal(0.9)).setScale(4, ROUND_HALF_UP);
+        firstGenerTest.setId(IdUtils.randomId());
+        firstGenerTest.setPjNo(pjNo);
         firstGenerTest.setYear("1");
+        firstGenerTest.setFirstDecreaseValue(firstDecreasePoint);
+        firstGenerTest.setOtherDecreaseValue(otherDecreasePoint);
         firstGenerTest.setAnnulGenerate(firstGener);
         firstGenerTest.setAnnulGenerateC(firstGenerC);
-        pjGenerProfitList.add(firstGenerTest);
         // 节省电费
-        pjGenerProfitList.stream().forEach(item -> item.setSaveElecPrice(
-                item.getAnnulGenerate().multiply(pjBaseInfo.getSelfUsePart())
-                        .multiply(new BigDecimal(0.01)).multiply(pjBaseInfo.getElectPrice())
-                        .setScale(2, ROUND_HALF_UP)));
+        firstGenerTest.setSaveElecPrice(firstGenerTest.getAnnulGenerate().multiply(pjBaseInfo.getSelfUsePart())
+                .multiply(pjBaseInfo.getElectPrice()).setScale(2, ROUND_HALF_UP));
+//        pjGenerProfitList.stream().forEach(item -> item.setSaveElecPriceC(
+//                item.getAnnulGenerateC().multiply(pjBaseInfo.getSelfUsePart())
+//                        .multiply(new BigDecimal(0.01)).multiply(pjBaseInfo.getElectPrice())
+//                        .setScale(2, ROUND_HALF_UP)));
         // 余电上网
-        pjGenerProfitList.stream().forEach(item -> item.setSendStateIncome(
-                item.getAnnulGenerate().multiply(BigDecimal.ONE.subtract(pjBaseInfo.getSelfUsePart()))
-                        .multiply(new BigDecimal(0.01)).multiply(pjBaseInfo.getSendStatePrice())
-                        .setScale(2, ROUND_HALF_UP)));
+        firstGenerTest.setSendStateIncome(firstGenerTest.getAnnulGenerate()
+                .multiply(BigDecimal.ONE.subtract(pjBaseInfo.getSelfUsePart()))
+                .multiply(pjBaseInfo.getSendStatePrice())
+                .setScale(2, ROUND_HALF_UP));
+//        pjGenerProfitList.stream().forEach(item -> item.setSendStateIncomeC(
+//                item.getAnnulGenerateC().multiply(BigDecimal.ONE.subtract(pjBaseInfo.getSelfUsePart()))
+//                        .multiply(new BigDecimal(0.01)).multiply(pjBaseInfo.getSendStatePrice())
+//                        .setScale(2, ROUND_HALF_UP)));
         //年净收益
-        pjGenerProfitList.stream().forEach(item -> item.setAnnulIncome(
-                item.getSaveElecPrice().add(item.getSendStateIncome()).setScale(2, ROUND_HALF_UP)));
+        firstGenerTest.setAnnulIncome(firstGenerTest.getSaveElecPrice()
+                .add(firstGenerTest.getSendStateIncome()).setScale(2, ROUND_HALF_UP));
+//        pjGenerProfitList.stream().forEach(item -> item.setAnnulIncomeC(
+//                item.getSaveElecPrice().add(item.getSendStateIncome()).setScale(2, ROUND_HALF_UP)));
         // 年投资回报率
-        pjGenerProfitList.stream().forEach(item -> item.setIncomeRatioAnnul(
-                item.getAnnulIncome().divide(pjBaseInfo.getPjTotalPrice()).setScale(2, ROUND_HALF_UP)));
-
-
+        firstGenerTest.setIncomeRatioAnnul( firstGenerTest.getAnnulIncome()
+                .divide(pjBaseInfo.getPjTotalPrice(), 4, ROUND_HALF_UP));
+//        pjGenerProfitList.stream().forEach(item -> item.setIncomeRatioAnnulC(
+//                item.getAnnulIncome().divide(pjBaseInfo.getPjTotalPrice()).setScale(2, ROUND_HALF_UP)));
         // 总投资回报率
-        pjGenerProfitList.forEach(item -> {
-            if (FIRST_YEAR.equals(item.getYear())) {
-                item.setIncomeRatioTotal(item.getIncomeRatioAnnul());
-            }
-        });
-        for (i = 2; i <= 25; i++) {
-            final int m =i;
-            final int n = i-1;
-            PjGenerProfitTest before = pjGenerProfitList.stream().filter(body -> String.valueOf(n).equals(body.getYear())).findAny().get();
-            PjGenerProfitTest after =  pjGenerProfitList.stream().filter(body -> String.valueOf(m).equals(body.getYear())).findAny().get();
-            after.setIncomeRatioTotal(before.getIncomeRatioTotal().add(after.getIncomeRatioAnnul()));
-        }
-
+        firstGenerTest.setIncomeRatioTotal(firstGenerTest.getIncomeRatioAnnul());
+        firstGenerTest.setIsDelete(IS_NO);
+        pjGenerProfitList.add(firstGenerTest);
 
         //第二年
-        BigDecimal secondGener = firstGener.multiply(new BigDecimal(1).subtract(pjGenerProfit.getFirstDecreaseValue()));
-        BigDecimal secondGenerC = firstGenerC.multiply(new BigDecimal(1).subtract(pjGenerProfit.getFirstDecreaseValue()));
+        BigDecimal secondGener = firstGener.multiply(new BigDecimal(1).subtract(firstDecreasePoint)).setScale(4, ROUND_HALF_UP);
+        BigDecimal secondGenerC = firstGenerC.multiply(new BigDecimal(1).subtract(firstDecreasePoint)).setScale(4, ROUND_HALF_UP);
         PjGenerProfitTest secondGenerTest = new PjGenerProfitTest();
-        secondGenerTest.setYear("2");
+        firstGenerTest.setId(IdUtils.randomId());
+
+        secondGenerTest.setPjNo(pjNo);
+        secondGenerTest.setYear(SECOND_YEAR);
         secondGenerTest.setAnnulGenerate(secondGener);
         secondGenerTest.setAnnulGenerateC(secondGenerC);
+        // 节省电费
+        secondGenerTest.setSaveElecPrice(secondGenerTest.getAnnulGenerate()
+                .multiply(pjBaseInfo.getSelfUsePart())
+                .multiply(pjBaseInfo.getElectPrice()).setScale(2, ROUND_HALF_UP));
+        // 余电上网
+        secondGenerTest.setSendStateIncome(secondGenerTest.getAnnulGenerate()
+                .multiply(BigDecimal.ONE.subtract(pjBaseInfo.getSelfUsePart()))
+                .multiply(pjBaseInfo.getSendStatePrice())
+                .setScale(2, ROUND_HALF_UP));
+        //年净收益
+        secondGenerTest.setAnnulIncome(secondGenerTest.getSaveElecPrice()
+                .add(secondGenerTest.getSendStateIncome()).setScale(2, ROUND_HALF_UP));
+        // 年投资回报率
+        secondGenerTest.setIncomeRatioAnnul( secondGenerTest.getAnnulIncome()
+                .divide(pjBaseInfo.getPjTotalPrice(),4, ROUND_HALF_UP));
+        // 总投资回报率
+        secondGenerTest.setIncomeRatioTotal(secondGenerTest.getIncomeRatioAnnul()
+                .add(firstGenerTest.getIncomeRatioTotal()));
+        secondGenerTest.setIsDelete(IS_NO);
         pjGenerProfitList.add(secondGenerTest);
 
         for (i = 3; i <= 25; i++) {
+            final int n = i-1;
             PjGenerProfitTest otherGenerTest = new PjGenerProfitTest();
             String yearSequence = String.valueOf(i);
-            BigDecimal solarGener = firstGener.multiply(new BigDecimal(1).subtract(pjGenerProfit.getOtherDecreaseValue()));
+            PjGenerProfitTest before = pjGenerProfitList.stream().filter(body -> String.valueOf(n).equals(body.getYear())).findAny().get();
+            BigDecimal solarGener = before.getAnnulGenerate().multiply(new BigDecimal(1).subtract(otherDecreasePoint)).setScale(4, ROUND_HALF_UP);
+            BigDecimal solarGenerC = before.getAnnulGenerateC().multiply(new BigDecimal(1).subtract(otherDecreasePoint)).setScale(4, ROUND_HALF_UP);
+            firstGenerTest.setId(IdUtils.randomId());
+
+            otherGenerTest.setPjNo(pjNo);
             otherGenerTest.setYear(yearSequence);
             otherGenerTest.setAnnulGenerate(solarGener);
+            otherGenerTest.setAnnulGenerateC(solarGenerC);
+            // 节省电费
+            otherGenerTest.setSaveElecPrice(otherGenerTest.getAnnulGenerate().multiply(pjBaseInfo.getSelfUsePart())
+                    .multiply(pjBaseInfo.getElectPrice())
+                    .setScale(2, ROUND_HALF_UP));
+            // 余电上网
+            otherGenerTest.setSendStateIncome(otherGenerTest.getAnnulGenerate()
+                    .multiply(BigDecimal.ONE.subtract(pjBaseInfo.getSelfUsePart()))
+                    .multiply(pjBaseInfo.getSendStatePrice()).setScale(2, ROUND_HALF_UP));
+            //年净收益
+            otherGenerTest.setAnnulIncome(otherGenerTest.getSaveElecPrice()
+                    .add(otherGenerTest.getSendStateIncome()).setScale(2, ROUND_HALF_UP));
+            // 年投资回报率
+            otherGenerTest.setIncomeRatioAnnul( otherGenerTest.getAnnulIncome()
+                    .divide(pjBaseInfo.getPjTotalPrice(), 4,ROUND_HALF_UP));
+            // 总投资回报率
+            otherGenerTest.setIncomeRatioTotal(otherGenerTest.getIncomeRatioAnnul()
+                    .add(before.getIncomeRatioTotal()));
+            otherGenerTest.setIsDelete(IS_NO);
+
             pjGenerProfitList.add(otherGenerTest);
         }
-//        for (PjGenerProfitTest item : pjGenerProfitList) {
-//            pjGenerProfitTestMapper.insertPjGenerProfitTest(item);
-//        }
+
+        if (pjGenerProfitTestMapper.getGenerProfits(pjNo).isEmpty()){
+            for (PjGenerProfitTest item : pjGenerProfitList) {
+                pjGenerProfitTestMapper.insertPjGenerProfitTest(item);
+            }
+        }else {
+            for (PjGenerProfitTest item : pjGenerProfitList) {
+                pjGenerProfitTestMapper.updatePjGenerProfitTest(item);
+            }
+        }
+        pjGenerProfitGatherService.caculateProfitAmount(pjGenerProfitList);
+        return pjGenerProfitList;
     }
 
     /**
@@ -206,5 +275,10 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService {
 //        pjGenerProfitList.add(firstGenerTest);
 
 
+    }
+
+    @Override
+    public List<PjGenerProfitTest> getGenerProfits(String pjNo) {
+        return pjGenerProfitTestMapper.getGenerProfits(pjNo);
     }
 }

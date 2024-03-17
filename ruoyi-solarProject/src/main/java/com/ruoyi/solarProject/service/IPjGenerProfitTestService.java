@@ -3,6 +3,7 @@ package com.ruoyi.solarProject.service;
 import java.util.List;
 
 import com.ruoyi.solarProject.domain.PjBaseInfo;
+import com.ruoyi.solarProject.domain.PjGenerProfitTest;
 
 /**
  * 【请填写功能名称】Service接口
@@ -63,8 +64,23 @@ public interface IPjGenerProfitTestService
     /**
      * @Desc  光伏项目，根据基本信息进行发电、收益测算
      * @Author Wyc
-     * @param pjNo 【请填写功能名称】主键
-     * @return 结果
+     * @change
      */
-    public void pjGenerProfitTest(PjBaseInfo pjBaseInfo);
+    public List<PjGenerProfitTest> pjGenerProfitTest(PjGenerProfitTest pjGenerProfitTest);
+
+    /**
+     * @Desc  根据项目编号，获取发电收益测算列表
+     * @Author
+     * @change
+     */
+    public List<PjGenerProfitTest> getGenerProfits(String pjNo);
+
+
+    /**
+     * @Desc  根据项目编号，获取发电收益测算条数，判断是否已存在测算值
+     * @Author
+     * @change
+     */
+//    public int selectGenerProfitNums(String pjNo);
+
 }

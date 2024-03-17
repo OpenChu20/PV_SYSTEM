@@ -59,4 +59,6 @@ public interface PjGenerProfitGatherMapper
      * @return 结果
      */
     public int deletePjGenerProfitGatherByPjNos(String[] pjNos);
+
+    public int caculateProfitGather(PjGenerProfitGather profitGathers);
 }

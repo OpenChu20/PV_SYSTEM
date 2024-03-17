@@ -151,7 +151,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updTime != null">upd_time = #{updTime},</if>
             <if test="updId != null">upd_id = #{updId},</if>
         </trim>
-        where id = #{id}
+        where pj_no = #{pjNo} and year=#{year} and is_delete='0'
     </update>
 
     <delete id="deletePjGenerProfitTestById" parameterType="Long">
@@ -164,4 +164,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+
+    <select id="getGenerProfits" parameterType="String" resultMap="PjGenerProfitTestResult">
+        <include refid="selectPjGenerProfitTestVo"/>
+        where pj_no = #{pjNo} and is_delete='0'
+    </select>
+
 </mapper>
