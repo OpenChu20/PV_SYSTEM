@@ -1,4 +1,4 @@
-package com.ruoyi.solarProject.util;
+package com.ruoyi.solarProject.tool.util;
 import com.ruoyi.solarProject.domain.PjBaseInfo;
 import com.ruoyi.solarProject.domain.PjEnergySaving;
 import com.ruoyi.solarProject.domain.PjGenerProfitGather;
@@ -10,7 +10,7 @@ import java.util.*;
 
 /**
  * 导出PPT相关代码处理相关处理
- * 
+ *
  * @author ruoyi
  */
 public class ExportPPTUtil<T>

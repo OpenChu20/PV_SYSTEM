@@ -71,10 +71,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="pjTotalBonus != null "> and pj_total_bonus = #{pjTotalBonus}</if>
             <if test="otherDesc != null  and otherDesc != ''"> and other_desc = #{otherDesc}</if>
             <if test="isDelete != null  and isDelete != ''"> and is_delete = #{isDelete}</if>
+            <if test="createTime != null  and createTime != ''"> and create_time = #{createTime}</if>
             <if test="createId != null  and createId != ''"> and create_id = #{createId}</if>
             <if test="updTime != null "> and upd_time = #{updTime}</if>
             <if test="updId != null  and updId != ''"> and upd_id = #{updId}</if>
         </where>
+        order by create_time desc
     </select>
 
     <select id="selectPjBaseInfoByPjNo" parameterType="String" resultMap="PjBaseInfoResult">
@@ -199,38 +201,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{pjNo}
         </foreach>
     </delete>
-
-
-
-
-    <sql id="selectPjGenerProfitTest">
-        select pj_no,test_type,first_decrease_value,other_decrease_value,pr_value,year,annul_generate,save_elec_price,send_state_income,annul_income,income_ratio_annul,income_ratio_total,annul_generate_c,save_elec_price_c,send_state_income_c,annul_income_c,income_ratio_annul_c,income_ratio_total_c,is_delete,create_time,create_id,upd_time,upd_id from pj_gener_profit_test
-    </sql>
-
-    <resultMap type="PjGenerProfitTest" id="PjGenerProfitTestResult">
-        <result property="pjNo"    column="pj_no"    />
-        <result property="testType"    column="test_type"    />
-        <result property="firstDecreaseValue"    column="first_decrease_value"    />
-        <result property="otherDecreaseValue"    column="other_decrease_value"    />
-        <result property="prValue"    column="pr_value"    />
-        <result property="year"    column="year"    />
-        <result property="annulGenerate"    column="annul_generate"    />
-        <result property="saveElecPrice"    column="save_elec_price"    />
-        <result property="sendStateIncome"    column="send_state_income"    />
-        <result property="annulIncome"    column="annul_income"    />
-        <result property="incomeRatioAnnul"    column="income_ratio_annul"    />
-        <result property="incomeRatioTotal"    column="income_ratio_total"    />
-        <result property="annulGenerateC"    column="annul_generate_c"    />
-        <result property="saveElecPriceC"    column="save_elec_price_c"    />
-        <result property="sendStateIncomeC"    column="send_state_income_c"    />
-        <result property="annulIncomeC"    column="annul_income_c"    />
-        <result property="incomeRatioAnnulC"    column="income_ratio_annul_c"    />
-        <result property="incomeRatioTotalC"    column="income_ratio_total_c"    />
-        <result property="isDelete"    column="is_delete"    />
-        <result property="createId"    column="create_time"    />
-        <result property="updTime"    column="upd_time"    />
-        <result property="updId"    column="upd_id"    />
-    </resultMap>
-
 
 </mapper>

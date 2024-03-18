@@ -4,12 +4,16 @@ import java.util.List;
 import java.util.Random;
 
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.uuid.Seq;
 import com.ruoyi.solarProject.domain.PjBaseInfo;
 import com.ruoyi.solarProject.domain.PjGenerProfitTest;
 import com.ruoyi.solarProject.mapper.PjBaseInfoMapper;
 import com.ruoyi.solarProject.service.IPjBaseInfoService;
+import com.ruoyi.solarProject.tool.SequenceUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static com.ruoyi.solarProject.tool.SequenceUtils.solarPjType;
 
 /**
  * 【请填写功能名称】Service业务层处理
@@ -56,8 +60,7 @@ public class PjBaseInfoServiceImpl implements IPjBaseInfoService
     @Override
     public int insertPjBaseInfo(PjBaseInfo pjBaseInfo)
     {
-        Random random = new Random();
-        pjBaseInfo.setPjNo("PP"+random.nextInt(90)+10);
+        pjBaseInfo.setPjNo(SequenceUtils.getSolarPjId(solarPjType));
         pjBaseInfo.setCreateTime(DateUtils.getNowDate());
         return pjBaseInfoMapper.insertPjBaseInfo(pjBaseInfo);
     }

@@ -33,91 +33,6 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService {
     @Autowired
     private IPjGenerProfitGatherService pjGenerProfitGatherService;
 
-//    /**
-//     * 查询【请填写功能名称】
-//     *
-//     * @param pjNo 【请填写功能名称】主键
-//     * @return 【请填写功能名称】
-//     */
-//    @Override
-//    public PjGenerProfitTest selectPjGenerProfitTestByPjNo(String pjNo)
-//    {
-//        return pjGenerProfitTestMapper.(pjNo);
-//    }
-//
-//    /**
-//     * 查询【请填写功能名称】列表
-//     *
-//     * @param pjGenerProfitTest 【请填写功能名称】
-//     * @return 【请填写功能名称】
-//     */
-//    @Override
-//    public List<PjGenerProfitTest> selectPjGenerProfitTestList(PjGenerProfitTest pjGenerProfitTest)
-//    {
-//        return pjGenerProfitTestMapper.selectPjGenerProfitTestList(pjGenerProfitTest);
-//    }
-//
-//    /**
-//     * 新增【请填写功能名称】
-//     *
-//     * @param pjGenerProfitTest 【请填写功能名称】
-//     * @return 结果
-//     */
-//    @Override
-//    public int insertPjGenerProfitTest(PjGenerProfitTest pjGenerProfitTest)
-//    {
-//        pjGenerProfitTest.setCreateTime(DateUtils.getNowDate());
-//        return pjGenerProfitTestMapper.insertPjGenerProfitTest(pjGenerProfitTest);
-//    }
-//
-//    /**
-//     * 修改【请填写功能名称】
-//     *
-//     * @param pjGenerProfitTest 【请填写功能名称】
-//     * @return 结果
-//     */
-//    @Override
-//    public int updatePjGenerProfitTest(PjGenerProfitTest pjGenerProfitTest)
-//    {
-//        return pjGenerProfitTestMapper.updatePjGenerProfitTest(pjGenerProfitTest);
-//    }
-//
-//    /**
-//     * 批量删除【请填写功能名称】
-//     *
-//     * @param pjNos 需要删除的【请填写功能名称】主键
-//     * @return 结果
-//     */
-//    @Override
-//    public int deletePjGenerProfitTestByPjNos(String[] pjNos)
-//    {
-//        return pjGenerProfitTestMapper.deletePjGenerProfitTestByPjNos(pjNos);
-//    }
-//
-//    /**
-//     * 删除【请填写功能名称】信息
-//     *
-//     * @param pjNo 【请填写功能名称】主键
-//     * @return 结果
-//     */
-//    @Override
-//    public int deletePjGenerProfitTestByPjNo(String pjNo)
-//    {
-//        return pjGenerProfitTestMapper.deletePjGenerProfitTestByPjNo(pjNo);
-//    }
-    /**
-     * 查询【请填写功能名称】
-     *
-     * @param pjNo 【请填写功能名称】主键
-     * @return 【请填写功能名称】
-     */
-   /* @Override
-    public PjGenerProfitTest selectPjGenerProfitTestByPjNo(String pjNo)
-    {
-        //return pjGenerProfitTestMapper.selectPjGenerProfitTestByPjNo(pjNo);
-        return null;
-    }*/
-
     @Override
     public List<PjGenerProfitTest> pjGenerProfitTest(PjGenerProfitTest pjGenerProfitTest) {
         int i;
@@ -146,29 +61,21 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService {
         // 节省电费
         firstGenerTest.setSaveElecPrice(firstGenerTest.getAnnulGenerate().multiply(pjBaseInfo.getSelfUsePart())
                 .multiply(pjBaseInfo.getElectPrice()).setScale(2, ROUND_HALF_UP));
-//        pjGenerProfitList.stream().forEach(item -> item.setSaveElecPriceC(
-//                item.getAnnulGenerateC().multiply(pjBaseInfo.getSelfUsePart())
-//                        .multiply(new BigDecimal(0.01)).multiply(pjBaseInfo.getElectPrice())
-//                        .setScale(2, ROUND_HALF_UP)));
+
         // 余电上网
         firstGenerTest.setSendStateIncome(firstGenerTest.getAnnulGenerate()
                 .multiply(BigDecimal.ONE.subtract(pjBaseInfo.getSelfUsePart()))
                 .multiply(pjBaseInfo.getSendStatePrice())
                 .setScale(2, ROUND_HALF_UP));
-//        pjGenerProfitList.stream().forEach(item -> item.setSendStateIncomeC(
-//                item.getAnnulGenerateC().multiply(BigDecimal.ONE.subtract(pjBaseInfo.getSelfUsePart()))
-//                        .multiply(new BigDecimal(0.01)).multiply(pjBaseInfo.getSendStatePrice())
-//                        .setScale(2, ROUND_HALF_UP)));
+
         //年净收益
         firstGenerTest.setAnnulIncome(firstGenerTest.getSaveElecPrice()
                 .add(firstGenerTest.getSendStateIncome()).setScale(2, ROUND_HALF_UP));
-//        pjGenerProfitList.stream().forEach(item -> item.setAnnulIncomeC(
-//                item.getSaveElecPrice().add(item.getSendStateIncome()).setScale(2, ROUND_HALF_UP)));
+
         // 年投资回报率
         firstGenerTest.setIncomeRatioAnnul( firstGenerTest.getAnnulIncome()
                 .divide(pjBaseInfo.getPjTotalPrice(), 4, ROUND_HALF_UP));
-//        pjGenerProfitList.stream().forEach(item -> item.setIncomeRatioAnnulC(
-//                item.getAnnulIncome().divide(pjBaseInfo.getPjTotalPrice()).setScale(2, ROUND_HALF_UP)));
+
         // 总投资回报率
         firstGenerTest.setIncomeRatioTotal(firstGenerTest.getIncomeRatioAnnul());
         firstGenerTest.setIsDelete(IS_NO);
@@ -253,29 +160,6 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService {
         return pjGenerProfitList;
     }
 
-    /**
-     * 删除【请填写功能名称】信息
-     *
-     * @param pjNo 【请填写功能名称】主键
-     * @return 结果
-     */
-    /*@Override
-    public int deletePjGenerProfitTestByPjNo(String pjNo)
-    {
-        return 0;
-    }*/
-    private void fixUpTest(PjGenerProfitTest firstGenerTest, List<PjGenerProfitTest> pjGenerProfitList) {
-//        List<PjGenerProfitTest> pjGenerProfitList = new ArrayList<>();
-//        //        首年发电
-//        //        单位发电量（kW·h/m²）x组件数量（片）x单块组件功率（W）/ 1000
-//        BigDecimal firstGenerC = firstGenerTest.getAnnulGenerate().multiply(new BigDecimal(0.8));
-//        PjGenerProfitTest firstGenerTestC = new PjGenerProfitTest();
-//        firstGenerTestC.setYear("1");
-//        firstGenerTestC.setAnnulGenerate(firstGenerC);
-//        pjGenerProfitList.add(firstGenerTest);
-
-
-    }
 
     @Override
     public List<PjGenerProfitTest> getGenerProfits(String pjNo) {
