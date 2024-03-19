@@ -99,4 +99,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{pjNo}
         </foreach>
     </delete>
+
+    <update id="insetOrUpdateEnergySaving">
+        insert INTO pj_energy_saving
+        (  pj_no, coal_saving_average, carbon_saving_average, sulfur_saving_average, nitric_saving_average,
+         smoke_saving_average, is_delete, create_time, create_id, upd_time, upd_id
+        )
+        VALUES
+            (#{pjNo},#{coalSavingAverage},#{carbonSavingAverage},#{sulfurSavingAverage},#{nitricSavingAverage},
+             #{smokeSavingAverage},#{isDelete},#{createTime},#{createId},#{updTime},#{updId})
+            ON DUPLICATE KEY UPDATE
+            coal_saving_average = VALUES(coal_saving_average), carbon_saving_average= VALUES(carbon_saving_average),
+            sulfur_saving_average= VALUES(sulfur_saving_average),
+            nitric_saving_average= VALUES(nitric_saving_average),smoke_saving_average= VALUES(smoke_saving_average),
+            upd_time= VALUES(upd_time), upd_id= VALUES(upd_id)
+    </update>
 </mapper>
