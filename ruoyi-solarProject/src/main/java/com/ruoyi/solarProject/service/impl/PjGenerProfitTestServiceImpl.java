@@ -3,9 +3,11 @@ package com.ruoyi.solarProject.service.impl;
 
 import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.solarProject.domain.PjBaseInfo;
+import com.ruoyi.solarProject.domain.PjGenerProfitGather;
 import com.ruoyi.solarProject.domain.PjGenerProfitTest;
 import com.ruoyi.solarProject.mapper.PjBaseInfoMapper;
 import com.ruoyi.solarProject.mapper.PjGenerProfitTestMapper;
+import com.ruoyi.solarProject.service.IPjEnergySavingService;
 import com.ruoyi.solarProject.service.IPjGenerProfitGatherService;
 import com.ruoyi.solarProject.service.IPjGenerProfitTestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,8 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService {
     private PjBaseInfoMapper pjBaseInfoMapper;
     @Autowired
     private IPjGenerProfitGatherService pjGenerProfitGatherService;
+    @Autowired
+    private IPjEnergySavingService pjEnergySavingService;
 
     @Override
     public List<PjGenerProfitTest> pjGenerProfitTest(PjGenerProfitTest pjGenerProfitTest) {
@@ -156,7 +160,11 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService {
                 pjGenerProfitTestMapper.updatePjGenerProfitTest(item);
             }
         }
-        pjGenerProfitGatherService.caculateProfitAmount(pjGenerProfitList);
+        //计算收益汇总值
+        PjGenerProfitGather profitGather =  pjGenerProfitGatherService.caculateProfitAmount(pjGenerProfitList);
+        // 计算减排数据
+        pjEnergySavingService.caculateSavingAmount(profitGather);
+
         return pjGenerProfitList;
     }
 

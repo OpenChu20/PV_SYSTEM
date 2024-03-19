@@ -1,5 +1,6 @@
 package com.ruoyi.common.constant;
 
+import com.ruoyi.common.annotation.Excel;
 import io.jsonwebtoken.Claims;
 
 /**
@@ -23,6 +24,11 @@ public class SolarProjectConstants
     public static final String FIRST_YEAR = "1";
     public static final String SECOND_YEAR = "2";
 
+    public static final String COAL = "1";
+    public static final String CARBON = "2";
+    public static final String SULFUR = "3";
+    public static final String NITUIC = "4";  //减排氮氧化物
+    public static final String SMOKE = "5";
 
     /**
      * UTF-8 字符集

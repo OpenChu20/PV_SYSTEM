@@ -1,6 +1,7 @@
 package com.ruoyi.solarProject.service;
 
 import com.ruoyi.solarProject.domain.PjEnergySaving;
+import com.ruoyi.solarProject.domain.PjGenerProfitGather;
 
 import java.util.List;
 
@@ -12,51 +13,7 @@ import java.util.List;
  */
 public interface IPjEnergySavingService
 {
-    /**
-     * 查询【请填写功能名称】
-     *
-     * @param pjNo 【请填写功能名称】主键
-     * @return 【请填写功能名称】
-     */
-    public PjEnergySaving selectPjEnergySavingByPjNo(String pjNo);
 
-    /**
-     * 查询【请填写功能名称】列表
-     *
-     * @param pjEnergySaving 【请填写功能名称】
-     * @return 【请填写功能名称】集合
-     */
-    public List<PjEnergySaving> selectPjEnergySavingList(PjEnergySaving pjEnergySaving);
+    public void caculateSavingAmount(PjGenerProfitGather ProfitGather);
 
-    /**
-     * 新增【请填写功能名称】
-     *
-     * @param pjEnergySaving 【请填写功能名称】
-     * @return 结果
-     */
-    public int insertPjEnergySaving(PjEnergySaving pjEnergySaving);
-
-    /**
-     * 修改【请填写功能名称】
-     *
-     * @param pjEnergySaving 【请填写功能名称】
-     * @return 结果
-     */
-    public int updatePjEnergySaving(PjEnergySaving pjEnergySaving);
-
-    /**
-     * 批量删除【请填写功能名称】
-     *
-     * @param pjNos 需要删除的【请填写功能名称】主键集合
-     * @return 结果
-     */
-    public int deletePjEnergySavingByPjNos(String[] pjNos);
-
-    /**
-     * 删除【请填写功能名称】信息
-     *
-     * @param pjNo 【请填写功能名称】主键
-     * @return 结果
-     */
-    public int deletePjEnergySavingByPjNo(String pjNo);
 }

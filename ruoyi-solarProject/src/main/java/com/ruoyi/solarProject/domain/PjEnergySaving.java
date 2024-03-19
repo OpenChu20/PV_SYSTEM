@@ -8,10 +8,10 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 【请填写功能名称】对象 pj_energy_saving
+ * ioo对象 pj_energy_saving
  *
  * @author ruoyi
- * @date 2024-03-10
+ * @date 2024-03-19
  */
 public class PjEnergySaving extends BaseEntity
 {
@@ -22,23 +22,23 @@ public class PjEnergySaving extends BaseEntity
 
     /** 节省标煤 */
     @Excel(name = "节省标煤")
-    private Long coalSavingAverage;
+    private Integer coalSavingAverage;
 
     /** 减排二氧化碳 */
     @Excel(name = "减排二氧化碳")
-    private Long carbonSavingAverage;
+    private Integer carbonSavingAverage;
 
     /** 减排二氧化硫 */
     @Excel(name = "减排二氧化硫")
-    private Long sulfurSavingAverage;
+    private Integer sulfurSavingAverage;
 
     /** 减排氮氧化物 */
     @Excel(name = "减排氮氧化物")
-    private Long nitricSavingAverage;
+    private Integer nitricSavingAverage;
 
     /** 减排烟尘 */
     @Excel(name = "减排烟尘")
-    private Long smokeSavingAverage;
+    private Integer smokeSavingAverage;
 
     /** 是否删除 */
     @Excel(name = "是否删除")
@@ -66,48 +66,48 @@ public class PjEnergySaving extends BaseEntity
     {
         return pjNo;
     }
-    public void setCoalSavingAverage(Long coalSavingAverage)
+    public void setCoalSavingAverage(Integer coalSavingAverage)
     {
         this.coalSavingAverage = coalSavingAverage;
     }
 
-    public Long getCoalSavingAverage()
+    public Integer getCoalSavingAverage()
     {
         return coalSavingAverage;
     }
-    public void setCarbonSavingAverage(Long carbonSavingAverage)
+    public void setCarbonSavingAverage(Integer carbonSavingAverage)
     {
         this.carbonSavingAverage = carbonSavingAverage;
     }
 
-    public Long getCarbonSavingAverage()
+    public Integer getCarbonSavingAverage()
     {
         return carbonSavingAverage;
     }
-    public void setSulfurSavingAverage(Long sulfurSavingAverage)
+    public void setSulfurSavingAverage(Integer sulfurSavingAverage)
     {
         this.sulfurSavingAverage = sulfurSavingAverage;
     }
 
-    public Long getSulfurSavingAverage()
+    public Integer getSulfurSavingAverage()
     {
         return sulfurSavingAverage;
     }
-    public void setNitricSavingAverage(Long nitricSavingAverage)
+    public void setNitricSavingAverage(Integer nitricSavingAverage)
     {
         this.nitricSavingAverage = nitricSavingAverage;
     }
 
-    public Long getNitricSavingAverage()
+    public Integer getNitricSavingAverage()
     {
         return nitricSavingAverage;
     }
-    public void setSmokeSavingAverage(Long smokeSavingAverage)
+    public void setSmokeSavingAverage(Integer smokeSavingAverage)
     {
         this.smokeSavingAverage = smokeSavingAverage;
     }
 
-    public Long getSmokeSavingAverage()
+    public Integer getSmokeSavingAverage()
     {
         return smokeSavingAverage;
     }

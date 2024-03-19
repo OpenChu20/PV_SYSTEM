@@ -104,8 +104,6 @@ public class PjBaseInfoController extends BaseController
     /**
      * 删除【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:info:remove')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
     @DeleteMapping("/{pjNos}")
     public AjaxResult remove(@PathVariable String[] pjNos)
     {

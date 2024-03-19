@@ -35,71 +35,71 @@ public class PjEnergySavingController extends BaseController
     @Autowired
     private IPjEnergySavingService pjEnergySavingService;
 
-    /**
-     * 查询【请填写功能名称】列表
-     */
-    @PreAuthorize("@ss.hasPermi('system:saving:list')")
-    @GetMapping("/list")
-    public TableDataInfo list(PjEnergySaving pjEnergySaving)
-    {
-        startPage();
-        List<PjEnergySaving> list = pjEnergySavingService.selectPjEnergySavingList(pjEnergySaving);
-        return getDataTable(list);
-    }
+//    /**
+//     * 查询【请填写功能名称】列表
+//     */
+//    @PreAuthorize("@ss.hasPermi('system:saving:list')")
+//    @GetMapping("/list")
+//    public TableDataInfo list(PjEnergySaving pjEnergySaving)
+//    {
+//        startPage();
+//        List<PjEnergySaving> list = pjEnergySavingService.selectPjEnergySavingList(pjEnergySaving);
+//        return getDataTable(list);
+//    }
 
-    /**
-     * 导出【请填写功能名称】列表
-     */
-    @PreAuthorize("@ss.hasPermi('system:saving:export')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
-    @PostMapping("/export")
-    public void export(HttpServletResponse response, PjEnergySaving pjEnergySaving)
-    {
-        List<PjEnergySaving> list = pjEnergySavingService.selectPjEnergySavingList(pjEnergySaving);
-        ExcelUtil<PjEnergySaving> util = new ExcelUtil<PjEnergySaving>(PjEnergySaving.class);
-        util.exportExcel(response, list, "【请填写功能名称】数据");
-    }
+//    /**
+//     * 导出【请填写功能名称】列表
+//     */
+//    @PreAuthorize("@ss.hasPermi('system:saving:export')")
+//    @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
+//    @PostMapping("/export")
+//    public void export(HttpServletResponse response, PjEnergySaving pjEnergySaving)
+//    {
+//        List<PjEnergySaving> list = pjEnergySavingService.selectPjEnergySavingList(pjEnergySaving);
+//        ExcelUtil<PjEnergySaving> util = new ExcelUtil<PjEnergySaving>(PjEnergySaving.class);
+//        util.exportExcel(response, list, "【请填写功能名称】数据");
+//    }
 
-    /**
-     * 获取【请填写功能名称】详细信息
-     */
-    @PreAuthorize("@ss.hasPermi('system:saving:query')")
-    @GetMapping(value = "/{pjNo}")
-    public AjaxResult getInfo(@PathVariable("pjNo") String pjNo)
-    {
-        return success(pjEnergySavingService.selectPjEnergySavingByPjNo(pjNo));
-    }
-
-    /**
-     * 新增【请填写功能名称】
-     */
-    @PreAuthorize("@ss.hasPermi('system:saving:add')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
-    @PostMapping
-    public AjaxResult add(@RequestBody PjEnergySaving pjEnergySaving)
-    {
-        return toAjax(pjEnergySavingService.insertPjEnergySaving(pjEnergySaving));
-    }
-
-    /**
-     * 修改【请填写功能名称】
-     */
-    @PreAuthorize("@ss.hasPermi('system:saving:edit')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
-    @PutMapping
-    public AjaxResult edit(@RequestBody PjEnergySaving pjEnergySaving)
-    {
-        return toAjax(pjEnergySavingService.updatePjEnergySaving(pjEnergySaving));
-    }
-
-    /**
-     * 删除【请填写功能名称】
-     */
-    @PreAuthorize("@ss.hasPermi('system:saving:remove')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{pjNos}")
-    public AjaxResult remove(@PathVariable String[] pjNos)
-    {
-        return toAjax(pjEnergySavingService.deletePjEnergySavingByPjNos(pjNos));
-    }
+//    /**
+//     * 获取【请填写功能名称】详细信息
+//     */
+//    @PreAuthorize("@ss.hasPermi('system:saving:query')")
+//    @GetMapping(value = "/{pjNo}")
+//    public AjaxResult getInfo(@PathVariable("pjNo") String pjNo)
+//    {
+//        return success(pjEnergySavingService.selectPjEnergySavingByPjNo(pjNo));
+//    }
+//
+//    /**
+//     * 新增【请填写功能名称】
+//     */
+//    @PreAuthorize("@ss.hasPermi('system:saving:add')")
+//    @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
+//    @PostMapping
+//    public AjaxResult add(@RequestBody PjEnergySaving pjEnergySaving)
+//    {
+//        return toAjax(pjEnergySavingService.insertPjEnergySaving(pjEnergySaving));
+//    }
+//
+//    /**
+//     * 修改【请填写功能名称】
+//     */
+//    @PreAuthorize("@ss.hasPermi('system:saving:edit')")
+//    @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
+//    @PutMapping
+//    public AjaxResult edit(@RequestBody PjEnergySaving pjEnergySaving)
+//    {
+//        return toAjax(pjEnergySavingService.updatePjEnergySaving(pjEnergySaving));
+//    }
+//
+//    /**
+//     * 删除【请填写功能名称】
+//     */
+//    @PreAuthorize("@ss.hasPermi('system:saving:remove')")
+//    @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
+//	@DeleteMapping("/{pjNos}")
+//    public AjaxResult remove(@PathVariable String[] pjNos)
+//    {
+//        return toAjax(pjEnergySavingService.deletePjEnergySavingByPjNos(pjNos));
+//    }
 }

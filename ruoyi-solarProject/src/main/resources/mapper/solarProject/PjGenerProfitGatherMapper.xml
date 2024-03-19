@@ -130,6 +130,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              #{sumIncomeRatioAnnul},#{sumIncomeRatioTotal},#{isDelete},#{createTime},#{createId},#{updTime},
              #{updId},#{avgIncomeRatioAnnul})
             ON DUPLICATE KEY UPDATE
-                                 pj_no = VALUES(pj_no)
+          total_generate=VALUES(total_generate), avg_generate=VALUES(avg_generate), sum_save_price=VALUES(sum_save_price),
+          sum_send_state_income=VALUES(sum_send_state_income), sum_annul_income=VALUES(sum_annul_income),
+          sum_income_ratio_annul=VALUES(sum_income_ratio_annul), sum_income_ratio_total=VALUES(sum_income_ratio_total),
+          upd_time=VALUES(upd_time),upd_id=VALUES(upd_id),avg_income_ratio_annul=VALUES(avg_income_ratio_annul)
     </insert>
 </mapper>

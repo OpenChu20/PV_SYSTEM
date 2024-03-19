@@ -113,7 +113,7 @@ public class PjGenerProfitGatherServiceImpl implements IPjGenerProfitGatherServi
     }
 
     @Override
-    public void caculateProfitAmount(List<PjGenerProfitTest> pjGenerProfitTestList) {
+    public PjGenerProfitGather caculateProfitAmount(List<PjGenerProfitTest> pjGenerProfitTestList) {
         PjGenerProfitGather profitGather = new PjGenerProfitGather();
         BigDecimal totalGener = pjGenerProfitTestList.stream().map(PjGenerProfitTest :: getAnnulGenerate)
                 .reduce(ZERO,BigDecimal::add).setScale(2, ROUND_HALF_UP);
@@ -137,5 +137,6 @@ public class PjGenerProfitGatherServiceImpl implements IPjGenerProfitGatherServi
         profitGather.setIsDelete(IS_NO);
 
         pjGenerProfitGatherMapper.caculateProfitGather(profitGather);
+        return profitGather;
     }
 }

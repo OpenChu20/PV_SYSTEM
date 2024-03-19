@@ -1,12 +1,16 @@
 package com.ruoyi.solarProject.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.solarProject.domain.PjEnergySaving;
+import com.ruoyi.solarProject.domain.PjGenerProfitGather;
 import com.ruoyi.solarProject.mapper.PjEnergySavingMapper;
 import com.ruoyi.solarProject.service.IPjEnergySavingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static com.ruoyi.common.constant.SolarProjectConstants.*;
 
 /**
  * 【请填写功能名称】Service业务层处理
@@ -20,76 +24,41 @@ public class PjEnergySavingServiceImpl implements IPjEnergySavingService
     @Autowired
     private PjEnergySavingMapper pjEnergySavingMapper;
 
-    /**
-     * 查询【请填写功能名称】
-     *
-     * @param pjNo 【请填写功能名称】主键
-     * @return 【请填写功能名称】
-     */
+
     @Override
-    public PjEnergySaving selectPjEnergySavingByPjNo(String pjNo)
-    {
-        return pjEnergySavingMapper.selectPjEnergySavingByPjNo(pjNo);
+    public void caculateSavingAmount(PjGenerProfitGather profitGather) {
+        PjEnergySaving pjEnergySaving = new PjEnergySaving();
+        BigDecimal avgGener = profitGather.getAvgGenerate();
+        pjEnergySaving.setCoalSavingAverage(this.dealDifferentType(COAL,avgGener));
+        pjEnergySaving.setCarbonSavingAverage(this.dealDifferentType(CARBON,avgGener));
+        pjEnergySaving.setSulfurSavingAverage(this.dealDifferentType(SULFUR,avgGener));
+        pjEnergySaving.setNitricSavingAverage(this.dealDifferentType(NITUIC,avgGener));
+        pjEnergySaving.setSmokeSavingAverage(this.dealDifferentType(SMOKE,avgGener));
+        pjEnergySaving.setPjNo(profitGather.getPjNo());
+        pjEnergySaving.setIsDelete(IS_NO);
+        pjEnergySavingMapper.insetOrUpdateEnergySaving(pjEnergySaving);
     }
 
-    /**
-     * 查询【请填写功能名称】列表
-     *
-     * @param pjEnergySaving 【请填写功能名称】
-     * @return 【请填写功能名称】
-     */
-    @Override
-    public List<PjEnergySaving> selectPjEnergySavingList(PjEnergySaving pjEnergySaving)
-    {
-        return pjEnergySavingMapper.selectPjEnergySavingList(pjEnergySaving);
-    }
+    private int dealDifferentType(String savingType, BigDecimal avgGener){
+        BigDecimal param;
+        switch (savingType){
+            case COAL:
+                param = new BigDecimal(0.335);
+                break;
+            case CARBON:
+                param = new BigDecimal(0.997);
+                break;
+            case SULFUR:
+                param = new BigDecimal(0.03);
+                break;
+            case NITUIC:
+                param = new BigDecimal(0.015);
+                break;
+            default:
+                param = new BigDecimal(0.272);
+        }
 
-    /**
-     * 新增【请填写功能名称】
-     *
-     * @param pjEnergySaving 【请填写功能名称】
-     * @return 结果
-     */
-    @Override
-    public int insertPjEnergySaving(PjEnergySaving pjEnergySaving)
-    {
-        pjEnergySaving.setCreateTime(DateUtils.getNowDate());
-        return pjEnergySavingMapper.insertPjEnergySaving(pjEnergySaving);
-    }
-
-    /**
-     * 修改【请填写功能名称】
-     *
-     * @param pjEnergySaving 【请填写功能名称】
-     * @return 结果
-     */
-    @Override
-    public int updatePjEnergySaving(PjEnergySaving pjEnergySaving)
-    {
-        return pjEnergySavingMapper.updatePjEnergySaving(pjEnergySaving);
-    }
-
-    /**
-     * 批量删除【请填写功能名称】
-     *
-     * @param pjNos 需要删除的【请填写功能名称】主键
-     * @return 结果
-     */
-    @Override
-    public int deletePjEnergySavingByPjNos(String[] pjNos)
-    {
-        return pjEnergySavingMapper.deletePjEnergySavingByPjNos(pjNos);
-    }
-
-    /**
-     * 删除【请填写功能名称】信息
-     *
-     * @param pjNo 【请填写功能名称】主键
-     * @return 结果
-     */
-    @Override
-    public int deletePjEnergySavingByPjNo(String pjNo)
-    {
-        return pjEnergySavingMapper.deletePjEnergySavingByPjNo(pjNo);
+        return avgGener.multiply(param).multiply(new BigDecimal(10)).intValue();
     }
 }
+

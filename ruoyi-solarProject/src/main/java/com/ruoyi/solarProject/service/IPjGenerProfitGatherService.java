@@ -62,5 +62,12 @@ public interface IPjGenerProfitGatherService
      */
     public int deletePjGenerProfitGatherByPjNo(String pjNo);
 
-    public void caculateProfitAmount(List<PjGenerProfitTest> pjGenerProfitTestList);
+    /**
+     * @desc 计算收益汇总相关值
+     * @date 2024-03-18
+     * @author 王渊超
+     * @param
+     * @change   修改原因   修改时间   修改人员
+     */
+    public PjGenerProfitGather caculateProfitAmount(List<PjGenerProfitTest> pjGenerProfitTestList);
 }

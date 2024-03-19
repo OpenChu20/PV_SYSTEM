@@ -59,4 +59,6 @@ public interface PjEnergySavingMapper
      * @return 结果
      */
     public int deletePjEnergySavingByPjNos(String[] pjNos);
+
+    public int insetOrUpdateEnergySaving(PjEnergySaving pjEnergySaving);
 }
