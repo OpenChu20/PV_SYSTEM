@@ -1,8 +1,12 @@
 package com.ruoyi.solarProject.service;
 
 import com.ruoyi.solarProject.domain.PjBaseInfo;
+import com.ruoyi.solarProject.domain.PjEnergySaving;
 import com.ruoyi.solarProject.domain.PjGenerProfitTest;
+import com.ruoyi.solarProject.domain.vo.ProfitGatherVo;
+import io.swagger.models.Response;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -61,5 +65,14 @@ public interface IPjBaseInfoService
      * @return 结果
      */
     public int deletePjBaseInfoByPjNo(String pjNo);
+
+    /**
+     * 导出PPT功能
+     *
+     * @param  【请填写功能名称】主键
+     * @return 结果
+     */
+    public Response exportPPT(HttpServletResponse response , PjBaseInfo pjBaseInfo, PjEnergySaving pjEnergySaving, ProfitGatherVo profitGatherVo, List<PjGenerProfitTest> pjGenerProfitTestServices);
+
 
 }

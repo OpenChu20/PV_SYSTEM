@@ -91,7 +91,7 @@ public class PjBaseInfo extends BaseEntity
 
     /** 变压器容量 */
     @Excel(name = "变压器容量")
-    private BigDecimal trancformerCapacity;
+    private BigDecimal transformerCapacity;
 
     /** 客户国网电价 */
     @Excel(name = "客户国网电价")
@@ -126,9 +126,7 @@ public class PjBaseInfo extends BaseEntity
     private String isDelete;
 
 
-    /** 插入用户 */
-    @Excel(name = "插入用户")
-    private String transformerCapacity;
+
 
     /** 插入用户 */
     @Excel(name = "插入用户")
@@ -143,13 +141,7 @@ public class PjBaseInfo extends BaseEntity
     @Excel(name = "更新用户")
     private String updId;
 
-    public String getTransformerCapacity() {
-        return transformerCapacity;
-    }
 
-    public void setTransformerCapacity(String transformerCapacity) {
-        this.transformerCapacity = transformerCapacity;
-    }
 
     public void setPjNo(String pjNo)
     {
@@ -299,11 +291,11 @@ public class PjBaseInfo extends BaseEntity
     }
 
     public BigDecimal getTrancformerCapacity() {
-        return trancformerCapacity;
+        return transformerCapacity;
     }
 
     public void setTrancformerCapacity(BigDecimal trancformerCapacity) {
-        this.trancformerCapacity = trancformerCapacity;
+        this.transformerCapacity = trancformerCapacity;
     }
 
     public BigDecimal getElectPrice() {

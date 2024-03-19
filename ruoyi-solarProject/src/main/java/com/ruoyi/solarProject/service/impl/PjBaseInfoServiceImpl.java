@@ -6,12 +6,18 @@ import java.util.Random;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.uuid.Seq;
 import com.ruoyi.solarProject.domain.PjBaseInfo;
+import com.ruoyi.solarProject.domain.PjEnergySaving;
 import com.ruoyi.solarProject.domain.PjGenerProfitTest;
+import com.ruoyi.solarProject.domain.vo.ProfitGatherVo;
 import com.ruoyi.solarProject.mapper.PjBaseInfoMapper;
 import com.ruoyi.solarProject.service.IPjBaseInfoService;
 import com.ruoyi.solarProject.tool.SequenceUtils;
+import com.ruoyi.solarProject.tool.util.ExportPPTUtil;
+import io.swagger.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletResponse;
 
 import static com.ruoyi.solarProject.tool.SequenceUtils.solarPjType;
 
@@ -101,6 +107,19 @@ public class PjBaseInfoServiceImpl implements IPjBaseInfoService
     public int deletePjBaseInfoByPjNo(String pjNo)
     {
         return pjBaseInfoMapper.deletePjBaseInfoByPjNo(pjNo);
+    }
+
+    @Override
+    public Response exportPPT(HttpServletResponse response, PjBaseInfo pjBaseInfo, PjEnergySaving pjEnergySaving, ProfitGatherVo profitGatherVo, List<PjGenerProfitTest> pjGenerProfitTestServices) {
+        ExportPPTUtil exportPPTUtil = new ExportPPTUtil();
+        try {
+            ExportPPTUtil.exportPPT(response,pjBaseInfo,pjEnergySaving,profitGatherVo,pjGenerProfitTestServices);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        return null;
     }
 
 

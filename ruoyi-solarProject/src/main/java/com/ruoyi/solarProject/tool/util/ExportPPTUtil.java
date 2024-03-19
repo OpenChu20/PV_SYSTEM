@@ -1,28 +1,55 @@
 package com.ruoyi.solarProject.tool.util;
 import com.ruoyi.solarProject.domain.PjBaseInfo;
 import com.ruoyi.solarProject.domain.PjEnergySaving;
-import com.ruoyi.solarProject.domain.PjGenerProfitGather;
+
 import com.ruoyi.solarProject.domain.PjGenerProfitTest;
+import com.ruoyi.solarProject.domain.vo.ProfitGatherVo;
 import org.apache.poi.xslf.usermodel.*;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
+
+
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.net.URL;
 import java.util.*;
-
 /**
  * 导出PPT相关代码处理相关处理
  *
  * @author ruoyi
  */
-public class ExportPPTUtil<T>
+public class ExportPPTUtil
 {
 
     //基于项目编号导出对应的PPT模板
-    public static void exportPPT(String projectNumber) throws Exception{
+    public static void exportPPT(HttpServletResponse response, PjBaseInfo pjBaseInfo, PjEnergySaving pjEnergySaving, ProfitGatherVo profitGatherVo, List<PjGenerProfitTest> pjGenerProfitTestServices) throws Exception{
         try{
-            PjBaseInfo pjBaseInfo = null;
+            String filename = "E:\\product\\guan\\houduan\\jiongx_project_back\\ruoyi-solarProject\\src\\main\\java\\com\\ruoyi\\solarProject\\tool\\util\\projectInfo.pptx";
+            ClassPathResource fpr = new ClassPathResource("template/projectInfo.pptx");
+            String path = "classpath:template/projectInfo.pptx";
 
-            FileInputStream fis = new FileInputStream("//projectInfo.pptx");
-            XMLSlideShow srcShow = new XMLSlideShow(fis);
+
+            ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
+            Resource[] resources = resourcePatternResolver.getResources("classpath:template/projectInfo.pptx");
+            File file = null;
+            InputStream inputStream = null;
+            for ( Resource resource : resources ) {
+                //获取文件名
+
+                //获取文件，在打成jar包后，通过url来获取文件，则路径是正确的
+             //    file = new File(resource.getURL().getFile());
+
+                 inputStream = resource.getInputStream();
+
+            }
+
+        //    FileInputStream fis = (FileInputStream) inputStream;
+          //  FileInputStream fis = new FileInputStream(filename);
+            XMLSlideShow srcShow = new XMLSlideShow(inputStream);
             //获取所有幻灯片
             List<XSLFSlide> slides = srcShow.getSlides();
             XSLFSlide slide = slides.get(5);
@@ -32,25 +59,31 @@ public class ExportPPTUtil<T>
             setExcel1(slide1,pjBaseInfo);
             //第13页
             XSLFSlide slide2 = slides.get(12);
-            setExcel2(slide2,pjBaseInfo);
+            setExcel2(slide2,pjBaseInfo,profitGatherVo);
             //第19页
             XSLFSlide slide3 = slides.get(18);
-            setExcel3(slide3,null,null);
+            setExcel3(slide3,pjGenerProfitTestServices,profitGatherVo);
             //第19页
             XSLFSlide slide4 = slides.get(19);
-            setExcel4(slide4,null);
+            setExcel4(slide4,pjEnergySaving);
             //第19页
             XSLFSlide slide5 = slides.get(20);
-            setExcel5(slide5,null,null);
-            fis.close();
-            try (FileOutputStream out = new FileOutputStream("D:\\test1\\p55.pptx")) {
-                srcShow.write(out);
-            }
+            setExcel5(slide5,profitGatherVo,pjBaseInfo);
+            inputStream.close();
+            long ll = System.currentTimeMillis();
+
+
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            response.setCharacterEncoding("utf-8");
+            srcShow.write(response.getOutputStream());
+
             srcShow.close();
         }catch (Exception e){
             e.printStackTrace();
             throw new Exception("导出PPT错误，请联系管理员");
         }
+
+
     }
 
 
@@ -121,17 +154,12 @@ public class ExportPPTUtil<T>
                 //防水方式
                 cell = table.getCell(4,3);
                 cell.setText(pjBaseInfo.getWaterProofStyle());
-
             }
         }
-
-
-
-
     }
 
-    private static void setExcel2(XSLFSlide slide2,PjBaseInfo pjBaseInfo) {
-        PjGenerProfitGather pjGenerProfitGather = null;
+    private static void setExcel2(XSLFSlide slide2,PjBaseInfo pjBaseInfo,ProfitGatherVo pjGenerProfitGather ) {
+
         List<XSLFShape>   xslfShapes = slide2.getShapes();
         for (XSLFShape xslfShape : xslfShapes) {
             if(xslfShape instanceof XSLFTable){
@@ -175,8 +203,9 @@ public class ExportPPTUtil<T>
 
 
     }
-    private static void setExcel3(XSLFSlide slide2, List<PjGenerProfitTest> pjGenerProfitTests,PjGenerProfitGather pjGenerProfitGather) {
+    private static void setExcel3(XSLFSlide slide2, List<PjGenerProfitTest> pjGenerProfitTests,ProfitGatherVo pjGenerProfitGather) {
         List<XSLFShape>   xslfShapes = slide2.getShapes();
+        System.out.println("pjGenerProfitTests:"+pjGenerProfitTests.size());
         int i = 1 ;
         for (XSLFShape xslfShape : xslfShapes) {
             if(xslfShape instanceof XSLFTable){
@@ -209,7 +238,8 @@ public class ExportPPTUtil<T>
                         if(cell == null){
                             continue;
                         }
-                        PjGenerProfitTest pjGenerProfitTest = pjGenerProfitTests.get(g+11);
+
+                        PjGenerProfitTest pjGenerProfitTest = pjGenerProfitTests.get(g+10);
                         if(pjGenerProfitTest == null){
                             //设置合计的数量
                             //发电量
@@ -225,11 +255,6 @@ public class ExportPPTUtil<T>
                             //年净收益
                             cell = table.getCell(g,4);
                             cell.setText(String.valueOf(pjGenerProfitGather.getSumAnnulIncome()));
-
-
-
-
-
                         }else{
                             //发电量
                             cell = table.getCell(g,1);
@@ -313,7 +338,7 @@ public class ExportPPTUtil<T>
     }
 
 
-    private static void setExcel5(XSLFSlide slide2,PjGenerProfitGather pjGenerProfitGather,PjBaseInfo pjBaseInfo) {
+    private static void setExcel5(XSLFSlide slide2,ProfitGatherVo pjGenerProfitGather,PjBaseInfo pjBaseInfo) {
         List<XSLFShape>   xslfShapes = slide2.getShapes();
         for (XSLFShape xslfShape : xslfShapes) {
             if(xslfShape instanceof XSLFTable){
@@ -328,20 +353,20 @@ public class ExportPPTUtil<T>
                // 42*12*25*0.05/10000 == 0.063
                 BigDecimal b1 = new BigDecimal(0.063);
                 cell = table.getCell(3,1);
-                cell.setText(trancformerCapacity.divide(b1).toString());
+                cell.setText(trancformerCapacity.divide(b1,3, RoundingMode.HALF_UP).toString());
                 //温度节能
                 BigDecimal bigDecimal = pjBaseInfo.getRoofArea();
                 //客户国电网价格
                 BigDecimal bigDecimal3 = new BigDecimal(160);
                 BigDecimal electPrice = pjBaseInfo.getElectPrice();
-                BigDecimal electPrice1 = bigDecimal.divide(electPrice).multiply(bigDecimal3);
+                BigDecimal electPrice1 = bigDecimal.divide(electPrice,3, RoundingMode.HALF_UP).multiply(bigDecimal3);
 
                 cell = table.getCell(4,1);
                 cell.setText(electPrice1.toString());
                 //修缮费用   屋顶面积*50*2/10000
 
                 BigDecimal bigDecimal1 = new BigDecimal(100);
-                BigDecimal bigDecimal2 = bigDecimal.divide(bigDecimal1);
+                BigDecimal bigDecimal2 = bigDecimal.divide(bigDecimal1,3, RoundingMode.HALF_UP);
                 cell = table.getCell(5,1);
                 cell.setText(bigDecimal2.toString());
                 //double s2 = 25*2.5/10000;  ==160

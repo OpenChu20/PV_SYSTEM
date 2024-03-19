@@ -113,8 +113,6 @@ public class PjGenerProfitTestController extends BaseController
     public TableDataInfo getGenerProfits(@PathVariable(value = "pjNo") String pjNo)
     {
 //        String pjNo = pjBaseInfo.getPjNo();
-        System.out.println(pjNo);
-        String ccc = "";
         List<PjGenerProfitTest> list = pjGenerProfitTestService.getGenerProfits(pjNo);
         return getDataTable(list);
     }

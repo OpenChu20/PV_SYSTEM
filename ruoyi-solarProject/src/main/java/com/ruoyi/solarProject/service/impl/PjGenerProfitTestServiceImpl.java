@@ -89,7 +89,7 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService {
         BigDecimal secondGener = firstGener.multiply(new BigDecimal(1).subtract(firstDecreasePoint)).setScale(4, ROUND_HALF_UP);
         BigDecimal secondGenerC = firstGenerC.multiply(new BigDecimal(1).subtract(firstDecreasePoint)).setScale(4, ROUND_HALF_UP);
         PjGenerProfitTest secondGenerTest = new PjGenerProfitTest();
-        firstGenerTest.setId(IdUtils.randomId());
+        secondGenerTest.setId(IdUtils.randomId());
 
         secondGenerTest.setPjNo(pjNo);
         secondGenerTest.setYear(SECOND_YEAR);
@@ -123,7 +123,7 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService {
             PjGenerProfitTest before = pjGenerProfitList.stream().filter(body -> String.valueOf(n).equals(body.getYear())).findAny().get();
             BigDecimal solarGener = before.getAnnulGenerate().multiply(new BigDecimal(1).subtract(otherDecreasePoint)).setScale(4, ROUND_HALF_UP);
             BigDecimal solarGenerC = before.getAnnulGenerateC().multiply(new BigDecimal(1).subtract(otherDecreasePoint)).setScale(4, ROUND_HALF_UP);
-            firstGenerTest.setId(IdUtils.randomId());
+            otherGenerTest.setId(IdUtils.randomId());
 
             otherGenerTest.setPjNo(pjNo);
             otherGenerTest.setYear(yearSequence);
