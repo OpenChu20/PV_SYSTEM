@@ -26,6 +26,11 @@ public class PjEnergySavingServiceImpl implements IPjEnergySavingService
 
 
     @Override
+    public PjEnergySaving selectPjEnergySavingByPjNo(String pjNo) {
+        return pjEnergySavingMapper.selectPjEnergySavingByPjNo(pjNo);
+    }
+
+    @Override
     public void caculateSavingAmount(PjGenerProfitGather profitGather) {
         PjEnergySaving pjEnergySaving = new PjEnergySaving();
         BigDecimal avgGener = profitGather.getAvgGenerate();

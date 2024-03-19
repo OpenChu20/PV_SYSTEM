@@ -60,15 +60,15 @@ public class PjEnergySavingController extends BaseController
 //        util.exportExcel(response, list, "【请填写功能名称】数据");
 //    }
 
-//    /**
-//     * 获取【请填写功能名称】详细信息
-//     */
-//    @PreAuthorize("@ss.hasPermi('system:saving:query')")
-//    @GetMapping(value = "/{pjNo}")
-//    public AjaxResult getInfo(@PathVariable("pjNo") String pjNo)
-//    {
-//        return success(pjEnergySavingService.selectPjEnergySavingByPjNo(pjNo));
-//    }
+    /**
+     * 获取【请填写功能名称】详细信息
+     */
+    @PreAuthorize("@ss.hasPermi('system:saving:query')")
+    @GetMapping(value = "/{pjNo}")
+    public AjaxResult getInfo(@PathVariable("pjNo") String pjNo)
+    {
+        return success(pjEnergySavingService.selectPjEnergySavingByPjNo(pjNo));
+    }
 //
 //    /**
 //     * 新增【请填写功能名称】

@@ -1,5 +1,6 @@
 package com.ruoyi.solarProject.service;
 
+import com.ruoyi.solarProject.domain.PjBaseInfo;
 import com.ruoyi.solarProject.domain.PjEnergySaving;
 import com.ruoyi.solarProject.domain.PjGenerProfitGather;
 
@@ -13,6 +14,9 @@ import java.util.List;
  */
 public interface IPjEnergySavingService
 {
+
+
+    public PjEnergySaving selectPjEnergySavingByPjNo(String pjNo);
 
     public void caculateSavingAmount(PjGenerProfitGather ProfitGather);
 

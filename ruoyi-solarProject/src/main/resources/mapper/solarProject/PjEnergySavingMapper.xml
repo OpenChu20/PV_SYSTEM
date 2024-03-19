@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectPjEnergySavingByPjNo" parameterType="String" resultMap="PjEnergySavingResult">
         <include refid="selectPjEnergySavingVo"/>
-        where pj_no = #{pjNo}
+        where pj_no = #{pjNo} and is_delete='0'
     </select>
 
     <insert id="insertPjEnergySaving" parameterType="PjEnergySaving">
