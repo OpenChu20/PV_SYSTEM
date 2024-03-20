@@ -5,17 +5,13 @@ import com.ruoyi.solarProject.domain.PjEnergySaving;
 import com.ruoyi.solarProject.domain.PjGenerProfitTest;
 import com.ruoyi.solarProject.domain.vo.ProfitGatherVo;
 import org.apache.poi.xslf.usermodel.*;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
-
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.net.URL;
 import java.util.*;
 /**
  * 导出PPT相关代码处理相关处理
@@ -26,7 +22,7 @@ public class ExportPPTUtil
 {
 
     //基于项目编号导出对应的PPT模板
-    public static void exportPPT(HttpServletResponse response, PjBaseInfo pjBaseInfo, PjEnergySaving pjEnergySaving, ProfitGatherVo profitGatherVo, List<PjGenerProfitTest> pjGenerProfitTestServices) throws Exception{
+    public static void exportPPT(HttpServletResponse response, PjBaseInfo pjBaseInfo, PjEnergySaving pjEnergySaving, ProfitGatherVo profitGatherVo, List<PjGenerProfitTest> pjGenerProfitTestServices,Map<String,String> dictData) throws Exception{
         try{
             ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
             Resource[] resources = resourcePatternResolver.getResources("classpath:template/projectInfo.pptx");
@@ -48,10 +44,10 @@ public class ExportPPTUtil
             //获取所有幻灯片
             List<XSLFSlide> slides = srcShow.getSlides();
             XSLFSlide slide = slides.get(5);
-            setExcel0(slide,pjBaseInfo);
+            setExcel0(slide,pjBaseInfo,dictData);
             //第12页
             XSLFSlide slide1 = slides.get(11);
-            setExcel1(slide1,pjBaseInfo);
+            setExcel1(slide1,pjBaseInfo,profitGatherVo,pjGenerProfitTestServices,dictData);
             //第13页
             XSLFSlide slide2 = slides.get(12);
             setExcel2(slide2,pjBaseInfo,profitGatherVo);
@@ -84,7 +80,7 @@ public class ExportPPTUtil
 
 
     //第六页PPT
-    public static void setExcel0(XSLFSlide slide, PjBaseInfo pjBaseInfo){
+    public static void setExcel0(XSLFSlide slide, PjBaseInfo pjBaseInfo,Map<String,String> dictData){
         List<XSLFShape>   xslfShapes = slide.getShapes();
         for (XSLFShape xslfShape : xslfShapes) {
             if(xslfShape instanceof XSLFTable){
@@ -97,58 +93,69 @@ public class ExportPPTUtil
                 cell.setText(pjBaseInfo.getCusName());
                 //第二行第四列
                 cell = table.getCell(1,3);
-                cell.setText(String.valueOf(pjBaseInfo.getTrancformerCapacity()));
+                cell.setText(pjBaseInfo.getTrancformerCapacity().setScale(0)+"kva");
                 //第二行第二列
                 //暂时设置项目名称
                 cell = table.getCell(2,1);
                 cell.setText(pjBaseInfo.getPjName());
-                //第二行第四列
+                //第二行第四列 安装材料
                 cell = table.getCell(2,3);
-                cell.setText(pjBaseInfo.getRoofMaterials());
+                String lable = dictData.get(pjBaseInfo.getRoofMaterials()+"_roof_materials");
+
+                cell.setText(lable);
                 //第二行第二列
                 cell = table.getCell(3,1);
-                cell.setText(String.valueOf(pjBaseInfo.getRoofArea()));
+                cell.setText(String.valueOf(pjBaseInfo.getRoofArea().setScale(0))+"平米");
                 //第二行第四列
                 cell = table.getCell(3,3);
-                cell.setText(String.valueOf(pjBaseInfo.getSelfUseAmount()));
+                BigDecimal bigDecimal = new BigDecimal(10000);
+                BigDecimal electPrice = pjBaseInfo.getElectPrice();
+                BigDecimal electPrice1 = electPrice.divide(bigDecimal,2, RoundingMode.HALF_UP);
+                cell.setText(electPrice1.toString()+"万度");
             }
         }
     }
-    private static void setExcel1(XSLFSlide slide2, PjBaseInfo pjBaseInfo) {
+    private static void setExcel1(XSLFSlide slide2, PjBaseInfo pjBaseInfo, ProfitGatherVo profitGatherVo,List<PjGenerProfitTest> pjGenerProfitTests,Map<String,String> dictData) {
+
         List<XSLFShape>   xslfShapes = slide2.getShapes();
         for (XSLFShape xslfShape : xslfShapes) {
             if(xslfShape instanceof XSLFTable){
-                System.out.println("2222");
                 XSLFTable table = (XSLFTable) xslfShape;
                 XSLFTableCell cell = table.getCell(0,0);
                 //cell.setText("测试数据001");
                 //第二行第二列
                 cell = table.getCell(1,1);
                 //安装数量
-                cell.setText(String.valueOf(pjBaseInfo.getModulesNum()));
+                cell.setText(String.valueOf(pjBaseInfo.getModulesNum())+"块");
                 //第二行第四列
                 cell = table.getCell(1,3);
                 //组件功率
-                cell.setText(String.valueOf(pjBaseInfo.getPerModulesRate()));
+                cell.setText(String.valueOf(pjBaseInfo.getPerModulesRate())+"W");
                 //第二行第二列
                 cell = table.getCell(2,1);
-                cell.setText(String.valueOf(pjBaseInfo.getTotalCapacity()));
+                cell.setText(String.valueOf(pjBaseInfo.getTotalCapacity())+"KW");
                 //第二行第四列
                 cell = table.getCell(2,3);
-                cell.setText("首年发电量");
+                PjGenerProfitTest pjGenerProfitTest = pjGenerProfitTests.get(0);
+                BigDecimal bigDecimal = pjGenerProfitTest.getAnnulGenerate();
+                cell.setText(bigDecimal.setScale(1,RoundingMode.HALF_UP)+"万度");
                 //第二行第二列
                 cell = table.getCell(3,1);
-                cell.setText(String.valueOf(pjBaseInfo.getPvArea()));
+                cell.setText(String.valueOf(pjBaseInfo.getPvArea().setScale(0))+"平方米");
                 //第二行第四列
                 cell = table.getCell(3,3);
-                cell.setText("25年总发电量");
+                cell.setText(profitGatherVo.getTotalGenerate().setScale(2)+"万度");
 
                 //安装方式
+                String installStytle = dictData.get(pjBaseInfo.getInstallStyle()+"_install_style");
+
+
                 cell = table.getCell(4,1);
-                cell.setText(pjBaseInfo.getInstallStyle());
+                cell.setText(installStytle);
+                String waterProofStyle = dictData.get(pjBaseInfo.getWaterProofStyle()+"_water_proof_style");
                 //防水方式
                 cell = table.getCell(4,3);
-                cell.setText(pjBaseInfo.getWaterProofStyle());
+                cell.setText(waterProofStyle);
             }
         }
     }
@@ -169,29 +176,29 @@ public class ExportPPTUtil
 
                 //pjTotalPrice/1000
                 cell = table.getCell(1,3);
-                cell.setText(String.valueOf(pjBaseInfo.getPjTotalPrice()));
+                cell.setText(String.valueOf(pjBaseInfo.getPjTotalPrice().setScale(2,RoundingMode.HALF_UP))+"万元");
                 //投资方
                 cell = table.getCell(2,1);
                 cell.setText(pjBaseInfo.getCusName());
                 //25年发电收益
                 cell = table.getCell(2,3);
-                cell.setText(String.valueOf(pjGenerProfitGather.getSumAnnulIncome()));
+                cell.setText(String.valueOf(pjGenerProfitGather.getSumAnnulIncome().setScale(0,RoundingMode.HALF_UP))+"万元");
                 //装机容量
                 cell = table.getCell(3,1);
-                cell.setText(String.valueOf(pjBaseInfo.getTotalCapacity()));
+                cell.setText(String.valueOf(pjBaseInfo.getTotalCapacity())+"KW");
                 //回本周期
                 cell = table.getCell(3,3);
 
                 //实时计算
-                cell.setText(String.valueOf("3.6"));
+                cell.setText(String.valueOf("3.6")+"年");
 
                 //25年发电量
                 cell = table.getCell(4,1);
 
-                cell.setText(String.valueOf(pjGenerProfitGather.getTotalGenerate()));
+                cell.setText(String.valueOf(pjGenerProfitGather.getTotalGenerate().setScale(2,RoundingMode.HALF_UP))+"万度");
                 //25年年均收益率
                 cell = table.getCell(4,3);
-                cell.setText(String.valueOf(pjGenerProfitGather.getAvgIncomeRatioAnnul()));
+                cell.setText(String.valueOf(pjGenerProfitGather.getAvgIncomeRatioAnnul())+"%");
 
             }
         }
@@ -200,17 +207,8 @@ public class ExportPPTUtil
     }
     private static void setExcel3(XSLFSlide slide2, List<PjGenerProfitTest> pjGenerProfitTests,ProfitGatherVo pjGenerProfitGather) {
         List<XSLFShape>   xslfShapes = slide2.getShapes();
-        System.out.println("pjGenerProfitTests:"+pjGenerProfitTests.size());
         int i = 1 ;
-
-
-
-// 获取文本运行的字体，如果没有，则创建一个
-
-
-
-
-
+        //对 pjGenerProfitTests 进行排序
 
 
         for (XSLFShape xslfShape : xslfShapes) {
@@ -223,7 +221,7 @@ public class ExportPPTUtil
                         PjGenerProfitTest pjGenerProfitTest = pjGenerProfitTests.get(g-2);
                         //发电量
                         cell = table.getCell(g,1);
-                        cell.setText(String.valueOf(pjGenerProfitTest.getAnnulGenerate()));
+                        cell.setText(String.valueOf(pjGenerProfitTest.getAnnulGenerate().setScale(2,RoundingMode.HALF_UP)));
                         if(cell != null){
                             XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
                             XSLFTextRun run = paragraph.getTextRuns().get(0);
@@ -234,7 +232,7 @@ public class ExportPPTUtil
 
                         //节省电费
                         cell = table.getCell(g,2);
-                        cell.setText(String.valueOf(pjGenerProfitTest.getSaveElecPrice()));
+                        cell.setText(String.valueOf(pjGenerProfitTest.getSaveElecPrice().setScale(2,RoundingMode.HALF_UP)));
                         if(cell != null){
                             XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
                             XSLFTextRun run = paragraph.getTextRuns().get(0);
@@ -245,7 +243,7 @@ public class ExportPPTUtil
 
                         //余电上网
                         cell = table.getCell(g,3);
-                        cell.setText(String.valueOf(pjGenerProfitTest.getSendStateIncome()));
+                        cell.setText(String.valueOf(pjGenerProfitTest.getSendStateIncome().setScale(1,RoundingMode.HALF_UP)));
                         if(cell != null){
                             XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
                             XSLFTextRun run = paragraph.getTextRuns().get(0);
@@ -254,7 +252,7 @@ public class ExportPPTUtil
                         }
                         //年净收益
                         cell = table.getCell(g,4);
-                        cell.setText(String.valueOf(pjGenerProfitTest.getAnnulIncome()));
+                        cell.setText(String.valueOf(pjGenerProfitTest.getAnnulIncome().setScale(1,RoundingMode.HALF_UP)));
                         if(cell != null){
                             XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
                             XSLFTextRun run = paragraph.getTextRuns().get(0);
@@ -265,20 +263,20 @@ public class ExportPPTUtil
                 }else{
                     XSLFTable table = (XSLFTable) xslfShape;
                     XSLFTableCell cell = null;
-                    for(int g = 2 ; g <= 15 ; g++){
+                    for(int g = 2 ; g < 15 ; g++){
                         //第二行第二列
                         cell = table.getCell(g,1);
                         if(cell == null){
                             continue;
                         }
 
-                        PjGenerProfitTest pjGenerProfitTest = pjGenerProfitTests.get(g+10);
-                        if(pjGenerProfitTest == null){
+
+                        if(pjGenerProfitTests.size() <= g+11){
                             //设置合计的数量
                             //发电量
                             cell = table.getCell(g,1);
 
-                            cell.setText(String.valueOf(pjGenerProfitGather.getTotalGenerate()));
+                            cell.setText(String.valueOf(pjGenerProfitGather.getTotalGenerate().setScale(2,RoundingMode.HALF_UP)));
                             if(cell != null){
                                 XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
                                 XSLFTextRun run = paragraph.getTextRuns().get(0);
@@ -287,7 +285,7 @@ public class ExportPPTUtil
                             }
                             //节省电费
                             cell = table.getCell(g,2);
-                            cell.setText(String.valueOf(pjGenerProfitGather.getSumSavePrice()));
+                            cell.setText(String.valueOf(pjGenerProfitGather.getSumSavePrice().setScale(2,RoundingMode.HALF_UP)));
                             if(cell != null){
                                 XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
                                 XSLFTextRun run = paragraph.getTextRuns().get(0);
@@ -296,7 +294,7 @@ public class ExportPPTUtil
                             }
                             //余电上网
                             cell = table.getCell(g,3);
-                            cell.setText(String.valueOf(pjGenerProfitGather.getSumSendStateIncome()));
+                            cell.setText(String.valueOf(pjGenerProfitGather.getSumSendStateIncome().setScale(1,RoundingMode.HALF_UP)));
                             if(cell != null){
                                 XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
                                 XSLFTextRun run = paragraph.getTextRuns().get(0);
@@ -305,7 +303,7 @@ public class ExportPPTUtil
                             }
                             //年净收益
                             cell = table.getCell(g,4);
-                            cell.setText(String.valueOf(pjGenerProfitGather.getSumAnnulIncome()));
+                            cell.setText(String.valueOf(pjGenerProfitGather.getSumAnnulIncome().setScale(1,RoundingMode.HALF_UP)));
                             if(cell != null){
                                 XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
                                 XSLFTextRun run = paragraph.getTextRuns().get(0);
@@ -313,10 +311,11 @@ public class ExportPPTUtil
                                 run.setFontSize(14.0); // 设置字体大小为20
                             }
                         }else{
+                            PjGenerProfitTest pjGenerProfitTest = pjGenerProfitTests.get(g+11);
                             //发电量
                             cell = table.getCell(g,1);
 
-                            cell.setText(String.valueOf(pjGenerProfitTest.getAnnulGenerate()));
+                            cell.setText(String.valueOf(pjGenerProfitTest.getAnnulGenerate().setScale(2,RoundingMode.HALF_UP)));
                             if(cell != null){
                                 XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
                                 XSLFTextRun run = paragraph.getTextRuns().get(0);
@@ -325,7 +324,7 @@ public class ExportPPTUtil
                             }
                             //节省电费
                             cell = table.getCell(g,2);
-                            cell.setText(String.valueOf(pjGenerProfitTest.getSaveElecPrice()));
+                            cell.setText(String.valueOf(pjGenerProfitTest.getSaveElecPrice().setScale(2,RoundingMode.HALF_UP)));
                             if(cell != null){
                                 XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
                                 XSLFTextRun run = paragraph.getTextRuns().get(0);
@@ -334,7 +333,7 @@ public class ExportPPTUtil
                             }
                             //余电上网
                             cell = table.getCell(g,3);
-                            cell.setText(String.valueOf(pjGenerProfitTest.getSendStateIncome()));
+                            cell.setText(String.valueOf(pjGenerProfitTest.getSendStateIncome().setScale(1,RoundingMode.HALF_UP)));
                             if(cell != null){
                                 XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
                                 XSLFTextRun run = paragraph.getTextRuns().get(0);
@@ -343,7 +342,7 @@ public class ExportPPTUtil
                             }
                             //年净收益
                             cell = table.getCell(g,4);
-                            cell.setText(String.valueOf(pjGenerProfitTest.getAnnulIncome()));
+                            cell.setText(String.valueOf(pjGenerProfitTest.getAnnulIncome().setScale(1,RoundingMode.HALF_UP)));
                             if(cell != null){
                                 XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
                                 XSLFTextRun run = paragraph.getTextRuns().get(0);

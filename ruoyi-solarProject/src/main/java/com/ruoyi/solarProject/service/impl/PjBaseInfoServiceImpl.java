@@ -1,8 +1,11 @@
 package com.ruoyi.solarProject.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
+import com.ruoyi.common.core.domain.entity.SysDictData;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.uuid.Seq;
 import com.ruoyi.solarProject.domain.PjBaseInfo;
@@ -13,6 +16,7 @@ import com.ruoyi.solarProject.mapper.PjBaseInfoMapper;
 import com.ruoyi.solarProject.service.IPjBaseInfoService;
 import com.ruoyi.solarProject.tool.SequenceUtils;
 import com.ruoyi.solarProject.tool.util.ExportPPTUtil;
+import com.ruoyi.system.service.ISysDictTypeService;
 import io.swagger.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -84,6 +88,10 @@ public class PjBaseInfoServiceImpl implements IPjBaseInfoService
 
         return pjBaseInfoMapper.updatePjBaseInfo(pjBaseInfo);
     }
+    @Autowired
+    private ISysDictTypeService dictTypeService;
+
+
 
     /**
      * 批量删除【请填写功能名称】
@@ -112,8 +120,27 @@ public class PjBaseInfoServiceImpl implements IPjBaseInfoService
     @Override
     public Response exportPPT(HttpServletResponse response, PjBaseInfo pjBaseInfo, PjEnergySaving pjEnergySaving, ProfitGatherVo profitGatherVo, List<PjGenerProfitTest> pjGenerProfitTestServices) {
         ExportPPTUtil exportPPTUtil = new ExportPPTUtil();
+        //安装材料
+        List<SysDictData> roof_materials = dictTypeService.selectDictDataByType("roof_materials");
+        //安装方式
+        List<SysDictData> install_style = dictTypeService.selectDictDataByType("install_style");
+        //防水方式
+        List<SysDictData> water_proof_style = dictTypeService.selectDictDataByType("water_proof_style");
+        Map<String,String> materials = new HashMap<>();
+        //安装材料
+        for(SysDictData sysDictData : roof_materials){
+            materials.put(sysDictData.getDictValue()+"_roof_materials",sysDictData.getDictLabel());
+        }
+        for(SysDictData sysDictData : install_style){
+            materials.put(sysDictData.getDictValue()+"_install_style",sysDictData.getDictLabel());
+        }
+        for(SysDictData sysDictData : water_proof_style){
+            materials.put(sysDictData.getDictValue()+"_water_proof_style",sysDictData.getDictLabel());
+        }
+
+
         try {
-            ExportPPTUtil.exportPPT(response,pjBaseInfo,pjEnergySaving,profitGatherVo,pjGenerProfitTestServices);
+            ExportPPTUtil.exportPPT(response,pjBaseInfo,pjEnergySaving,profitGatherVo,pjGenerProfitTestServices,materials);
         }catch (Exception e){
             e.printStackTrace();
         }

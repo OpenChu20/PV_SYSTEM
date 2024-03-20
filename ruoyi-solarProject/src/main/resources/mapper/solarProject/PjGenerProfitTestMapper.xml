@@ -168,7 +168,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="getGenerProfits" parameterType="String" resultMap="PjGenerProfitTestResult">
         <include refid="selectPjGenerProfitTestVo"/>
-        where pj_no = #{pjNo} and is_delete='0'
+        where pj_no = #{pjNo} and is_delete='0' order by year
     </select>
 
 </mapper>
