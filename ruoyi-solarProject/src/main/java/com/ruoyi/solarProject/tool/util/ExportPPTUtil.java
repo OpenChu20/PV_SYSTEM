@@ -90,7 +90,7 @@ public class ExportPPTUtil
                 //cell.setText("测试数据001");
                 //第二行第二列
                 cell = table.getCell(1,1);
-                cell.setText(pjBaseInfo.getCusName());
+                cell.setText(pjBaseInfo.getPjName());
                 //第二行第四列
                 cell = table.getCell(1,3);
                 cell.setText(pjBaseInfo.getTrancformerCapacity().setScale(0)+"kva");
@@ -109,8 +109,10 @@ public class ExportPPTUtil
                 //第二行第四列
                 cell = table.getCell(3,3);
                 BigDecimal bigDecimal = new BigDecimal(10000);
-                BigDecimal electPrice = pjBaseInfo.getElectPrice();
+                BigDecimal electPrice = pjBaseInfo.getSelfUseAmount();
+                System.out.println("electPrice:"+electPrice);
                 BigDecimal electPrice1 = electPrice.divide(bigDecimal,2, RoundingMode.HALF_UP);
+                System.out.println("electPrice1:"+electPrice1);
                 cell.setText(electPrice1.toString()+"万度");
             }
         }
