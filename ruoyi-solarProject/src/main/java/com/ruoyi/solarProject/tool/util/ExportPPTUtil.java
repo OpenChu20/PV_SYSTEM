@@ -28,11 +28,6 @@ public class ExportPPTUtil
     //基于项目编号导出对应的PPT模板
     public static void exportPPT(HttpServletResponse response, PjBaseInfo pjBaseInfo, PjEnergySaving pjEnergySaving, ProfitGatherVo profitGatherVo, List<PjGenerProfitTest> pjGenerProfitTestServices) throws Exception{
         try{
-            String filename = "E:\\product\\guan\\houduan\\jiongx_project_back\\ruoyi-solarProject\\src\\main\\java\\com\\ruoyi\\solarProject\\tool\\util\\projectInfo.pptx";
-            ClassPathResource fpr = new ClassPathResource("template/projectInfo.pptx");
-            String path = "classpath:template/projectInfo.pptx";
-
-
             ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
             Resource[] resources = resourcePatternResolver.getResources("classpath:template/projectInfo.pptx");
             File file = null;
@@ -207,6 +202,17 @@ public class ExportPPTUtil
         List<XSLFShape>   xslfShapes = slide2.getShapes();
         System.out.println("pjGenerProfitTests:"+pjGenerProfitTests.size());
         int i = 1 ;
+
+
+
+// 获取文本运行的字体，如果没有，则创建一个
+
+
+
+
+
+
+
         for (XSLFShape xslfShape : xslfShapes) {
             if(xslfShape instanceof XSLFTable){
 
@@ -217,17 +223,44 @@ public class ExportPPTUtil
                         PjGenerProfitTest pjGenerProfitTest = pjGenerProfitTests.get(g-2);
                         //发电量
                         cell = table.getCell(g,1);
-
                         cell.setText(String.valueOf(pjGenerProfitTest.getAnnulGenerate()));
+                        if(cell != null){
+                            XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
+                            XSLFTextRun run = paragraph.getTextRuns().get(0);
+                            // 设置文本字体大小
+                            run.setFontSize(14.0); // 设置字体大小为20
+                        }
+
+
                         //节省电费
                         cell = table.getCell(g,2);
                         cell.setText(String.valueOf(pjGenerProfitTest.getSaveElecPrice()));
+                        if(cell != null){
+                            XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
+                            XSLFTextRun run = paragraph.getTextRuns().get(0);
+                            // 设置文本字体大小
+                            run.setFontSize(14.0); // 设置字体大小为20
+                        }
+
+
                         //余电上网
                         cell = table.getCell(g,3);
                         cell.setText(String.valueOf(pjGenerProfitTest.getSendStateIncome()));
+                        if(cell != null){
+                            XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
+                            XSLFTextRun run = paragraph.getTextRuns().get(0);
+                            // 设置文本字体大小
+                            run.setFontSize(14.0); // 设置字体大小为20
+                        }
                         //年净收益
                         cell = table.getCell(g,4);
                         cell.setText(String.valueOf(pjGenerProfitTest.getAnnulIncome()));
+                        if(cell != null){
+                            XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
+                            XSLFTextRun run = paragraph.getTextRuns().get(0);
+                            // 设置文本字体大小
+                            run.setFontSize(14.0); // 设置字体大小为20
+                        }
                     }
                 }else{
                     XSLFTable table = (XSLFTable) xslfShape;
@@ -246,29 +279,77 @@ public class ExportPPTUtil
                             cell = table.getCell(g,1);
 
                             cell.setText(String.valueOf(pjGenerProfitGather.getTotalGenerate()));
+                            if(cell != null){
+                                XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
+                                XSLFTextRun run = paragraph.getTextRuns().get(0);
+                                // 设置文本字体大小
+                                run.setFontSize(14.0); // 设置字体大小为20
+                            }
                             //节省电费
                             cell = table.getCell(g,2);
                             cell.setText(String.valueOf(pjGenerProfitGather.getSumSavePrice()));
+                            if(cell != null){
+                                XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
+                                XSLFTextRun run = paragraph.getTextRuns().get(0);
+                                // 设置文本字体大小
+                                run.setFontSize(14.0); // 设置字体大小为20
+                            }
                             //余电上网
                             cell = table.getCell(g,3);
                             cell.setText(String.valueOf(pjGenerProfitGather.getSumSendStateIncome()));
+                            if(cell != null){
+                                XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
+                                XSLFTextRun run = paragraph.getTextRuns().get(0);
+                                // 设置文本字体大小
+                                run.setFontSize(14.0); // 设置字体大小为20
+                            }
                             //年净收益
                             cell = table.getCell(g,4);
                             cell.setText(String.valueOf(pjGenerProfitGather.getSumAnnulIncome()));
+                            if(cell != null){
+                                XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
+                                XSLFTextRun run = paragraph.getTextRuns().get(0);
+                                // 设置文本字体大小
+                                run.setFontSize(14.0); // 设置字体大小为20
+                            }
                         }else{
                             //发电量
                             cell = table.getCell(g,1);
 
                             cell.setText(String.valueOf(pjGenerProfitTest.getAnnulGenerate()));
+                            if(cell != null){
+                                XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
+                                XSLFTextRun run = paragraph.getTextRuns().get(0);
+                                // 设置文本字体大小
+                                run.setFontSize(14.0); // 设置字体大小为20
+                            }
                             //节省电费
                             cell = table.getCell(g,2);
                             cell.setText(String.valueOf(pjGenerProfitTest.getSaveElecPrice()));
+                            if(cell != null){
+                                XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
+                                XSLFTextRun run = paragraph.getTextRuns().get(0);
+                                // 设置文本字体大小
+                                run.setFontSize(14.0); // 设置字体大小为20
+                            }
                             //余电上网
                             cell = table.getCell(g,3);
                             cell.setText(String.valueOf(pjGenerProfitTest.getSendStateIncome()));
+                            if(cell != null){
+                                XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
+                                XSLFTextRun run = paragraph.getTextRuns().get(0);
+                                // 设置文本字体大小
+                                run.setFontSize(14.0); // 设置字体大小为20
+                            }
                             //年净收益
                             cell = table.getCell(g,4);
                             cell.setText(String.valueOf(pjGenerProfitTest.getAnnulIncome()));
+                            if(cell != null){
+                                XSLFTextParagraph paragraph =  cell.getTextParagraphs().get(0);
+                                XSLFTextRun run = paragraph.getTextRuns().get(0);
+                                // 设置文本字体大小
+                                run.setFontSize(14.0); // 设置字体大小为20
+                            }
                         }
 
 
