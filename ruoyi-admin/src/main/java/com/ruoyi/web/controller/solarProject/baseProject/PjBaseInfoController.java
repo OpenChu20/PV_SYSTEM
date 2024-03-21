@@ -45,7 +45,6 @@ public class PjBaseInfoController extends BaseController
     /**
      * 查询【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:info:list')")
     @GetMapping("/list")
     public TableDataInfo list(PjBaseInfo pjBaseInfo)
     {
@@ -57,8 +56,6 @@ public class PjBaseInfoController extends BaseController
     /**
      * 导出【请填写功能名称】列表
      */
-    @PreAuthorize("@ss.hasPermi('system:info:export')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, PjBaseInfo pjBaseInfo)
     {
@@ -74,14 +71,13 @@ public class PjBaseInfoController extends BaseController
     @GetMapping(value = "/{pjNo}")
     public AjaxResult getInfo(@PathVariable("pjNo") String pjNo)
     {
-        return success(pjBaseInfoService.selectPjBaseInfoByPjNo(pjNo));
+        PjBaseInfo aa = pjBaseInfoService.selectPjBaseInfoByPjNo(pjNo);
+        return success(aa);
     }
 
     /**
      * 新增【请填写功能名称】
      */
-    @PreAuthorize("@ss.hasPermi('system:info:add')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PjBaseInfo pjBaseInfo)
     {

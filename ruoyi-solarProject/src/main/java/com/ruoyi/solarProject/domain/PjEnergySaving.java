@@ -2,6 +2,7 @@ package com.ruoyi.solarProject.domain;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -13,6 +14,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @author ruoyi
  * @date 2024-03-19
  */
+@Data
 public class PjEnergySaving extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -57,111 +59,4 @@ public class PjEnergySaving extends BaseEntity
     @Excel(name = "更新用户")
     private String updId;
 
-    public void setPjNo(String pjNo)
-    {
-        this.pjNo = pjNo;
-    }
-
-    public String getPjNo()
-    {
-        return pjNo;
-    }
-    public void setCoalSavingAverage(Integer coalSavingAverage)
-    {
-        this.coalSavingAverage = coalSavingAverage;
-    }
-
-    public Integer getCoalSavingAverage()
-    {
-        return coalSavingAverage;
-    }
-    public void setCarbonSavingAverage(Integer carbonSavingAverage)
-    {
-        this.carbonSavingAverage = carbonSavingAverage;
-    }
-
-    public Integer getCarbonSavingAverage()
-    {
-        return carbonSavingAverage;
-    }
-    public void setSulfurSavingAverage(Integer sulfurSavingAverage)
-    {
-        this.sulfurSavingAverage = sulfurSavingAverage;
-    }
-
-    public Integer getSulfurSavingAverage()
-    {
-        return sulfurSavingAverage;
-    }
-    public void setNitricSavingAverage(Integer nitricSavingAverage)
-    {
-        this.nitricSavingAverage = nitricSavingAverage;
-    }
-
-    public Integer getNitricSavingAverage()
-    {
-        return nitricSavingAverage;
-    }
-    public void setSmokeSavingAverage(Integer smokeSavingAverage)
-    {
-        this.smokeSavingAverage = smokeSavingAverage;
-    }
-
-    public Integer getSmokeSavingAverage()
-    {
-        return smokeSavingAverage;
-    }
-    public void setIsDelete(String isDelete)
-    {
-        this.isDelete = isDelete;
-    }
-
-    public String getIsDelete()
-    {
-        return isDelete;
-    }
-    public void setCreateId(String createId)
-    {
-        this.createId = createId;
-    }
-
-    public String getCreateId()
-    {
-        return createId;
-    }
-    public void setUpdTime(Date updTime)
-    {
-        this.updTime = updTime;
-    }
-
-    public Date getUpdTime()
-    {
-        return updTime;
-    }
-    public void setUpdId(String updId)
-    {
-        this.updId = updId;
-    }
-
-    public String getUpdId()
-    {
-        return updId;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("pjNo", getPjNo())
-            .append("coalSavingAverage", getCoalSavingAverage())
-            .append("carbonSavingAverage", getCarbonSavingAverage())
-            .append("sulfurSavingAverage", getSulfurSavingAverage())
-            .append("nitricSavingAverage", getNitricSavingAverage())
-            .append("smokeSavingAverage", getSmokeSavingAverage())
-            .append("isDelete", getIsDelete())
-            .append("createTime", getCreateTime())
-            .append("createId", getCreateId())
-            .append("updTime", getUpdTime())
-            .append("updId", getUpdId())
-            .toString();
-    }
 }

@@ -93,7 +93,7 @@ public class ExportPPTUtil
                 cell.setText(pjBaseInfo.getPjName());
                 //第二行第四列
                 cell = table.getCell(1,3);
-                cell.setText(pjBaseInfo.getTrancformerCapacity().setScale(0)+"kva");
+                cell.setText(pjBaseInfo.getTransformerCapacity().setScale(0)+"kva");
                 //第二行第二列
                 //暂时设置项目名称
                 cell = table.getCell(2,1);
@@ -431,11 +431,11 @@ public class ExportPPTUtil
                 cell = table.getCell(2,1);
                 cell.setText(String.valueOf(pjGenerProfitGather.getSumSavePrice()));
                 //节省变压器容量
-                BigDecimal trancformerCapacity = pjBaseInfo.getTrancformerCapacity();
+                BigDecimal transformerCapacity = pjBaseInfo.getTransformerCapacity();
                // 42*12*25*0.05/10000 == 0.063
                 BigDecimal b1 = new BigDecimal(0.063);
                 cell = table.getCell(3,1);
-                cell.setText(trancformerCapacity.divide(b1,3, RoundingMode.HALF_UP).toString());
+                cell.setText(transformerCapacity.divide(b1,3, RoundingMode.HALF_UP).toString());
                 //温度节能
                 BigDecimal bigDecimal = pjBaseInfo.getRoofArea();
                 //客户国电网价格

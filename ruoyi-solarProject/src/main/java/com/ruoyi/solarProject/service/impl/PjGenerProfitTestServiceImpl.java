@@ -1,6 +1,7 @@
 package com.ruoyi.solarProject.service.impl;
 
 
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import com.ruoyi.solarProject.domain.PjBaseInfo;
 import com.ruoyi.solarProject.domain.PjGenerProfitGather;
@@ -55,7 +56,6 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService {
                 .divide(new BigDecimal(1000))
                 .divide(new BigDecimal(10000)).setScale(4, ROUND_HALF_UP);
         BigDecimal firstGenerC = firstGener.multiply(new BigDecimal(0.9)).setScale(4, ROUND_HALF_UP);
-        firstGenerTest.setId(IdUtils.randomId());
         firstGenerTest.setPjNo(pjNo);
         firstGenerTest.setYear("1");
         firstGenerTest.setFirstDecreaseValue(firstDecreasePoint);
@@ -89,7 +89,6 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService {
         BigDecimal secondGener = firstGener.multiply(new BigDecimal(1).subtract(firstDecreasePoint)).setScale(4, ROUND_HALF_UP);
         BigDecimal secondGenerC = firstGenerC.multiply(new BigDecimal(1).subtract(firstDecreasePoint)).setScale(4, ROUND_HALF_UP);
         PjGenerProfitTest secondGenerTest = new PjGenerProfitTest();
-        secondGenerTest.setId(IdUtils.randomId());
 
         secondGenerTest.setPjNo(pjNo);
         secondGenerTest.setYear(SECOND_YEAR);
@@ -123,7 +122,6 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService {
             PjGenerProfitTest before = pjGenerProfitList.stream().filter(body -> String.valueOf(n).equals(body.getYear())).findAny().get();
             BigDecimal solarGener = before.getAnnulGenerate().multiply(new BigDecimal(1).subtract(otherDecreasePoint)).setScale(4, ROUND_HALF_UP);
             BigDecimal solarGenerC = before.getAnnulGenerateC().multiply(new BigDecimal(1).subtract(otherDecreasePoint)).setScale(4, ROUND_HALF_UP);
-            otherGenerTest.setId(IdUtils.randomId());
 
             otherGenerTest.setPjNo(pjNo);
             otherGenerTest.setYear(yearSequence);

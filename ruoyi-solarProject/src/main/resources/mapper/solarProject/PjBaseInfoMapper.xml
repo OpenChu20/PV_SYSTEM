@@ -39,7 +39,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectPjBaseInfoVo">
-        select pj_no, pj_name, cus_no, cus_name, modules_num, per_modules_rate, total_capacity, pj_per_price, pj_total_price, per_pv_genr, roof_area, pv_area, roof_materials, install_style, connect_grid_style, water_proof_style, func_property, voltge_level, transformer_capacity, elect_price, send_state_price, self_use_part, send_state_part, self_use_amount, pj_total_bonus, other_desc, is_delete, create_time, create_id, upd_time, upd_id from pj_base_info
+        select pj_no, pj_name, cus_no, cus_name, modules_num, per_modules_rate, total_capacity, pj_per_price, pj_total_price,
+               per_pv_genr, roof_area, pv_area, roof_materials, install_style, connect_grid_style, water_proof_style,
+               func_property, voltge_level, transformer_capacity, elect_price, send_state_price, self_use_part,
+               send_state_part, self_use_amount, pj_total_bonus, other_desc, is_delete, create_time, create_id, upd_time,
+               upd_id from pj_base_info
     </sql>
 
     <select id="selectPjBaseInfoList" parameterType="PjBaseInfo" resultMap="PjBaseInfoResult">

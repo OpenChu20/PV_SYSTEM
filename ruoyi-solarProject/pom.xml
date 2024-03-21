@@ -32,8 +32,8 @@
             <artifactId>ruoyi-system</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-system</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
 
     </dependencies>
