@@ -1,5 +1,6 @@
 package com.ruoyi.solarProject.service.impl;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,6 +73,10 @@ public class PjBaseInfoServiceImpl implements IPjBaseInfoService
     {
         pjBaseInfo.setPjNo(SequenceUtils.getSolarPjId(solarPjType));
         pjBaseInfo.setCreateTime(DateUtils.getNowDate());
+        //处理用电比例
+        BigDecimal selfUsePart = pjBaseInfo.getSelfUsePart().divide(BigDecimal.valueOf(100));
+        pjBaseInfo.setSelfUsePart(selfUsePart);
+        pjBaseInfo.setSendStatePart(BigDecimal.ONE.subtract(selfUsePart));
         return pjBaseInfoMapper.insertPjBaseInfo(pjBaseInfo);
     }
 
@@ -84,6 +89,10 @@ public class PjBaseInfoServiceImpl implements IPjBaseInfoService
     @Override
     public int updatePjBaseInfo(PjBaseInfo pjBaseInfo)
     {
+        //处理用电比例
+        BigDecimal selfUsePart = pjBaseInfo.getSelfUsePart().divide(BigDecimal.valueOf(100));
+        pjBaseInfo.setSelfUsePart(selfUsePart);
+        pjBaseInfo.setSendStatePart(BigDecimal.ONE.subtract(selfUsePart));
         pjBaseInfoMapper.updatePjBaseInfo(pjBaseInfo);
 
         return pjBaseInfoMapper.updatePjBaseInfo(pjBaseInfo);
