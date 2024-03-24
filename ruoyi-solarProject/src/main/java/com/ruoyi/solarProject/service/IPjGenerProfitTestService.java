@@ -81,6 +81,6 @@ public interface IPjGenerProfitTestService
      * @Author
      * @change
      */
-//    public int selectGenerProfitNums(String pjNo);
+    public int countTheTests(String pjNo);
 
 }

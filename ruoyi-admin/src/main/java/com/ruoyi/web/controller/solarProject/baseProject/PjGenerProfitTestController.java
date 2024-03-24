@@ -116,4 +116,15 @@ public class PjGenerProfitTestController extends BaseController
         List<PjGenerProfitTest> list = pjGenerProfitTestService.getGenerProfits(pjNo);
         return getDataTable(list);
     }
+
+    /**
+     * @Desc  校验是否完成了发电测算
+     * @Author Wyc
+     * @change
+     */
+    @GetMapping("/count/{pjNo}")
+    public AjaxResult checkIfHas(@PathVariable(value = "pjNo") String pjNo)
+    {
+        return success(pjGenerProfitTestService.countTheTests(pjNo));
+    }
 }

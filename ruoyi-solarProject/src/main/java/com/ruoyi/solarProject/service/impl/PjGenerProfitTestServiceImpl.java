@@ -171,4 +171,10 @@ public class PjGenerProfitTestServiceImpl implements IPjGenerProfitTestService {
     public List<PjGenerProfitTest> getGenerProfits(String pjNo) {
         return pjGenerProfitTestMapper.getGenerProfits(pjNo);
     }
+
+    @Override
+    public int countTheTests(String pjNo) {
+
+        return pjGenerProfitTestMapper.countTheTestsByPjNo(pjNo);
+    }
 }

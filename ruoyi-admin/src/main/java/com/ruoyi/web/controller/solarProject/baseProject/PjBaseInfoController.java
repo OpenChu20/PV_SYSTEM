@@ -45,6 +45,7 @@ public class PjBaseInfoController extends BaseController
     /**
      * 查询【请填写功能名称】列表
      */
+    @Log(title = "获取生效的项目列表", businessType = BusinessType.OTHER)
     @GetMapping("/list")
     public TableDataInfo list(PjBaseInfo pjBaseInfo)
     {
