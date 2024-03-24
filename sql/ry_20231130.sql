@@ -753,7 +753,7 @@ CREATE TABLE pj_base_info (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ---- 增加索引
-ALTER  TABLE  'PJ_BASE_INFO'  ADD  UNIQUE ('pj_no');
+ALTER  TABLE  PJ_BASE_INFO  ADD  UNIQUE ('pj_no');
 ------------------------------------------------------------------------------------------------------------------------------
 
 DROP TABLE IF EXISTS pj_gener_profit_test;

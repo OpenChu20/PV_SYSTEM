@@ -171,4 +171,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where pj_no = #{pjNo} and is_delete='0' order by year
     </select>
 
+    <select id="countTheTestsByPjNo" parameterType="String" resultType="int">
+        select count(1) from pj_gener_profit_test
+                where pj_no = #{pjNo} and is_delete='0'
+    </select>
 </mapper>

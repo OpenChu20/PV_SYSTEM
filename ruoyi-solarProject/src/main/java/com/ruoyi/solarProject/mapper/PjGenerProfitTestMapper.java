@@ -63,6 +63,8 @@ public interface PjGenerProfitTestMapper
 
     public List<PjGenerProfitTest> getGenerProfits(String pjNo);
 
+    public int countTheTestsByPjNo(String pjNo);
+
 
 
 }

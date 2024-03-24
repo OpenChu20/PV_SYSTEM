@@ -19,6 +19,8 @@ import com.ruoyi.solarProject.tool.SequenceUtils;
 import com.ruoyi.solarProject.tool.util.ExportPPTUtil;
 import com.ruoyi.system.service.ISysDictTypeService;
 import io.swagger.models.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,8 @@ import static com.ruoyi.solarProject.tool.SequenceUtils.solarPjType;
 @Service
 public class PjBaseInfoServiceImpl implements IPjBaseInfoService
 {
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private PjBaseInfoMapper pjBaseInfoMapper;
 
@@ -59,6 +63,7 @@ public class PjBaseInfoServiceImpl implements IPjBaseInfoService
     @Override
     public List<PjBaseInfo> selectPjBaseInfoList(PjBaseInfo pjBaseInfo)
     {
+        logger.info("这里进入了列表查询" + pjBaseInfo.toString());
         return pjBaseInfoMapper.selectPjBaseInfoList(pjBaseInfo);
     }
 
@@ -73,10 +78,6 @@ public class PjBaseInfoServiceImpl implements IPjBaseInfoService
     {
         pjBaseInfo.setPjNo(SequenceUtils.getSolarPjId(solarPjType));
         pjBaseInfo.setCreateTime(DateUtils.getNowDate());
-        //处理用电比例
-        BigDecimal selfUsePart = pjBaseInfo.getSelfUsePart().divide(BigDecimal.valueOf(100));
-        pjBaseInfo.setSelfUsePart(selfUsePart);
-        pjBaseInfo.setSendStatePart(BigDecimal.ONE.subtract(selfUsePart));
         return pjBaseInfoMapper.insertPjBaseInfo(pjBaseInfo);
     }
 
