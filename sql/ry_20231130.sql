@@ -864,7 +864,7 @@ INSERT INTO `ry-vue`.sys_dict_type (dict_id, dict_name, dict_type, status, creat
 
 
 ----20240314
-alter table pj_base_info modify column send_state_part decimal(5,2)
-alter table pj_base_info modify column self_use_part decimal(5,2)
+alter table pj_base_info modify column send_state_part decimal(5,2);
+alter table pj_base_info modify column self_use_part decimal(5,2);
 
 
