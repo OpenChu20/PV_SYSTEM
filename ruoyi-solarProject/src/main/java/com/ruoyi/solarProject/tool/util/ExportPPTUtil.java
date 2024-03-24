@@ -23,11 +23,13 @@ public class ExportPPTUtil
 
     //基于项目编号导出对应的PPT模板
     public static void exportPPT(HttpServletResponse response, PjBaseInfo pjBaseInfo, PjEnergySaving pjEnergySaving, ProfitGatherVo profitGatherVo, List<PjGenerProfitTest> pjGenerProfitTestServices,Map<String,String> dictData) throws Exception{
+        InputStream inputStream = null;
+        XMLSlideShow srcShow = null;
         try{
             ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
             Resource[] resources = resourcePatternResolver.getResources("classpath:template/projectInfo.pptx");
             File file = null;
-            InputStream inputStream = null;
+
             for ( Resource resource : resources ) {
                 //获取文件名
 
@@ -40,7 +42,7 @@ public class ExportPPTUtil
 
         //    FileInputStream fis = (FileInputStream) inputStream;
           //  FileInputStream fis = new FileInputStream(filename);
-            XMLSlideShow srcShow = new XMLSlideShow(inputStream);
+            srcShow = new XMLSlideShow(inputStream);
             //获取所有幻灯片
             List<XSLFSlide> slides = srcShow.getSlides();
             XSLFSlide slide = slides.get(5);
@@ -60,7 +62,7 @@ public class ExportPPTUtil
             //第19页
             XSLFSlide slide5 = slides.get(20);
             setExcel5(slide5,profitGatherVo,pjBaseInfo);
-            inputStream.close();
+
             long ll = System.currentTimeMillis();
 
 
@@ -68,10 +70,16 @@ public class ExportPPTUtil
             response.setCharacterEncoding("utf-8");
             srcShow.write(response.getOutputStream());
 
-            srcShow.close();
         }catch (Exception e){
             e.printStackTrace();
             throw new Exception("导出PPT错误，请联系管理员");
+        }finally {
+            if(inputStream != null){
+                inputStream.close();
+            }
+            if(srcShow != null){
+                srcShow.close();
+            }
         }
 
 
